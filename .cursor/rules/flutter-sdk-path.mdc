@@ -1,0 +1,12 @@
+---
+description: Canonical Flutter SDK path for shell commands and local scripts on this machine
+alwaysApply: true
+---
+
+# Flutter SDK (this machine)
+
+- **SDK root:** `E:\New_TPK_2026\Apps\NEET_Flutter_App\SDK\flutter`
+- **Source of truth in repo:** `tool/flutter_sdk.path` (admin web and mobile app both have a copy)
+- **PowerShell:** dot-source `tool/flutter_env.ps1` then use `Invoke-Flutter` / `Invoke-Dart`, or run `tool/run_admin_web.ps1` for admin web
+- **Do not** ask the user for the SDK path again; read `tool/flutter_sdk.path` if a terminal lacks `flutter` on PATH
+- Mobile Android already uses this path in `neetprep_flutter/android/local.properties` (`flutter.sdk`)

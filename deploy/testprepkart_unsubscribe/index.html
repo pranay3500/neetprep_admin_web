@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Account deletion request — TestprepKart NEET App</title>
+  <meta name="description" content="Request deletion of your TestprepKart NEET Admission &amp; Counseling app account and associated data." />
+  <style>
+    :root {
+      --purple: #5e35b1;
+      --bg: #f5f3fa;
+      --text: #424242;
+      --muted: #616161;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.08);
+      padding: 32px 28px 36px;
+    }
+    h1 {
+      color: var(--purple);
+      font-size: 1.45rem;
+      margin: 0 0 8px;
+    }
+    .app-name {
+      font-weight: 600;
+      color: #111;
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 0.95rem;
+      color: var(--purple);
+      margin: 20px 0 8px;
+    }
+    ul { margin: 0; padding-left: 1.2rem; }
+    li { margin-bottom: 6px; }
+    label { display: block; font-weight: 500; margin-bottom: 6px; }
+    input[type="email"], input[type="number"] {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 1rem;
+    }
+    .row { margin-bottom: 16px; }
+    .captcha-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .captcha-q { font-weight: 600; min-width: 100px; }
+    button[type="submit"] {
+      width: 100%;
+      margin-top: 8px;
+      padding: 16px;
+      background: var(--purple);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button[type="submit"]:disabled { opacity: 0.6; cursor: wait; }
+    .success {
+      background: #e8f5e9;
+      border: 1px solid #a5d6a7;
+      color: #2e7d32;
+      padding: 16px;
+      border-radius: 12px;
+    }
+    .error {
+      background: #ffebee;
+      border: 1px solid #ef9a9a;
+      color: #c62828;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .brand {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--purple);
+    }
+    .muted { color: var(--muted); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="brand">TestprepKart</div>
+      <h1>Account deletion request</h1>
+      <p class="app-name">TestprepKart NEET Admission &amp; Counseling App</p>
+
+      <h2>How to request account deletion</h2>
+      <ul>
+        <li>Enter the email address you used to register in the app.</li>
+        <li>Submit this form. Our team will verify your identity and process deletion within 30 days.</li>
+        <li>You may also sign in to the app and use Profile → Security, or contact support if you need help.</li>
+      </ul>
+
+      <h2>Data deleted or retained</h2>
+      <p>When your account is deleted, we remove or anonymize your profile (name, email, phone, grade, country, visa type), app preferences, favourites, message threads, demo and subscription requests tied to your account, and eligibility attempts linked to your user ID.</p>
+      <p class="muted">We may retain minimal records where required by law (for example payment or tax records) or anonymized analytics for up to 90 days, after which they are deleted or aggregated without personal identifiers.</p>
+
+      <div id="formBlock" style="margin-top: 24px;">
+        <div id="errBox" class="error" role="alert"></div>
+        <form id="deleteForm">
+          <div class="row">
+            <label for="email">Registered email address</label>
+            <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+          </div>
+          <div class="row">
+            <label>Verification</label>
+            <div class="captcha-row">
+              <span class="captcha-q" id="captchaQ"></span>
+              <input type="number" id="captchaAns" required inputmode="numeric" placeholder="Answer" style="max-width:120px" />
+              <button type="button" id="refreshCaptcha" style="background:transparent;border:none;color:var(--purple);cursor:pointer;font-size:0.85rem">New</button>
+            </div>
+          </div>
+          <button type="submit" id="submitBtn">Submit request</button>
+        </form>
+      </div>
+      <div id="successBlock" class="success" style="display:none;margin-top:24px">
+        Your request has been received. If an account exists for this email, our team will contact you to confirm deletion. You do not need to submit again.
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js';
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      serverTimestamp,
+    } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js';
+
+    const firebaseConfig = {
+      apiKey: 'AIzaSyD49aU-jBi91nfgM9zbMpPRWrKTsl7tkro',
+      appId: '1:793601317869:web:bbfcfd52486829dccae5e4',
+      messagingSenderId: '793601317869',
+      projectId: 'neet-prep-app-fc7fa',
+      authDomain: 'neet-prep-app-fc7fa.firebaseapp.com',
+      storageBucket: 'neet-prep-app-fc7fa.firebasestorage.app',
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app, 'default');
+
+    let captchaA = 0;
+    let captchaB = 0;
+
+    function newCaptcha() {
+      captchaA = 10 + Math.floor(Math.random() * 40);
+      captchaB = 1 + Math.floor(Math.random() * 9);
+      document.getElementById('captchaQ').textContent = captchaA + ' + ' + captchaB + ' =';
+      document.getElementById('captchaAns').value = '';
+    }
+
+    function showError(msg) {
+      const box = document.getElementById('errBox');
+      box.textContent = msg;
+      box.style.display = 'block';
+    }
+
+    function hideError() {
+      document.getElementById('errBox').style.display = 'none';
+    }
+
+    function validEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 254;
+    }
+
+    document.getElementById('refreshCaptcha').addEventListener('click', newCaptcha);
+    newCaptcha();
+
+    document.getElementById('deleteForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideError();
+      const email = document.getElementById('email').value.trim().toLowerCase();
+      const ans = parseInt(document.getElementById('captchaAns').value, 10);
+      if (!validEmail(email)) {
+        showError('Please enter a valid email address.');
+        return;
+      }
+      if (ans !== captchaA + captchaB) {
+        showError('Please complete the verification check correctly.');
+        newCaptcha();
+        return;
+      }
+
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+
+      try {
+        await addDoc(collection(db, 'account_deletion_requests'), {
+          email: email,
+          status: 'New',
+          isRead: false,
+          source: 'testprepkart_web_unsubscribe',
+          createdAt: serverTimestamp(),
+          createdAtLocal: new Date().toISOString(),
+        });
+        document.getElementById('formBlock').style.display = 'none';
+        document.getElementById('successBlock').style.display = 'block';
+      } catch (err) {
+        console.error(err);
+        showError(
+          err.code === 'permission-denied'
+            ? 'Unable to submit right now. Please email support@testprepkart.com.'
+            : 'Unable to submit. Please try again later.'
+        );
+        btn.disabled = false;
+        btn.textContent = 'Submit request';
+      }
+    });
+  </script>
+</body>
+</html>

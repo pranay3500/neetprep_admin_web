@@ -1,0 +1,21 @@
+{
+  "firestore": [
+    {
+      "database": "default",
+      "rules": "../neetprep_flutter/firestore.rules",
+      "indexes": "../neetprep_flutter/firestore.indexes.json"
+    }
+  ],
+  "flutter": {
+    "platforms": {
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "neet-prep-app-fc7fa",
+          "configurations": {
+            "web": "1:793601317869:web:bbfcfd52486829dccae5e4"
+          }
+        }
+      }
+    }
+  }
+}
