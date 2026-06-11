@@ -530,7 +530,10 @@ class _AdminNavigationRail extends StatelessWidget {
     required bool hasPendingCourses,
     required bool hasPendingSubscriptionRequests,
     required bool hasPendingUnsubscribeRequests,
+    required bool hasNewUserRegistrations,
   }) {
+    final hasUsersMenuAttention =
+        hasPendingSubscriptionRequests || hasNewUserRegistrations;
     return _destinations
         .map(
           (d) => _AdminNavDestination(
@@ -542,7 +545,7 @@ class _AdminNavigationRail extends StatelessWidget {
                 (d.index == 3 && hasPendingMessages) ||
                 (d.index == 11 && hasPendingCourses) ||
                 (d.index == 14 && hasPendingUnsubscribeRequests) ||
-                (d.index == 15 && hasPendingSubscriptionRequests),
+                (d.index == 15 && hasUsersMenuAttention),
           ),
         )
         .toList();
@@ -610,15 +613,31 @@ class _AdminNavigationRail extends StatelessWidget {
                             final hasPendingSubscriptionRequests =
                                 (subscriptionSnapshot.data?.docs ?? const [])
                                     .isNotEmpty;
-                            final items = _withBadges(
-                              hasPendingDemoRequests: hasPendingDemoRequests,
-                              hasPendingMessages: hasPendingMessages,
-                              hasPendingCourses: hasPendingCourses,
-                              hasPendingSubscriptionRequests:
-                                  hasPendingSubscriptionRequests,
-                              hasPendingUnsubscribeRequests:
-                                  hasPendingUnsubscribeRequests,
-                            );
+                            return StreamBuilder<
+                                QuerySnapshot<Map<String, dynamic>>>(
+                              stream: FirestoreDb.instance
+                                  .collection('users')
+                                  .where('adminRegistrationUnread',
+                                      isEqualTo: true)
+                                  .limit(1)
+                                  .snapshots(),
+                              builder: (context, registrationSnapshot) {
+                                final hasNewUserRegistrations =
+                                    (registrationSnapshot.data?.docs ??
+                                            const [])
+                                        .isNotEmpty;
+                                final items = _withBadges(
+                                  hasPendingDemoRequests:
+                                      hasPendingDemoRequests,
+                                  hasPendingMessages: hasPendingMessages,
+                                  hasPendingCourses: hasPendingCourses,
+                                  hasPendingSubscriptionRequests:
+                                      hasPendingSubscriptionRequests,
+                                  hasPendingUnsubscribeRequests:
+                                      hasPendingUnsubscribeRequests,
+                                  hasNewUserRegistrations:
+                                      hasNewUserRegistrations,
+                                );
                         return SizedBox(
                           width: 220,
                           child: Material(
@@ -655,6 +674,8 @@ class _AdminNavigationRail extends StatelessWidget {
                             ),
                           ),
                         );
+                              },
+                            );
                           },
                         );
                       },

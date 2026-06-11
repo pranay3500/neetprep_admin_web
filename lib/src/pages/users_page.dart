@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -116,6 +117,55 @@ class _UsersPageState extends State<UsersPage> {
       },
       successMessage: 'Subscription request marked as handled.',
     );
+  }
+
+  Future<void> _clearRegistrationUnread(String userId) async {
+    await _patchUser(
+      userId,
+      fields: {
+        'adminRegistrationUnread': false,
+        'adminRegistrationSeenAt': FieldValue.serverTimestamp(),
+      },
+      successMessage: 'New registration marked as seen.',
+    );
+  }
+
+  Future<void> _markAllNewRegistrationsSeen() async {
+    try {
+      final snap = await _users
+          .where('adminRegistrationUnread', isEqualTo: true)
+          .limit(200)
+          .get();
+      if (snap.docs.isEmpty) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('No new registrations to mark.')),
+        );
+        return;
+      }
+      final batch = FirestoreDb.instance.batch();
+      for (final doc in snap.docs) {
+        batch.update(doc.reference, {
+          'adminRegistrationUnread': false,
+          'adminRegistrationSeenAt': FieldValue.serverTimestamp(),
+        });
+      }
+      await batch.commit();
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Marked ${snap.docs.length} new registration(s) as seen.',
+          ),
+        ),
+      );
+    } catch (e) {
+      debugPrint('[UsersPage] mark new registrations seen: $e');
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Could not update registrations: $e')),
+      );
+    }
   }
 
   Future<void> _approveSubscriptionRequest(String userId, String email) async {
@@ -427,6 +477,8 @@ class _UsersPageState extends State<UsersPage> {
         return panelActive;
       case _UserFilter.subscriptionRequests:
         return u['subscriptionRequestPending'] == true;
+      case _UserFilter.newRegistrations:
+        return u['adminRegistrationUnread'] == true;
     }
   }
 
@@ -732,6 +784,12 @@ class _UsersPageState extends State<UsersPage> {
                               style: Theme.of(context).textTheme.bodySmall,
                             ),
                           ),
+                          OutlinedButton.icon(
+                            onPressed: _markAllNewRegistrationsSeen,
+                            icon: const Icon(Icons.done_all_rounded, size: 18),
+                            label: const Text('Mark new registrations seen'),
+                          ),
+                          const SizedBox(width: 8),
                           FilledButton.icon(
                             onPressed:
                                 docs.isEmpty ? null : () => _exportCsv(docs),
@@ -783,7 +841,14 @@ class _UsersPageState extends State<UsersPage> {
                                     final flag = _flagEmojiFromIso2(iso2);
                                     final role = (u['role'] ?? 'user').toString();
                                     final email = (u['email'] ?? '-').toString();
+                                    final isNewRegistration =
+                                        u['adminRegistrationUnread'] == true;
                                     return DataRow(
+                                      color: isNewRegistration
+                                          ? WidgetStateProperty.all(
+                                              const Color(0x14E53935),
+                                            )
+                                          : null,
                                       cells: [
                                         DataCell(
                                           _selectableCell(_fmtDateTable(u['createdAt'])),
@@ -792,6 +857,26 @@ class _UsersPageState extends State<UsersPage> {
                                           Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
+                                              if (isNewRegistration) ...[
+                                                IconButton(
+                                                  icon: const Icon(
+                                                    Icons.fiber_manual_record,
+                                                    color: Color(0xFFE53935),
+                                                    size: 12,
+                                                  ),
+                                                  tooltip: 'New registration — mark seen',
+                                                  visualDensity:
+                                                      VisualDensity.compact,
+                                                  padding: EdgeInsets.zero,
+                                                  constraints:
+                                                      _compactIconConstraints,
+                                                  onPressed: () =>
+                                                      _clearRegistrationUnread(
+                                                        doc.id,
+                                                      ),
+                                                ),
+                                                const SizedBox(width: 4),
+                                              ],
                                               if (flag.isNotEmpty) ...[
                                                 Text(
                                                   flag,
@@ -909,6 +994,7 @@ enum _UserFilter {
   all('All users'),
   appUsers('App users only'),
   panelAccess('Admin / moderators'),
+  newRegistrations('New registrations'),
   subscriptionRequests('Subscription requests');
 
   const _UserFilter(this.label);
