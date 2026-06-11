@@ -16,6 +16,19 @@ Mobile read order for section HTML: **published Firestore** → cache → **API 
 
 ---
 
+## Update — 2026-06-08 (TPK app icon — browser tab + PWA)
+
+- **Current status:** Admin web favicon and PWA icons regenerated from the same TPK gradient square as mobile `assets/icon/app_icon.png` (orange→pink, white **TPK**). In-app chrome still uses the horizontal wordmark (`assets/images/testprepkart_logo.png`).
+- **Files changed:**
+  - `web/favicon.png`
+  - `web/icons/Icon-192.png`, `Icon-512.png`, `Icon-maskable-192.png`, `Icon-maskable-512.png`
+- **Completed functionality:**
+  - Browser tab, bookmark, and “Add to Home Screen” show the TPK app icon after redeploy.
+- **Pending cleanup:**
+  - Rebuild + upload admin web (`build_admin_daily.bat` or `deploy_admin.ps1`) so production picks up new icons.
+
+---
+
 ## Update — 2026-06-05 (Seat Allotment — v1 complete + Mobile Bundle tab)
 
 - **Current status:** MBBS Seats **v1 feature-complete on mobile** (bundled SQLite + local agent; no Claude). Admin **Seat Allotment** has tabs **CSV Import** / **Datasets** / **Mobile Bundle**.
