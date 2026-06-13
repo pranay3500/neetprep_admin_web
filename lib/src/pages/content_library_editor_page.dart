@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 
 import '../content_library/content_library_published_service.dart';
 import '../content_library/content_library_remote_content_service.dart';
@@ -29,6 +31,20 @@ class _ContentLibraryEditorPageState extends State<ContentLibraryEditorPage> {
   int _editorMountGeneration = 0;
 
   final _htmlController = TextEditingController();
+
+  static Future<String> _buildStamp() async {
+    if (!kIsWeb) return '';
+    try {
+      final uri = Uri.base.resolve('version.json');
+      final res = await http.get(uri).timeout(const Duration(seconds: 4));
+      if (res.statusCode != 200) return 'version.json missing on server';
+      final body = res.body.trim();
+      if (body.length > 120) return '${body.substring(0, 120)}…';
+      return body;
+    } catch (e) {
+      return '';
+    }
+  }
 
   @override
   void dispose() {
@@ -143,9 +159,23 @@ class _ContentLibraryEditorPageState extends State<ContentLibraryEditorPage> {
             ),
           ),
           const SizedBox(height: 6),
+          FutureBuilder<String>(
+            future: _buildStamp(),
+            builder: (context, snap) {
+              final stamp = snap.data;
+              if (stamp == null || stamp.isEmpty) return const SizedBox.shrink();
+              return Text(
+                'Build: $stamp',
+                style: GoogleFonts.robotoMono(
+                  fontSize: 10,
+                  color: Colors.grey.shade500,
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 4),
           Text(
-            'Select a unit, chapter, topic, or sub-topic. Use the full CKEditor toolbar '
-            '(fonts, alignment, tables, images, Source for HTML). Publish saves to Firestore.',
+            'Select a unit, chapter, topic, or sub-topic. Edit visually on the page or paste HTML in the source tab, then Publish.',
             style: GoogleFonts.poppins(
               fontSize: 13,
               color: const Color(0xFF616161),

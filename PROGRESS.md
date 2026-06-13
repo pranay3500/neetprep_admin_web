@@ -7,12 +7,38 @@ Tracks admin-only work so sessions do not re-debug the same issues. Pair with mo
 | Layer | Source | Used by |
 |--------|--------|---------|
 | **Tree (API 1)** | `GET …/self-study/api/tree/content/neet/neet-planning` | CL Import → Firestore `content_library_import_nodes`; mobile library index |
-| **Body (CMS)** | Admin CKEditor → **Publish** | Firestore `content_library_published_nodes/{websiteNodeId}` — fields `contentSource`, `status: "published"` |
+| **Body (CMS)** | Admin HTML editor → **Publish** | Firestore `content_library_published_nodes/{websiteNodeId}` — fields `contentSource`, `status: "published"` |
 | **Body (fallback API 2)** | `GET …/self-study/api/content/{nodeId}` | Mobile + **CL Editor preload** when Firestore empty |
 | **PDF URLs** | Admin CL Import hierarchy | Firestore `cms_content_library/main` → `nodePdfUrls` |
 | **Lock / free** | Admin CL Import | `cms_content_library/main` gating lists |
 
 Mobile read order for section HTML: **published Firestore** → cache → **API 2**.
+
+---
+
+## Update — 2026-06-12 (Content Library Editor rebuild + Unsubscribe table fix)
+
+- **Current status:** CL Editor no longer uses CKEditor. **Visual edit** (default tab) + **Edit HTML** (paste/raw source). Publish flow unchanged (`contentSource` → Firestore).
+- **CL Editor — what changed:**
+  - [x] Removed CKEditor stack (`ckeditor/*`, `ckeditor_bridge.js`, `ckeditor_frame.html`, CDN in `index.html`) after repeated Flutter web pointer/scroll/destroy failures.
+  - [x] **Visual edit** tab — iframe `web/content_library_visual_editor.html` with `contenteditable` body + toolbar (bold, italic, underline, H2/H3, lists, link, divider). Edits sync to `TextEditingController` via `postMessage`.
+  - [x] **Edit HTML** tab — scrollable monospace `TextField` + snippet toolbar (best for paste / fine-tuning tags).
+  - [x] `content_library_editor_page.dart` — helper copy updated.
+- **Unsubscribe requests table (2026-06-12):**
+  - [x] Fixed `RenderFlex` overflow on **Date** column (`unsubscribe_requests_page.dart`) — fixed 168px column width + `Expanded` + ellipsis on timestamp.
+- **Files changed:**
+  - `lib/src/widgets/content_library_html_editor.dart`
+  - `lib/src/widgets/content_library_visual_editor_web.dart`
+  - `lib/src/widgets/content_library_visual_editor_stub.dart`
+  - `web/content_library_visual_editor.html`
+  - `web/index.html`
+  - `lib/src/pages/content_library_editor_page.dart`
+  - `lib/src/pages/unsubscribe_requests_page.dart`
+- **Deleted:** `lib/src/widgets/ckeditor/*`, `lib/src/widgets/content_library_html_preview_*.dart`, `web/ckeditor_bridge.js`, `web/ckeditor_frame.html`
+- **Verify:** Hard refresh admin web (Ctrl+Shift+R) → CL Editor → Stage 1 → **Visual edit** (click, type, scroll, toolbar) → **Edit HTML** (paste) → Publish → mobile shows body. Unsubscribe page — no yellow/black stripe on Date column.
+- **Production deploy (required after 2026-06-12 editor change):** Rebuild `powershell -File tool/build_admin_web.ps1` and upload **entire** `build/web/` to Satlas (includes `content_library_visual_editor.html`, `index.html`, `.htaccess`). After deploy: hard refresh; UI should show **Edit HTML** / **Visual edit** tabs (not CKEditor).
+- **Stale cache (2026-06-13):** If production still shows CKEditor + `Null check operator` after upload, the server may have new files but the **browser service worker** is serving old `main.dart.js`. Fix: `index.html` now unregisters service workers on load; build uses `--pwa-strategy=none`; `.htaccess` sets no-cache on `.js`/`.html`. User one-time: Chrome DevTools → Application → Clear site data, or test in Incognito.
+- **Historical:** CKEditor debugging notes kept below (superseded by this update).
 
 ---
 
@@ -200,6 +226,14 @@ Mobile read order for section HTML: **published Firestore** → cache → **API 
 
 ## Current workstream
 
+### CL Editor (current — 2026-06-12)
+
+- [x] **Visual edit** + **Edit HTML** tabs — see **Update — 2026-06-12** above.
+- [x] Preload from **API 2** when published doc missing or `contentSource` empty (May 16, 2026).
+- **Files:** `content_library_editor_page.dart`, `content_library_html_editor.dart`, `content_library_visual_editor_web.dart`, `web/content_library_visual_editor.html`, `content_library_remote_content_service.dart`, `content_library_published_service.dart`.
+
+### CL Editor — historical (CKEditor, superseded 2026-06-12)
+
 ### Home dashboard banners (May 16, 2026)
 
 - [x] **Settings → Home Banners:** Publish up to 5 carousel images; set required design width/height (px) and auto-scroll interval; enable/disable carousel.
@@ -225,10 +259,55 @@ Mobile read order for section HTML: **published Firestore** → cache → **API 
 
 **If it regresses:** Hard refresh (Ctrl+Shift+R) so `ckeditor_bridge.js` is not cached; confirm `index.html` loads bridge after CKEditor CDN.
 
-### CL Editor — blank when Firestore empty (May 16, 2026)
+### CL Editor — CKEditor content not scrollable (Jun 2026)
 
-- [x] Preload from **API 2** when published doc missing or `contentSource` empty.
-- **Files:** `content_library_editor_page.dart`, `content_library_remote_content_service.dart`, `content_library_published_service.dart`.
+**Symptom:** Long curriculum pages (e.g. Stage 1) appear frozen — bottom content not reachable; editor feels like a static snapshot.
+
+**Cause:** CKEditor editable grew taller than the Flutter `HtmlElementView` viewport with no internal scroll (`overflow` clipped by platform view).
+
+**Fix applied:**
+
+- `web/index.html` — flex column layout on `.tpk-ckeditor-host`; `.ck-editor__editable` gets `overflow-y: auto` and `max-height: 100%`.
+- `web/ckeditor_bridge.js` — `applyEditorScrollLayout()` + `ResizeObserver` after editor create; cleanup on destroy.
+- `lib/src/widgets/ckeditor/content_library_ckeditor_web.dart` — host `div` uses flex + `overflow: hidden`.
+
+**Verify:** Hard refresh admin web → CL Editor → open Stage 1 → scroll inside the white editor area to the bottom → edit text near the end.
+
+### CL Editor — Source (HTML) toolbar button (Jun 2026)
+
+**Symptom:** No **Source** / raw HTML option in the CKEditor toolbar (classic build was loading first).
+
+**Fix applied:** `web/ckeditor_bridge.js` now loads **CKEditor 5 super-build** first (v41.4.2) — includes `sourceEditing` in toolbar (</> icon, right side). Classic build is emergency fallback only (console warning, no Source).
+
+**Verify:** Hard refresh → CL Editor → toolbar shows extended options + **Source** button → toggle to edit HTML directly.
+
+### CL Editor — frozen / not clickable / no scroll (Jun 2026)
+
+**Symptom:** Content visible but editor feels inactive — cannot click toolbar or body; no scroll to bottom.
+
+**Cause:** CKEditor inside Flutter `HtmlElementView` `<div>` — Flutter web canvas layer intercepted pointer events; flex CSS also collapsed hit area.
+
+**Fix applied (v3 — body overlay):**
+
+- CKEditor super-build loads in `index.html`; editor panel is **`position: fixed` on `document.body`**, aligned to a marker div inside Flutter (bypasses Flutter canvas pointer blocking).
+- `web/ckeditor_bridge.js` — simplified toolbar + `sourceEditing`; guards against undefined `editor.model.document`; syncs panel position on resize/scroll.
+- `content_library_ckeditor_web.dart` — marker div only (pointer-events none); real editor is the body overlay.
+
+**Verify:** Hard refresh (Ctrl+Shift+R) → CL Editor → toolbar clickable, body editable, scroll works, Source (`</>`) toggles HTML.
+
+### CL Editor — `instances[elementId].destroy is not a function` (Jun 12, 2026)
+
+**Symptom:** Red error `instances[elementId].destroy is not a function` or `NoSuchMethodError: editor.destroy`, blank white editor box (no toolbar).
+
+**Cause:** External `ckeditor_bridge.js` lifecycle + Dart `js_interop` destroy calls raced when switching sections; body-overlay panel also fought Flutter layout.
+
+**Fix applied (v6 — Flutter iframe):**
+
+- `content_library_ckeditor_web.dart` — **pure Flutter** `HtmlElementView` + iframe (`ckeditor_frame.html`); `postMessage` init/change/destroy; no `tpkCkEditor` JS bridge from Dart.
+- `web/ckeditor_frame.html` — CKEditor super-build + Source toolbar; safe `typeof editor.destroy` guards.
+- `web/index.html` — removed CDN + `ckeditor_bridge.js` (CKEditor loads only inside iframe).
+
+**Verify:** Hard refresh (Ctrl+Shift+R) → CL Editor → Stage 1 → toolbar + scroll + Source work → switch section → no red error.
 
 ### CL Import — PDF per node (May 16, 2026)
 
@@ -239,10 +318,10 @@ Mobile read order for section HTML: **published Firestore** → cache → **API 
 
 ## Known pitfalls
 
-1. **Container timing** — Never call CKEditor `create` without waiting for `tpk-ck-{viewId}` in DOM (see above).
-2. **Editor before load** — Do not mount `ContentLibraryHtmlEditor` while `_loadingDoc`; controller must have HTML before `create`.
-3. **API 1 vs 2** — Tree import does not populate editor body; only API 2 or Firestore publish does.
-4. **Web cache** — JS bridge changes need full browser refresh, not only Flutter hot reload.
+1. **Editor before load** — Do not mount `ContentLibraryHtmlEditor` while `_loadingDoc`; controller must have HTML first.
+2. **API 1 vs 2** — Tree import does not populate editor body; only API 2 or Firestore publish does.
+3. **Visual vs HTML tabs** — Day-to-day edits on **Visual edit**; paste/raw markup on **Edit HTML**. Both sync to the same `contentSource` on Publish.
+4. **Web cache** — After deploying editor HTML/JS changes, hard refresh (Ctrl+Shift+R); hot reload alone may not reload `content_library_visual_editor.html`.
 
 ---
 
@@ -262,7 +341,8 @@ Mobile read order for section HTML: **published Firestore** → cache → **API 
 |------|------|
 | Editor page | `lib/src/pages/content_library_editor_page.dart` |
 | Import + PDF | `lib/src/pages/content_library_import_page.dart` |
-| CKEditor widget | `lib/src/widgets/ckeditor/content_library_ckeditor_web.dart` |
-| JS bridge | `web/ckeditor_bridge.js` |
+| HTML editor widget | `lib/src/widgets/content_library_html_editor.dart` |
+| Visual editor (web) | `lib/src/widgets/content_library_visual_editor_web.dart` |
+| Visual editor iframe | `web/content_library_visual_editor.html` |
 | API 2 preload | `lib/src/content_library/content_library_remote_content_service.dart` |
 | Publish save | `lib/src/content_library/content_library_published_service.dart` |

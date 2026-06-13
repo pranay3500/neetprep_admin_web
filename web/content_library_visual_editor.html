@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Visual editor</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: #fff;
+      overflow: hidden;
+    }
+    #root {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    #toolbar {
+      flex-shrink: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2px;
+      align-items: center;
+      padding: 6px 8px;
+      border-bottom: 1px solid #e0e0e0;
+      background: #f5f5f5;
+    }
+    #toolbar button {
+      border: 1px solid #d0d0d0;
+      background: #fff;
+      border-radius: 4px;
+      padding: 4px 8px;
+      font-size: 13px;
+      cursor: pointer;
+      min-height: 28px;
+    }
+    #toolbar button:hover { background: #eeeeee; }
+    #toolbar .sep {
+      width: 1px;
+      height: 22px;
+      background: #d0d0d0;
+      margin: 0 4px;
+    }
+    #editor {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 14px 16px;
+      font-size: 15px;
+      line-height: 1.55;
+      color: #212121;
+      outline: none;
+      cursor: text;
+      -webkit-overflow-scrolling: touch;
+    }
+    #editor:focus { box-shadow: inset 0 0 0 1px #c5cae9; }
+    #editor img { max-width: 100%; height: auto; }
+    #editor table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+    #editor th, #editor td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    #editor h1, #editor h2, #editor h3, #editor h4 {
+      margin: 1em 0 0.5em;
+      line-height: 1.25;
+    }
+    #editor p { margin: 0 0 0.75em; }
+    #editor ul, #editor ol { margin: 0 0 0.75em 1.25em; padding: 0; }
+    #editor a { color: #3949ab; }
+    #editor blockquote {
+      margin: 12px 0;
+      padding: 8px 12px;
+      border-left: 4px solid #c5cae9;
+      background: #f5f5f5;
+    }
+    #hint {
+      flex-shrink: 0;
+      font-size: 11px;
+      color: #757575;
+      padding: 4px 10px 6px;
+      border-bottom: 1px solid #eeeeee;
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div id="hint">Click in the page below to edit visually. Changes sync to Edit HTML automatically.</div>
+    <div id="toolbar">
+      <button type="button" data-cmd="bold" title="Bold"><b>B</b></button>
+      <button type="button" data-cmd="italic" title="Italic"><i>I</i></button>
+      <button type="button" data-cmd="underline" title="Underline"><u>U</u></button>
+      <span class="sep"></span>
+      <button type="button" data-block="h2">H2</button>
+      <button type="button" data-block="h3">H3</button>
+      <button type="button" data-block="p">Paragraph</button>
+      <span class="sep"></span>
+      <button type="button" data-cmd="insertUnorderedList" title="Bullet list">• List</button>
+      <button type="button" data-cmd="insertOrderedList" title="Numbered list">1. List</button>
+      <span class="sep"></span>
+      <button type="button" id="link-btn" title="Insert link">Link</button>
+      <button type="button" data-cmd="insertHorizontalRule" title="Divider">—</button>
+      <button type="button" data-cmd="removeFormat" title="Clear formatting">Clear</button>
+    </div>
+    <div id="editor" contenteditable="true"></div>
+  </div>
+  <script>
+    (function () {
+      var editorId = null;
+      var suppressSync = false;
+      var editor = document.getElementById('editor');
+
+      function getHtml() {
+        return editor.innerHTML;
+      }
+
+      function setHtml(html) {
+        suppressSync = true;
+        editor.innerHTML = html || '<p><br></p>';
+        suppressSync = false;
+      }
+
+      function notifyChange() {
+        if (suppressSync) return;
+        parent.postMessage({
+          type: 'tpk-visual-change',
+          id: editorId,
+          html: getHtml(),
+        }, '*');
+      }
+
+      function focusEditor() {
+        editor.focus();
+      }
+
+      function runCmd(command, value) {
+        focusEditor();
+        try {
+          document.execCommand(command, false, value || null);
+        } catch (_) { /* ignore */ }
+        notifyChange();
+      }
+
+      function setBlock(tag) {
+        focusEditor();
+        var block = tag.toUpperCase();
+        if (block === 'P') {
+          document.execCommand('formatBlock', false, 'p');
+        } else {
+          document.execCommand('formatBlock', false, '<' + tag + '>');
+        }
+        notifyChange();
+      }
+
+      document.getElementById('toolbar').addEventListener('click', function (e) {
+        var btn = e.target.closest('button');
+        if (!btn) return;
+        e.preventDefault();
+        var cmd = btn.getAttribute('data-cmd');
+        var block = btn.getAttribute('data-block');
+        if (cmd) runCmd(cmd);
+        else if (block) setBlock(block);
+      });
+
+      document.getElementById('link-btn').addEventListener('click', function (e) {
+        e.preventDefault();
+        var url = prompt('Link URL', 'https://');
+        if (url == null) return;
+        runCmd('createLink', url.trim() || 'https://');
+      });
+
+      editor.addEventListener('input', notifyChange);
+      editor.addEventListener('blur', notifyChange);
+
+      window.addEventListener('message', function (event) {
+        var data = event.data;
+        if (!data || typeof data.type !== 'string') return;
+        if (data.id && editorId && data.id !== editorId) return;
+
+        switch (data.type) {
+          case 'tpk-visual-init':
+            editorId = data.id;
+            setHtml(data.html || '');
+            parent.postMessage({ type: 'tpk-visual-ready', id: editorId }, '*');
+            break;
+          case 'tpk-visual-set-html':
+            setHtml(data.html || '');
+            break;
+          case 'tpk-visual-get-html':
+            parent.postMessage({
+              type: 'tpk-visual-html',
+              id: editorId,
+              html: getHtml(),
+            }, '*');
+            break;
+          case 'tpk-visual-focus':
+            focusEditor();
+            break;
+        }
+      });
+
+      parent.postMessage({ type: 'tpk-visual-frame-loaded' }, '*');
+    })();
+  </script>
+</body>
+</html>

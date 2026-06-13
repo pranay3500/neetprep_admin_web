@@ -74,7 +74,12 @@ class UnsubscribeRequestsPage extends StatelessWidget {
                         dataRowMinHeight: 48,
                         dataRowMaxHeight: 72,
                         columns: const [
-                          DataColumn(label: Text('Date')),
+                          DataColumn(
+                            label: SizedBox(
+                              width: 168,
+                              child: Text('Date'),
+                            ),
+                          ),
                           DataColumn(label: Text('Email')),
                           DataColumn(label: Text('Source')),
                           DataColumn(label: Text('Status')),
@@ -90,22 +95,30 @@ class UnsubscribeRequestsPage extends StatelessWidget {
                           return DataRow(
                             cells: [
                               DataCell(
-                                InkWell(
-                                  onTap: () => AccountDeletionRequestService
-                                      .markRead(doc.id),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      if (unread)
-                                        const Padding(
-                                          padding: EdgeInsets.only(right: 6),
-                                          child: CircleAvatar(
-                                            radius: 4,
-                                            backgroundColor: Color(0xFFE53935),
+                                SizedBox(
+                                  width: 168,
+                                  child: InkWell(
+                                    onTap: () => AccountDeletionRequestService
+                                        .markRead(doc.id),
+                                    child: Row(
+                                      children: [
+                                        if (unread)
+                                          const Padding(
+                                            padding: EdgeInsets.only(right: 6),
+                                            child: CircleAvatar(
+                                              radius: 4,
+                                              backgroundColor: Color(0xFFE53935),
+                                            ),
+                                          ),
+                                        Expanded(
+                                          child: Text(
+                                            _fmtTs(data),
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
-                                      Text(_fmtTs(data)),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),

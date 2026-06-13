@@ -29,7 +29,9 @@ echo   [OK] Build finished
 echo.
 echo   Next: upload ALL files from:
 echo         %CD%\build\web
-echo   to your server document root, then hard-refresh the live site.
+echo   to your server document root, then run:
+echo         powershell -File tool\verify_live_deploy.ps1
+echo   until it says [OK]. Then hard-refresh the live site.
 echo ============================================================
 echo.
 
