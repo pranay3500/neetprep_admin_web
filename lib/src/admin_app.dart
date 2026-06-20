@@ -25,6 +25,7 @@ import 'admin_auth_constants.dart';
 import 'services/admin_auth_eligibility.dart';
 import 'services/admin_email/admin_email_listener.dart';
 import 'services/firestore_db.dart';
+import 'widgets/responsive_layout.dart';
 import 'widgets/testprepkart_logo.dart';
 
 const bool kEnforceAdminRoleGuard = true;
@@ -310,6 +311,7 @@ class AdminHomeShell extends StatefulWidget {
 
 class _AdminHomeShellState extends State<AdminHomeShell> {
   int _tab = 0;
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -361,16 +363,36 @@ class _AdminHomeShellState extends State<AdminHomeShell> {
     'App Users',
   ];
 
+  void _selectTab(int index) {
+    setState(() => _tab = index);
+    if (isAdminCompactLayout(context)) {
+      _scaffoldKey.currentState?.closeDrawer();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final compact = isAdminCompactLayout(context);
+
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
-        leadingWidth: 188,
-        leading: const Padding(
-          padding: EdgeInsets.fromLTRB(14, 10, 8, 10),
-          child: TestprepKartLogo(height: 34, maxWidth: 160),
+        automaticallyImplyLeading: compact,
+        leadingWidth: compact ? 56 : 188,
+        leading: compact
+            ? null
+            : const Padding(
+                padding: EdgeInsets.fromLTRB(14, 10, 8, 10),
+                child: TestprepKartLogo(height: 34, maxWidth: 160),
+              ),
+        centerTitle: false,
+        title: Text(
+          _titles[_tab],
+          overflow: TextOverflow.ellipsis,
         ),
-        title: Text(_titles[_tab]),
+        iconTheme: IconThemeData(
+          color: Theme.of(context).colorScheme.onSurface,
+        ),
         actions: [
           IconButton(
             tooltip: 'Sign out',
@@ -379,22 +401,36 @@ class _AdminHomeShellState extends State<AdminHomeShell> {
           ),
         ],
       ),
-      body: Row(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _AdminNavigationRail(
-            selectedIndex: _tab,
-            onDestinationSelected: (index) => setState(() => _tab = index),
-          ),
-          const VerticalDivider(width: 1),
-          Expanded(
-            child: ColoredBox(
+      drawer: compact
+          ? Drawer(
+              child: _AdminNavigationRail(
+                selectedIndex: _tab,
+                onDestinationSelected: _selectTab,
+                expanded: true,
+              ),
+            )
+          : null,
+      body: compact
+          ? ColoredBox(
               color: Theme.of(context).colorScheme.surface,
               child: _pages[_tab],
+            )
+          : Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _AdminNavigationRail(
+                  selectedIndex: _tab,
+                  onDestinationSelected: _selectTab,
+                ),
+                const VerticalDivider(width: 1),
+                Expanded(
+                  child: ColoredBox(
+                    color: Theme.of(context).colorScheme.surface,
+                    child: _pages[_tab],
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
     );
   }
 }
@@ -420,10 +456,12 @@ class _AdminNavigationRail extends StatelessWidget {
   const _AdminNavigationRail({
     required this.selectedIndex,
     required this.onDestinationSelected,
+    this.expanded = false,
   });
 
   final int selectedIndex;
   final ValueChanged<int> onDestinationSelected;
+  final bool expanded;
 
   static const List<_AdminNavDestination> _destinations = [
     _AdminNavDestination(
@@ -638,42 +676,69 @@ class _AdminNavigationRail extends StatelessWidget {
                                   hasNewUserRegistrations:
                                       hasNewUserRegistrations,
                                 );
-                        return SizedBox(
-                          width: 220,
-                          child: Material(
-                            color: colorScheme.surfaceContainerHighest
-                                .withValues(alpha: 0.35),
-                            child: ListView.builder(
-                              padding: const EdgeInsets.symmetric(vertical: 8),
-                              itemCount: items.length,
-                              itemBuilder: (context, i) {
-                                final item = items[i];
-                                final selected = selectedIndex == item.index;
-                                return ListTile(
-                                  dense: true,
-                                  selected: selected,
-                                  leading: _PendingBadgeIcon(
-                                    icon: selected
-                                        ? item.selectedIcon
-                                        : item.icon,
-                                    showBadge: item.showBadge,
-                                  ),
-                                  title: Text(
-                                    item.label,
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      fontWeight: selected
-                                          ? FontWeight.w600
-                                          : FontWeight.w400,
+                                final navList = Material(
+                                  color: colorScheme.surfaceContainerHighest
+                                      .withValues(alpha: 0.35),
+                                  child: ListView.builder(
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: expanded ? 0 : 8,
                                     ),
+                                    itemCount: items.length,
+                                    itemBuilder: (context, i) {
+                                      final item = items[i];
+                                      final selected =
+                                          selectedIndex == item.index;
+                                      return ListTile(
+                                        dense: true,
+                                        selected: selected,
+                                        leading: _PendingBadgeIcon(
+                                          icon: selected
+                                              ? item.selectedIcon
+                                              : item.icon,
+                                          showBadge: item.showBadge,
+                                        ),
+                                        title: Text(
+                                          item.label,
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: selected
+                                                ? FontWeight.w600
+                                                : FontWeight.w400,
+                                          ),
+                                        ),
+                                        onTap: () =>
+                                            onDestinationSelected(item.index),
+                                      );
+                                    },
                                   ),
-                                  onTap: () =>
-                                      onDestinationSelected(item.index),
                                 );
-                              },
-                            ),
-                          ),
-                        );
+
+                                if (expanded) {
+                                  return SafeArea(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.stretch,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                            16,
+                                            16,
+                                            16,
+                                            8,
+                                          ),
+                                          child: const TestprepKartLogo(
+                                            height: 36,
+                                            maxWidth: 180,
+                                          ),
+                                        ),
+                                        const Divider(height: 1),
+                                        Expanded(child: navList),
+                                      ],
+                                    ),
+                                  );
+                                }
+
+                                return SizedBox(width: 220, child: navList);
                               },
                             );
                           },
