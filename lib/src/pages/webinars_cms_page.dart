@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import '../services/firestore_db.dart';
 import '../utils/webinar_schedule_timezone.dart';
 import '../widgets/admin_dialog_save_actions.dart';
+import '../widgets/admin_nav_badge_host.dart';
 
 /// Stable doc id for the default featured webinar (matches mobile preview content).
 const String kDefaultWebinarDocId = 'default_featured_webinar';
@@ -517,226 +518,247 @@ class WebinarsCmsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final interestCount =
+        AdminNavBadgeHost.of(context).webinarNotifyUnreadCount;
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              const Expanded(
-                child: Text(
-                  'Webinars',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
+      child: DefaultTabController(
+        length: 2,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Expanded(
+                  child: Text(
+                    'Webinars',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
+                  ),
+                ),
+                TextButton.icon(
+                  onPressed: () => _refreshFromServer(context),
+                  icon: const Icon(Icons.cloud_download_outlined),
+                  label: const Text('Check server'),
+                ),
+                const SizedBox(width: 8),
+                FilledButton.icon(
+                  onPressed: () => _openEditor(context),
+                  icon: const Icon(Icons.add),
+                  label: const Text('Add webinar'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Firestore collection: webinars. The mobile app reads only published webinars '
+              '(isPublished). Notify Me interest is stored in webinar_notify_interest.',
+            ),
+            const SizedBox(height: 12),
+            TabBar(
+              isScrollable: true,
+              tabs: [
+                const Tab(text: 'All Webinars'),
+                Tab(child: _WebinarInterestTabLabel(interestCount)),
+              ],
+            ),
+            const SizedBox(height: 8),
+            Expanded(
+              child: TabBarView(
+                children: [
+                  _buildWebinarCatalog(context),
+                  const _WebinarNotifyInterestTable(),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildWebinarCatalog(BuildContext context) {
+    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+      stream: _col.snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (snapshot.hasError) {
+          return Center(
+            child: Text('Could not load webinars: ${snapshot.error}'),
+          );
+        }
+        final docs = List<QueryDocumentSnapshot<Map<String, dynamic>>>.from(
+          snapshot.data?.docs ?? [],
+        )..sort((a, b) {
+            final ad = _ts(a.data()['scheduledAt']) ??
+                DateTime.fromMillisecondsSinceEpoch(0);
+            final bd = _ts(b.data()['scheduledAt']) ??
+                DateTime.fromMillisecondsSinceEpoch(0);
+            return ad.compareTo(bd);
+          });
+        if (docs.isEmpty) {
+          return Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 520),
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.live_tv_outlined,
+                      size: 48,
+                      color: Color(0xFF5E35B1),
+                    ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      'No webinars in Firestore',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w700,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 10),
+                    const Text(
+                      'The app used to show a built-in preview when this list was empty. '
+                      'Publish the default webinar to Firestore so admin and app use the same data.',
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 20),
+                    FilledButton.icon(
+                      onPressed: () => _seedDefaultWebinar(context),
+                      icon: const Icon(Icons.cloud_upload_outlined),
+                      label: const Text('Publish default webinar'),
+                    ),
+                    const SizedBox(height: 10),
+                    OutlinedButton.icon(
+                      onPressed: () => _openEditor(context),
+                      icon: const Icon(Icons.add),
+                      label: const Text('Add custom webinar'),
+                    ),
+                  ],
                 ),
               ),
-              TextButton.icon(
-                onPressed: () => _refreshFromServer(context),
-                icon: const Icon(Icons.cloud_download_outlined),
-                label: const Text('Check server'),
-              ),
-              const SizedBox(width: 8),
-              FilledButton.icon(
-                onPressed: () => _openEditor(context),
-                icon: const Icon(Icons.add),
-                label: const Text('Add webinar'),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            'Firestore collection: webinars. The mobile app reads only published webinars '
-            '(isPublished). Use Disable on a row to hide a webinar without deleting it. '
-            'Session status (Upcoming/Live/Past) is separate from visibility.',
-          ),
-          const SizedBox(height: 16),
-          Expanded(
-            child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-              stream: _col.snapshots(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text('Could not load webinars: ${snapshot.error}'),
-                  );
-                }
-                final docs = List<QueryDocumentSnapshot<Map<String, dynamic>>>.from(
-                  snapshot.data?.docs ?? [],
-                )..sort((a, b) {
-                    final ad = _ts(a.data()['scheduledAt']) ??
-                        DateTime.fromMillisecondsSinceEpoch(0);
-                    final bd = _ts(b.data()['scheduledAt']) ??
-                        DateTime.fromMillisecondsSinceEpoch(0);
-                    return ad.compareTo(bd);
-                  });
-                if (docs.isEmpty) {
-                  return Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 520),
-                      child: Padding(
-                        padding: const EdgeInsets.all(24),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(
-                              Icons.live_tv_outlined,
-                              size: 48,
-                              color: Color(0xFF5E35B1),
+            ),
+          );
+        }
+        return ListView.separated(
+          itemCount: docs.length,
+          separatorBuilder: (_, __) => const SizedBox(height: 8),
+          itemBuilder: (context, index) {
+            final doc = docs[index];
+            final data = doc.data();
+            final at = WebinarScheduleTimezone.utcFromFirestore(
+              data['scheduledAt'],
+            );
+            final scheduleLabel = at != null
+                ? '${WebinarScheduleTimezone.formatIstShort(at)}\n'
+                    '${WebinarScheduleTimezone.usTimezoneDisplay(at)}'
+                : 'No date';
+            final published = data['isPublished'] != false;
+            final titleText = _text(data['title'], 'Untitled');
+            final sessionStatus = _titleCase(_text(data['status'], 'upcoming'));
+            return Card(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(12, 10, 8, 10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            titleText,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 15,
                             ),
-                            const SizedBox(height: 16),
-                            const Text(
-                              'No webinars in Firestore',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700,
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            scheduleLabel,
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                          const SizedBox(height: 8),
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 6,
+                            children: [
+                              Chip(
+                                visualDensity: VisualDensity.compact,
+                                label: Text(sessionStatus),
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 10),
-                            const Text(
-                              'The app used to show a built-in preview when this list was empty. '
-                              'Publish the default webinar to Firestore so admin and app use the same data.',
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 20),
-                            FilledButton.icon(
-                              onPressed: () => _seedDefaultWebinar(context),
-                              icon: const Icon(Icons.cloud_upload_outlined),
-                              label: const Text('Publish default webinar'),
-                            ),
-                            const SizedBox(height: 10),
-                            OutlinedButton.icon(
-                              onPressed: () => _openEditor(context),
-                              icon: const Icon(Icons.add),
-                              label: const Text('Add custom webinar'),
-                            ),
-                          ],
-                        ),
+                              Chip(
+                                visualDensity: VisualDensity.compact,
+                                avatar: Icon(
+                                  published
+                                      ? Icons.visibility_rounded
+                                      : Icons.visibility_off_outlined,
+                                  size: 16,
+                                  color: published
+                                      ? Colors.green.shade700
+                                      : Colors.grey.shade600,
+                                ),
+                                label: Text(
+                                  published ? 'Visible in app' : 'Disabled',
+                                ),
+                                backgroundColor: published
+                                    ? Colors.green.withValues(alpha: 0.08)
+                                    : Colors.grey.withValues(alpha: 0.12),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                  );
-                }
-                return ListView.separated(
-                  itemCount: docs.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: 8),
-                  itemBuilder: (context, index) {
-                    final doc = docs[index];
-                    final data = doc.data();
-                    final at = WebinarScheduleTimezone.utcFromFirestore(
-                      data['scheduledAt'],
-                    );
-                    final scheduleLabel = at != null
-                        ? '${WebinarScheduleTimezone.formatIstShort(at)}\n'
-                            '${WebinarScheduleTimezone.usTimezoneDisplay(at)}'
-                        : 'No date';
-                    final published = data['isPublished'] != false;
-                    final titleText = _text(data['title'], 'Untitled');
-                    final sessionStatus = _titleCase(_text(data['status'], 'upcoming'));
-                    return Card(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(12, 10, 8, 10),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    titleText,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 15,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    scheduleLabel,
-                                    style: Theme.of(context).textTheme.bodySmall,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Wrap(
-                                    spacing: 8,
-                                    runSpacing: 6,
-                                    children: [
-                                      Chip(
-                                        visualDensity: VisualDensity.compact,
-                                        label: Text(sessionStatus),
-                                      ),
-                                      Chip(
-                                        visualDensity: VisualDensity.compact,
-                                        avatar: Icon(
-                                          published
-                                              ? Icons.visibility_rounded
-                                              : Icons.visibility_off_outlined,
-                                          size: 16,
-                                          color: published
-                                              ? Colors.green.shade700
-                                              : Colors.grey.shade600,
-                                        ),
-                                        label: Text(
-                                          published ? 'Visible in app' : 'Disabled',
-                                        ),
-                                        backgroundColor: published
-                                            ? Colors.green.withValues(alpha: 0.08)
-                                            : Colors.grey.withValues(alpha: 0.12),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Wrap(
-                              spacing: 4,
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              children: [
-                                OutlinedButton(
-                                  onPressed: published
-                                      ? () => _confirmDisableWebinar(
-                                            context,
-                                            docId: doc.id,
-                                            title: titleText,
-                                          )
-                                      : () => _setPublished(
-                                            context,
-                                            docId: doc.id,
-                                            published: true,
-                                          ),
-                                  child: Text(published ? 'Disable' : 'Enable'),
-                                ),
-                                IconButton(
-                                  tooltip: 'Edit',
-                                  onPressed: () =>
-                                      _openEditor(context, docId: doc.id),
-                                  icon: const Icon(Icons.edit_outlined),
-                                ),
-                                IconButton(
-                                  tooltip: 'Delete webinar',
-                                  onPressed: () => _confirmDeleteWebinar(
+                    Wrap(
+                      spacing: 4,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: [
+                        OutlinedButton(
+                          onPressed: published
+                              ? () => _confirmDisableWebinar(
                                     context,
                                     docId: doc.id,
                                     title: titleText,
-                                  ),
-                                  icon: const Icon(
-                                    Icons.delete_outline,
-                                    color: Colors.red,
-                                  ),
+                                  )
+                              : () => _setPublished(
+                                    context,
+                                    docId: doc.id,
+                                    published: true,
                                 ),
-                              ],
-                            ),
-                          ],
+                          child: Text(published ? 'Disable' : 'Enable'),
                         ),
-                      ),
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+                        IconButton(
+                          tooltip: 'Edit',
+                          onPressed: () =>
+                              _openEditor(context, docId: doc.id),
+                          icon: const Icon(Icons.edit_outlined),
+                        ),
+                        IconButton(
+                          tooltip: 'Delete webinar',
+                          onPressed: () => _confirmDeleteWebinar(
+                            context,
+                            docId: doc.id,
+                            title: titleText,
+                          ),
+                          icon: const Icon(
+                            Icons.delete_outline,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 
@@ -751,6 +773,200 @@ class WebinarsCmsPage extends StatelessWidget {
       ),
     );
   }
+}
+
+class _WebinarInterestTabLabel extends StatelessWidget {
+  const _WebinarInterestTabLabel(this.count);
+
+  final int count;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(count > 0 ? 'Notify Me ($count)' : 'Notify Me'),
+        if (count > 0) ...[
+          const SizedBox(width: 6),
+          const CircleAvatar(radius: 4, backgroundColor: Color(0xFFE53935)),
+        ],
+      ],
+    );
+  }
+}
+
+class _WebinarNotifyInterestTable extends StatelessWidget {
+  const _WebinarNotifyInterestTable();
+
+  static const _statuses = [
+    'New',
+    'Contacted',
+    'Notified',
+    'Not Interested',
+    'No Response',
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+        stream: FirestoreDb.instance
+            .collection('webinar_notify_interest')
+            .limit(200)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            return Center(child: Text('Failed to load: ${snapshot.error}'));
+          }
+          final rawDocs =
+              List<QueryDocumentSnapshot<Map<String, dynamic>>>.from(
+            snapshot.data?.docs ?? const [],
+          )..sort(
+              (a, b) => _interestCreatedAt(b.data())
+                  .compareTo(_interestCreatedAt(a.data())),
+            );
+          if (rawDocs.isEmpty) {
+            return const Center(child: Text('No Notify Me requests yet.'));
+          }
+          return Card(
+            clipBehavior: Clip.antiAlias,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: SingleChildScrollView(
+                primary: false,
+                child: DataTable(
+                  columnSpacing: 20,
+                  horizontalMargin: 16,
+                  headingRowHeight: 44,
+                  dataRowMinHeight: 52,
+                  dataRowMaxHeight: 88,
+                  columns: const [
+                    DataColumn(label: Text('Date')),
+                    DataColumn(label: Text('Name')),
+                    DataColumn(label: Text('Email')),
+                    DataColumn(label: Text('Class')),
+                    DataColumn(label: Text('Webinar')),
+                    DataColumn(label: Text('Phone')),
+                    DataColumn(label: Text('Country')),
+                    DataColumn(label: Text('Status')),
+                  ],
+                  rows: rawDocs.map((doc) {
+                    final data = doc.data();
+                    final status = _text(data['status'], 'New');
+                    final selectedStatus =
+                        _statuses.contains(status) ? status : 'New';
+                    final unread = data['isRead'] != true;
+                    void markSeen() {
+                      doc.reference.set({
+                        'isRead': true,
+                        'updatedAt': FieldValue.serverTimestamp(),
+                      }, SetOptions(merge: true));
+                    }
+
+                    return DataRow(
+                      cells: [
+                        DataCell(
+                          InkWell(
+                            onTap: markSeen,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 4),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  if (unread)
+                                    const Padding(
+                                      padding: EdgeInsets.only(right: 6),
+                                      child: CircleAvatar(
+                                        radius: 4,
+                                        backgroundColor: Color(0xFFE53935),
+                                      ),
+                                    ),
+                                  Text(_fmtInterestTs(data)),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        DataCell(Text(_text(data['userName'], '-'))),
+                        DataCell(Text(_text(data['email'], '-'))),
+                        DataCell(Text(_text(data['class'], '-'))),
+                        DataCell(
+                          SizedBox(
+                            width: 220,
+                            child: Text(
+                              _text(data['webinarTitle'], '-'),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ),
+                        DataCell(Text(_text(data['phone'], '-'))),
+                        DataCell(Text(_text(data['country'], '-'))),
+                        DataCell(
+                          SizedBox(
+                            width: 160,
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<String>(
+                                isDense: true,
+                                isExpanded: true,
+                                value: selectedStatus,
+                                items: _statuses
+                                    .map(
+                                      (s) => DropdownMenuItem(
+                                        value: s,
+                                        child: Text(s),
+                                      ),
+                                    )
+                                    .toList(),
+                                onChanged: (v) {
+                                  if (v == null) return;
+                                  doc.reference.set({
+                                    'status': v,
+                                    'isRead': true,
+                                    'updatedAt': FieldValue.serverTimestamp(),
+                                  }, SetOptions(merge: true));
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }).toList(),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+String _fmtInterestTs(Map<String, dynamic> data) {
+  final c = data['createdAt'];
+  if (c is Timestamp) {
+    return DateFormat('dd MMM yyyy, h:mm a').format(c.toDate().toLocal());
+  }
+  final loc = data['createdAtLocal']?.toString();
+  final p = loc != null ? DateTime.tryParse(loc) : null;
+  if (p != null) {
+    return DateFormat('dd MMM yyyy, h:mm a').format(p.toLocal());
+  }
+  return '-';
+}
+
+DateTime _interestCreatedAt(Map<String, dynamic> data) {
+  final c = data['createdAt'];
+  if (c is Timestamp) return c.toDate();
+  final loc = data['createdAtLocal']?.toString();
+  final p = loc != null ? DateTime.tryParse(loc) : null;
+  if (p != null) return p;
+  return DateTime.fromMillisecondsSinceEpoch(0);
 }
 
 String _text(Object? raw, String fallback) {

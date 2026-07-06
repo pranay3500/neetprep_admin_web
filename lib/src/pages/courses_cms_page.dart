@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import '../services/exchange_rate_service.dart';
 import '../services/firestore_db.dart';
 import '../widgets/admin_dialog_save_actions.dart';
+import '../widgets/admin_nav_badge_host.dart';
 
 class CoursesCmsPage extends StatelessWidget {
   const CoursesCmsPage({super.key});
@@ -17,49 +18,42 @@ class CoursesCmsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-      stream: FirestoreDb.instance
-          .collection('course_inquiries')
-          .where('isRead', isEqualTo: false)
-          .snapshots(),
-      builder: (context, inquirySnapshot) {
-        return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-          stream: FirestoreDb.instance
-              .collection('course_demo_bookings')
-              .where('isRead', isEqualTo: false)
-              .snapshots(),
-          builder: (context, demoSnapshot) {
-            final inquiryCount = inquirySnapshot.data?.docs.length ?? 0;
-            final demoCount = demoSnapshot.data?.docs.length ?? 0;
-            return DefaultTabController(
-              length: 4,
-              child: Column(
-                children: [
-                  TabBar(
-                    isScrollable: true,
-                    tabs: [
-                      const Tab(text: 'All Courses'),
-                      Tab(child: _RequestTabLabel('Inquiries', inquiryCount)),
-                      Tab(child: _RequestTabLabel('Demo Bookings', demoCount)),
-                      const Tab(text: 'Page Settings'),
-                    ],
-                  ),
-                  Expanded(
-                    child: TabBarView(
-                      children: [
-                        _AllCoursesTab(courses: _courses),
-                        const _RequestTable(collection: 'course_inquiries'),
-                        const _RequestTable(collection: 'course_demo_bookings'),
-                        _PageSettingsTab(settings: _settings),
-                      ],
-                    ),
-                  ),
-                ],
+    final badges = AdminNavBadgeHost.of(context);
+    return DefaultTabController(
+      length: 4,
+      child: Column(
+        children: [
+          TabBar(
+            isScrollable: true,
+            tabs: [
+              const Tab(text: 'All Courses'),
+              Tab(
+                child: _RequestTabLabel(
+                  'Inquiries',
+                  badges.courseInquiryUnreadCount,
+                ),
               ),
-            );
-          },
-        );
-      },
+              Tab(
+                child: _RequestTabLabel(
+                  'Demo Bookings',
+                  badges.courseDemoUnreadCount,
+                ),
+              ),
+              const Tab(text: 'Page Settings'),
+            ],
+          ),
+          Expanded(
+            child: TabBarView(
+              children: [
+                _AllCoursesTab(courses: _courses),
+                const _RequestTable(collection: 'course_inquiries'),
+                const _RequestTable(collection: 'course_demo_bookings'),
+                _PageSettingsTab(settings: _settings),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -330,7 +324,7 @@ class _AllCoursesTabState extends State<_AllCoursesTab> {
         final id = entry.key;
         try {
           final ref = widget.courses.doc(id);
-          final doc = await ref.get();
+          final doc = await ref.get(const GetOptions(source: Source.server));
           if (!doc.exists) {
             var data = Map<String, dynamic>.from(entry.value)..remove('id');
             try {

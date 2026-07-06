@@ -2,10 +2,15 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # Email relay (PHP — works on shared hosting without Node/PM2)
+  RewriteRule ^api/health$ email-api/health.php [L,QSA]
+  RewriteRule ^api/send-email$ email-api/send-email.php [L,QSA]
+
   # Real static files must 404 if missing — do not return index.html for .js/.wasm.
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_URI} !\.(js|wasm|json|png|jpg|jpeg|gif|ico|svg|css|html|txt)$ [NC]
+  RewriteCond %{REQUEST_URI} !\.(js|wasm|json|png|jpg|jpeg|gif|ico|svg|css|html|txt|php)$ [NC]
   RewriteRule ^ index.html [L]
 </IfModule>
 

@@ -29,6 +29,11 @@ class FirestoreDb {
       app: Firebase.app(),
       databaseId: databaseId,
     );
+    if (kIsWeb) {
+      _instance!.settings = const Settings(
+        persistenceEnabled: false,
+      );
+    }
 
     try {
       await _instance!

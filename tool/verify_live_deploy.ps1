@@ -67,6 +67,23 @@ Write-Host "  4. If Server shows cloudflare: purge CDN cache (Caching -> Purge E
 Write-Host "  5. Re-run this script until [OK]."
 Write-Host "  6. Hard-refresh https://neetappadmin.satlas.org/ (Ctrl+Shift+R)."
 
+$healthUrl = "https://neetappadmin.satlas.org/api/health"
+Write-Host ""
+Write-Host "Email relay check: $healthUrl" -ForegroundColor Cyan
+try {
+  $health = Invoke-WebRequest -Uri $healthUrl -UseBasicParsing -TimeoutSec 15
+  $body = $health.Content.Trim()
+  if ($body -match '"ok"\s*:\s*true' -and $body -match '"runtime"\s*:\s*"php"') {
+    Write-Host "[OK] Email relay /api/health returns PHP JSON." -ForegroundColor Green
+  } elseif ($body -match 'neetprep_admin_web|<!DOCTYPE html>') {
+    Write-Host "[FAIL] /api/health returns the Flutter app — upload build\web\email-api\ and .htaccess" -ForegroundColor Red
+  } else {
+    Write-Host "[WARN] Unexpected health body: $($body.Substring(0, [Math]::Min(120, $body.Length)))" -ForegroundColor Yellow
+  }
+} catch {
+  Write-Host "[FAIL] Could not reach email relay: $_" -ForegroundColor Red
+}
+
 try {
   $index = (Invoke-WebRequest -Uri $LiveIndex -UseBasicParsing).Content
   if ($index -match "serviceWorker") {

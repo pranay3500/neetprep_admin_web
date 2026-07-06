@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../services/admin_email/admin_email_config.dart';
 import '../services/admin_email/admin_email_dispatcher.dart';
+import '../services/admin_email/admin_email_relay_health.dart';
 import '../services/firestore_db.dart';
 import '../widgets/admin_dialog_save_actions.dart';
 import 'dashboard_banners_settings_tab.dart';
@@ -50,6 +53,10 @@ class _SettingsPageState extends State<SettingsPage> {
   bool _contentLibLoaded = false;
   bool _contentGatingEnabled = true;
   bool _isSaving = false;
+  bool _checkingRelay = false;
+  bool _sendingTest = false;
+  bool _relayCheckScheduled = false;
+  AdminEmailRelayHealthResult? _relayHealth;
   bool _masterEnabled = false;
   bool _smtpSsl = true;
   String _provider = 'SMTP';
@@ -126,6 +133,75 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
     };
     _templates = _map(data['templates']);
+    if (!_relayCheckScheduled) {
+      _relayCheckScheduled = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) => _checkRelayHealth());
+    }
+  }
+
+  Map<String, dynamic> _currentEmailSettingsPayload() {
+    return {
+      'masterEnabled': _masterEnabled,
+      'provider': _provider,
+      'senderName': _senderName.text.trim(),
+      'fromEmail': _fromEmail.text.trim(),
+      'replyToEmail': _replyToEmail.text.trim(),
+      'adminRecipients': _splitCsv(_adminRecipients.text),
+      'smtp': {
+        'host': _smtpHost.text.trim(),
+        'port': int.tryParse(_smtpPort.text.trim()) ?? 587,
+        'username': _smtpUsername.text.trim(),
+        'password': _smtpPassword.text,
+        'useSsl': _smtpSsl,
+      },
+      'api': {
+        'endpoint': _apiEndpoint.text.trim(),
+        'apiKey': _apiKey.text,
+      },
+      'relayUrl': _text(_relayUrl.text, AdminEmailConfig.defaultRelayUrl),
+      'triggers': _triggers,
+    };
+  }
+
+  Future<void> _checkRelayHealth() async {
+    if (!mounted) return;
+    setState(() => _checkingRelay = true);
+    final result = await AdminEmailRelayHealth.check(
+      _text(_relayUrl.text, AdminEmailConfig.defaultRelayUrl),
+    );
+    if (!mounted) return;
+    setState(() {
+      _relayHealth = result;
+      _checkingRelay = false;
+    });
+  }
+
+  Future<void> _sendTestEmail() async {
+    final user = FirebaseAuth.instance.currentUser;
+    final to = user?.email?.trim() ?? _fromEmail.text.trim();
+    if (!to.contains('@')) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Sign in with an email or set From Email for the test.'),
+        ),
+      );
+      return;
+    }
+
+    setState(() => _sendingTest = true);
+    await _save(silent: true);
+    final error = await AdminEmailDispatcher.instance.sendTestEmail(to: to);
+    if (!mounted) return;
+    setState(() => _sendingTest = false);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          error == null
+              ? 'Test email sent to $to'
+              : 'Test email failed: $error',
+        ),
+      ),
+    );
   }
 
   @override
@@ -204,6 +280,17 @@ class _SettingsPageState extends State<SettingsPage> {
                 'While you are signed in, the app watches Firestore and sends mail through your Email Relay URL using the provider below.',
               ),
               const SizedBox(height: 18),
+              _EmailSetupStatusCard(
+                configCheck: AdminEmailConfigCheck.fromSettings(
+                  _currentEmailSettingsPayload(),
+                ),
+                relayHealth: _relayHealth,
+                checkingRelay: _checkingRelay,
+                onCheckRelay: _checkRelayHealth,
+                onSendTest: _sendingTest ? null : _sendTestEmail,
+                sendingTest: _sendingTest,
+              ),
+              const SizedBox(height: 18),
               _section(
                 title: 'Email relay (required)',
                 children: [
@@ -213,7 +300,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     keyboardType: TextInputType.url,
                   ),
                   const Text(
-                    'Host the Node relay from deploy/email_relay on Satlas (same server). '
+                    'PHP relay ships in web/email-api/ and is routed by .htaccess '
+                    '(no Node/PM2 required on shared hosting). '
                     'Default: https://neetappadmin.satlas.org/api/send-email',
                     style: TextStyle(fontSize: 12, color: Colors.black54),
                   ),
@@ -887,10 +975,19 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Future<void> _save() async {
+  Future<void> _save({bool silent = false}) async {
     if (!(_formKey.currentState?.validate() ?? false)) return;
     setState(() => _isSaving = true);
     final user = FirebaseAuth.instance.currentUser;
+    final smtpPayload = <String, dynamic>{
+      'host': _smtpHost.text.trim(),
+      'port': int.tryParse(_smtpPort.text.trim()) ?? 587,
+      'username': _smtpUsername.text.trim(),
+      'useSsl': _smtpSsl,
+    };
+    if (_smtpPassword.text.isNotEmpty) {
+      smtpPayload['password'] = _smtpPassword.text;
+    }
     final payload = {
       'masterEnabled': _masterEnabled,
       'provider': _provider,
@@ -898,13 +995,7 @@ class _SettingsPageState extends State<SettingsPage> {
       'fromEmail': _fromEmail.text.trim(),
       'replyToEmail': _replyToEmail.text.trim(),
       'adminRecipients': _splitCsv(_adminRecipients.text),
-      'smtp': {
-        'host': _smtpHost.text.trim(),
-        'port': int.tryParse(_smtpPort.text.trim()) ?? 587,
-        'username': _smtpUsername.text.trim(),
-        'password': _smtpPassword.text,
-        'useSsl': _smtpSsl,
-      },
+      'smtp': smtpPayload,
       'api': {
         'endpoint': _apiEndpoint.text.trim(),
         'apiKey': _apiKey.text,
@@ -921,10 +1012,13 @@ class _SettingsPageState extends State<SettingsPage> {
     try {
       await _doc.set(payload, SetOptions(merge: true));
       AdminEmailDispatcher.instance.invalidateSettingsCache();
-      if (mounted) {
+      if (mounted && !silent) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Email settings saved.')),
         );
+      }
+      if (mounted) {
+        unawaited(_checkRelayHealth());
       }
     } catch (e) {
       if (mounted) {
@@ -1480,6 +1574,124 @@ String _defaultTemplateBody(String triggerKey, String audience) {
       return isAdmin
           ? '<p style="margin:0;font-size:15px;line-height:1.6;">A new admin notification is available.</p>'
           : '<p style="margin:0;font-size:15px;line-height:1.6;">You have a new notification from TestprepKart.</p>';
+  }
+}
+
+class _EmailSetupStatusCard extends StatelessWidget {
+  const _EmailSetupStatusCard({
+    required this.configCheck,
+    required this.relayHealth,
+    required this.checkingRelay,
+    required this.onCheckRelay,
+    required this.onSendTest,
+    required this.sendingTest,
+  });
+
+  final AdminEmailConfigCheck configCheck;
+  final AdminEmailRelayHealthResult? relayHealth;
+  final bool checkingRelay;
+  final VoidCallback onCheckRelay;
+  final VoidCallback? onSendTest;
+  final bool sendingTest;
+
+  @override
+  Widget build(BuildContext context) {
+    final relayOk = relayHealth?.reachable == true;
+    final borderColor = relayOk && configCheck.ready
+        ? const Color(0xFF86EFAC)
+        : const Color(0xFFFCD34D);
+    final bg = relayOk && configCheck.ready
+        ? const Color(0xFFF0FDF4)
+        : const Color(0xFFFFFBEB);
+
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: bg,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: borderColor),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Email setup status',
+              style: TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+            ),
+            const SizedBox(height: 8),
+            _statusRow(
+              ok: configCheck.ready,
+              label: configCheck.ready
+                  ? 'SMTP / sender settings look complete'
+                  : 'Configuration incomplete',
+            ),
+            if (!configCheck.ready) ...[
+              const SizedBox(height: 6),
+              for (final issue in configCheck.issues)
+                Padding(
+                  padding: const EdgeInsets.only(left: 28, bottom: 2),
+                  child: Text(
+                    '• $issue',
+                    style: const TextStyle(fontSize: 12, height: 1.35),
+                  ),
+                ),
+            ],
+            const SizedBox(height: 8),
+            _statusRow(
+              ok: relayOk,
+              label: checkingRelay
+                  ? 'Checking relay…'
+                  : (relayHealth?.message ?? 'Relay not checked yet'),
+            ),
+            const SizedBox(height: 10),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                OutlinedButton.icon(
+                  onPressed: checkingRelay ? null : onCheckRelay,
+                  icon: const Icon(Icons.wifi_tethering_rounded, size: 18),
+                  label: const Text('Check relay'),
+                ),
+                FilledButton.icon(
+                  onPressed: onSendTest,
+                  icon: sendingTest
+                      ? const SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Icon(Icons.mark_email_read_outlined, size: 18),
+                  label: Text(sendingTest ? 'Sending…' : 'Send test email'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Triggers run while this admin panel is open and you are signed in. '
+              'Keep Email enabled, save SMTP password, and confirm relay health is green.',
+              style: TextStyle(fontSize: 12, color: Colors.black54, height: 1.4),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _statusRow({required bool ok, required String label}) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(
+          ok ? Icons.check_circle_rounded : Icons.warning_amber_rounded,
+          size: 20,
+          color: ok ? const Color(0xFF059669) : const Color(0xFFD97706),
+        ),
+        const SizedBox(width: 8),
+        Expanded(child: Text(label, style: const TextStyle(fontSize: 13))),
+      ],
+    );
   }
 }
 

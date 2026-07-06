@@ -1,0 +1,1559 @@
+<div bis_size="{&quot;x&quot;:34,&quot;y&quot;:32,&quot;w&quot;:1096,&quot;h&quot;:14139,&quot;abs_x&quot;:332,&quot;abs_y&quot;:314}" class="tpk-stage-blue-theme">
+<style type="text/css">.tpk-stage-blue-theme {
+    --tpk-bg: #f6f8ff;
+    --tpk-card: #ffffff;
+    --tpk-soft-blue: #eef5ff;
+    --tpk-soft-lavender: #f4f3ff;
+    --tpk-purple: #6257f5;
+    --tpk-purple-dark: #30258f;
+    --tpk-green: #009f83;
+    --tpk-text: #111827;
+    --tpk-muted: #4b5563;
+    --tpk-border: #e6e9f5;
+    --tpk-shadow: 0 8px 28px rgba(37, 45, 94, 0.08);
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--tpk-text);
+    line-height: 1.65;
+    background: #fff;
+  }
+
+  .tpk-stage-blue-theme * {
+    box-sizing: border-box;
+  }
+
+  .tpk-stage-blue-theme a {
+    text-decoration: none;
+  }
+
+  .tpk-stage-wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+  .tpk-top-card {
+    background: #fff;
+    border: 1px solid var(--tpk-border);
+    border-radius: 10px;
+    box-shadow: var(--tpk-shadow);
+    padding: 18px 18px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .tpk-top-card h1 {
+    margin: 0;
+    color: var(--tpk-purple-dark);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: .2px;
+  }
+
+  .tpk-breadcrumb {
+    margin-top: 4px;
+    color: #475569;
+    font-size: 13px;
+  }
+
+  .tpk-progress-box {
+    min-width: 180px;
+    text-align: right;
+    color: #111827;
+    font-size: 13px;
+  }
+
+  .tpk-progress-label {
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .tpk-progress-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+    color: #4b5563;
+    font-weight: 700;
+  }
+
+  .tpk-progress-track {
+    width: 132px;
+    height: 7px;
+    background: #d9dce5;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .tpk-progress-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--tpk-purple);
+    border-radius: 999px;
+  }
+
+  .tpk-main-card {
+    background: #fff;
+    border: 1px solid var(--tpk-border);
+    border-radius: 10px;
+    box-shadow: var(--tpk-shadow);
+    overflow: hidden;
+  }
+
+  .tpk-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: linear-gradient(90deg, #ffffff, #fbfbff);
+    border-bottom: 1px solid var(--tpk-border);
+  }
+
+  .tpk-tab {
+    padding: 14px 10px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: #667085;
+    border-bottom: 2px solid transparent;
+  }
+
+  .tpk-tab.active {
+    color: var(--tpk-purple);
+    background: #fff;
+    border-bottom-color: var(--tpk-purple);
+  }
+
+  .tpk-tab.performance {
+    color: var(--tpk-green);
+  }
+
+  .tpk-content {
+    padding: 16px;
+  }
+
+  .tpk-hero {
+    background: linear-gradient(110deg, #f2f4ff 0%, #edf8fb 100%);
+    padding: 26px 16px;
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: 28px;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+
+  .tpk-pill {
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #dfe5f6;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 13px;
+    color: #111827;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+
+  .tpk-hero h2 {
+    margin: 0 0 10px;
+    color: #111827;
+    font-size: 25px;
+    line-height: 1.25;
+    font-weight: 800;
+  }
+
+  .tpk-hero p {
+    margin: 0 0 10px;
+    color: #374151;
+    font-size: 15px;
+  }
+
+  .tpk-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 16px 0 18px;
+  }
+
+  .tpk-chip {
+    background: #fff;
+    border: 1px solid #e8ecf7;
+    border-radius: 999px;
+    padding: 8px 12px;
+    color: #111827;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .tpk-btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  .tpk-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 14px;
+    transition: all .2s ease;
+    border: 1px solid transparent;
+  }
+
+  .tpk-btn-purple {
+    background: var(--tpk-purple);
+    color: #fff !important;
+    box-shadow: 0 8px 18px rgba(98, 87, 245, .22);
+  }
+
+  .tpk-btn-purple:hover {
+    background: #5146df;
+    color: #fff !important;
+    transform: translateY(-1px);
+  }
+
+  .tpk-btn-white {
+    background: #fff;
+    color: #111827 !important;
+    border-color: #d7dce9;
+    box-shadow: 0 7px 16px rgba(31, 41, 55, .08);
+  }
+
+  .tpk-btn-white:hover {
+    border-color: var(--tpk-purple);
+    color: var(--tpk-purple) !important;
+    transform: translateY(-1px);
+  }
+
+  .tpk-video-box {
+    background: #fff;
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, .12);
+  }
+
+  .tpk-video-thumb {
+    position: relative;
+    min-height: 285px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #111827 0%, #2b2b86 48%, #030712 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 28px;
+    color: #fff;
+  }
+
+  .tpk-video-thumb:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,.16), transparent 25%),
+      radial-gradient(circle at 80% 80%, rgba(16,185,129,.22), transparent 28%);
+  }
+
+  .tpk-video-thumb h3 {
+    position: relative;
+    margin: 0;
+    font-size: 26px;
+    line-height: 1.25;
+    color: #fff;
+    max-width: 420px;
+  }
+
+  .tpk-play {
+    position: absolute;
+    width: 76px;
+    height: 52px;
+    background: #ff0000;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 10px 25px rgba(0,0,0,.25);
+  }
+
+  .tpk-play span {
+    width: 0;
+    height: 0;
+    border-top: 13px solid transparent;
+    border-bottom: 13px solid transparent;
+    border-left: 21px solid #fff;
+    margin-left: 5px;
+  }
+
+  .tpk-section {
+    margin: 30px 0;
+  }
+
+  .tpk-section h2 {
+    margin: 0 0 16px;
+    color: var(--tpk-green);
+    font-size: 22px;
+    line-height: 1.3;
+    font-weight: 800;
+  }
+
+  .tpk-section h3 {
+    margin: 20px 0 10px;
+    color: var(--tpk-purple-dark);
+    font-size: 19px;
+    line-height: 1.35;
+    font-weight: 800;
+  }
+
+  .tpk-section p {
+    margin: 0 0 12px;
+    color: #374151;
+    font-size: 15px;
+  }
+
+  .tpk-card {
+    background: #fff;
+    border: 1px solid var(--tpk-border);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(37, 45, 94, .06);
+    margin-bottom: 18px;
+  }
+
+  .tpk-soft-card {
+    background: #f8faff;
+    border: 1px solid #e5e9f8;
+    border-radius: 14px;
+    padding: 18px;
+    margin: 18px 0;
+  }
+
+  .tpk-takeaway {
+    background: #fffef2;
+    border: 1px solid #f6e7a6;
+    border-left: 5px solid #f1c40f;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 18px 0;
+    color: #374151;
+  }
+
+  .tpk-warning {
+    background: #fff7f0;
+    border: 1px solid #ffd8b3;
+    border-left: 5px solid #ff7a00;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 16px 0;
+  }
+
+  .tpk-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--tpk-border);
+    border-radius: 12px;
+    margin: 16px 0;
+  }
+
+  .tpk-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 760px;
+    background: #fff;
+  }
+
+  .tpk-table th {
+    background: #f3f5ff;
+    color: var(--tpk-purple-dark);
+    font-weight: 800;
+    padding: 13px 14px;
+    text-align: left;
+    border: 1px solid var(--tpk-border);
+    font-size: 14px;
+  }
+
+  .tpk-table td {
+    padding: 13px 14px;
+    border: 1px solid var(--tpk-border);
+    color: #374151;
+    font-size: 14px;
+    vertical-align: top;
+  }
+
+  .tpk-table tr:nth-child(even) td {
+    background: #fbfcff;
+  }
+
+  .tpk-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin: 20px 0;
+  }
+
+  .tpk-stat {
+    background: #fff;
+    border: 1px solid var(--tpk-border);
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 5px 16px rgba(37, 45, 94, .05);
+  }
+
+  .tpk-stat strong {
+    display: block;
+    color: var(--tpk-purple);
+    font-size: 25px;
+    margin-bottom: 6px;
+  }
+
+  .tpk-stat span {
+    display: block;
+    color: #475569;
+    font-size: 13px;
+  }
+
+  .tpk-roadmap {
+    display: grid;
+    gap: 14px;
+  }
+
+  .tpk-step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 14px;
+    background: #fff;
+    border: 1px solid var(--tpk-border);
+    border-radius: 14px;
+    padding: 16px;
+  }
+
+  .tpk-step-no {
+    width: 40px;
+    height: 40px;
+    background: var(--tpk-purple);
+    color: #fff;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+  }
+
+  .tpk-step h3 {
+    margin: 0 0 7px;
+    color: var(--tpk-purple-dark);
+    font-size: 17px;
+  }
+
+  .tpk-step p {
+    margin: 0;
+  }
+
+  .tpk-video-grid,
+  .tpk-link-grid,
+  .tpk-two-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .tpk-mini-card,
+  .tpk-link-card {
+    background: #fff;
+    border: 1px solid var(--tpk-border);
+    border-radius: 14px;
+    padding: 16px;
+    color: #111827 !important;
+    box-shadow: 0 5px 16px rgba(37, 45, 94, .05);
+  }
+
+  .tpk-mini-card:hover,
+  .tpk-link-card:hover {
+    border-color: var(--tpk-purple);
+    color: var(--tpk-purple) !important;
+  }
+
+  .tpk-tag {
+    display: inline-block;
+    background: #eff3ff;
+    color: var(--tpk-purple);
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .tpk-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 12px;
+  }
+
+  .tpk-badge-row span {
+    background: #fff;
+    border: 1px solid #dfe5f6;
+    border-radius: 999px;
+    padding: 7px 11px;
+    color: #111827;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .tpk-list {
+    margin: 12px 0 0;
+    padding-left: 22px;
+  }
+
+  .tpk-list li {
+    margin-bottom: 8px;
+    color: #374151;
+  }
+
+  .tpk-ebook {
+    background: linear-gradient(110deg, #f2f4ff 0%, #edf8fb 100%);
+    border: 1px solid var(--tpk-border);
+    border-radius: 16px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    gap: 16px;
+    align-items: center;
+    margin: 24px 0;
+  }
+
+  .tpk-ebook-icon {
+    width: 62px;
+    height: 62px;
+    background: var(--tpk-purple);
+    border-radius: 18px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+  }
+
+  .tpk-cta-final {
+    background: linear-gradient(135deg, #30258f, #6257f5);
+    color: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    margin: 26px 0;
+    box-shadow: 0 12px 28px rgba(98, 87, 245, .2);
+  }
+
+  .tpk-cta-final h2,
+  .tpk-cta-final p {
+    color: #fff;
+  }
+
+  .tpk-next-box {
+    background: #f3f5ff;
+    border: 1px solid var(--tpk-border);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    margin: 28px 0 10px;
+  }
+
+  .tpk-faq-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .tpk-faq-item {
+    background: #fff;
+    border: 1px solid var(--tpk-border);
+    border-radius: 14px;
+    box-shadow: 0 5px 16px rgba(37, 45, 94, .05);
+    overflow: hidden;
+  }
+
+  .tpk-faq-item summary {
+    cursor: pointer;
+    padding: 16px 18px;
+    font-weight: 800;
+    color: var(--tpk-purple-dark);
+    list-style: none;
+    position: relative;
+    padding-right: 45px;
+  }
+
+  .tpk-faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .tpk-faq-item summary:after {
+    content: "+";
+    position: absolute;
+    right: 18px;
+    top: 14px;
+    width: 24px;
+    height: 24px;
+    background: #f3f5ff;
+    color: var(--tpk-purple);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tpk-faq-item[open] summary:after {
+    content: "-";
+  }
+
+  .tpk-faq-item p {
+    padding: 0 18px 16px;
+    margin: 0;
+    color: #374151;
+    font-size: 15px;
+  }
+
+  .tpk-whatsapp-float {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 58px;
+    height: 58px;
+    background: #03c45b;
+    border-radius: 999px;
+    color: #fff !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 12px 28px rgba(3,196,91,.35);
+    z-index: 50;
+  }
+
+  @media (max-width: 900px) {
+    .tpk-top-card,
+    .tpk-hero {
+      grid-template-columns: 1fr;
+      display: block;
+    }
+
+    .tpk-progress-box {
+      text-align: left;
+      margin-top: 14px;
+    }
+
+    .tpk-progress-row {
+      justify-content: flex-start;
+    }
+
+    .tpk-tabs {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tpk-stats,
+    .tpk-video-grid,
+    .tpk-link-grid,
+    .tpk-two-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .tpk-hero {
+      padding: 20px 14px;
+    }
+
+    .tpk-video-box {
+      margin-top: 18px;
+    }
+
+    .tpk-step {
+      grid-template-columns: 1fr;
+    }
+
+    .tpk-ebook {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+<div bis_size="{&quot;x&quot;:34,&quot;y&quot;:32,&quot;w&quot;:1096,&quot;h&quot;:14139,&quot;abs_x&quot;:332,&quot;abs_y&quot;:314}" class="tpk-stage-wrap">
+<div bis_size="{&quot;x&quot;:50,&quot;y&quot;:48,&quot;w&quot;:1064,&quot;h&quot;:123,&quot;abs_x&quot;:348,&quot;abs_y&quot;:330}" class="tpk-top-card">
+<div bis_size="{&quot;x&quot;:68,&quot;y&quot;:66,&quot;w&quot;:370,&quot;h&quot;:85,&quot;abs_x&quot;:366,&quot;abs_y&quot;:348}">
+<h1 bis_size="{&quot;x&quot;:68,&quot;y&quot;:86,&quot;w&quot;:370,&quot;h&quot;:32,&quot;abs_x&quot;:366,&quot;abs_y&quot;:368}"><span bis_size="{&quot;x&quot;:68,&quot;y&quot;:89,&quot;w&quot;:370,&quot;h&quot;:26,&quot;abs_x&quot;:366,&quot;abs_y&quot;:371}" style="color:#330099;">Stage 1 - Planning NEET in USA</span></h1>
+
+<div bis_size="{&quot;x&quot;:68,&quot;y&quot;:131,&quot;w&quot;:370,&quot;h&quot;:21,&quot;abs_x&quot;:366,&quot;abs_y&quot;:413}" class="tpk-breadcrumb">NEET &gt; NEET Planning &gt; Stage 1 - Planning NEET in USA</div>
+</div>
+
+<div bis_size="{&quot;x&quot;:916,&quot;y&quot;:85,&quot;w&quot;:180,&quot;h&quot;:48,&quot;abs_x&quot;:1214,&quot;abs_y&quot;:367}" class="tpk-progress-box">
+<div bis_size="{&quot;x&quot;:916,&quot;y&quot;:85,&quot;w&quot;:180,&quot;h&quot;:21,&quot;abs_x&quot;:1214,&quot;abs_y&quot;:367}" class="tpk-progress-label">Unit Progress</div>
+
+<div bis_size="{&quot;x&quot;:916,&quot;y&quot;:112,&quot;w&quot;:180,&quot;h&quot;:21,&quot;abs_x&quot;:1214,&quot;abs_y&quot;:394}" class="tpk-progress-row"><span bis_size="{&quot;x&quot;:937,&quot;y&quot;:112,&quot;w&quot;:18,&quot;h&quot;:21,&quot;abs_x&quot;:1235,&quot;abs_y&quot;:394}">0%</span>
+
+<div bis_size="{&quot;x&quot;:964,&quot;y&quot;:119,&quot;w&quot;:132,&quot;h&quot;:7,&quot;abs_x&quot;:1262,&quot;abs_y&quot;:401}" class="tpk-progress-track">
+<div bis_size="{&quot;x&quot;:964,&quot;y&quot;:119,&quot;w&quot;:0,&quot;h&quot;:7,&quot;abs_x&quot;:1262,&quot;abs_y&quot;:401}" class="tpk-progress-fill">&nbsp;</div>
+</div>
+</div>
+</div>
+</div>
+
+<div bis_size="{&quot;x&quot;:50,&quot;y&quot;:187,&quot;w&quot;:1064,&quot;h&quot;:13967,&quot;abs_x&quot;:348,&quot;abs_y&quot;:469}" class="tpk-main-card">
+<div bis_size="{&quot;x&quot;:50,&quot;y&quot;:188,&quot;w&quot;:1063,&quot;h&quot;:53,&quot;abs_x&quot;:348,&quot;abs_y&quot;:470}" class="tpk-tabs">
+<div bis_size="{&quot;x&quot;:50,&quot;y&quot;:188,&quot;w&quot;:265,&quot;h&quot;:52,&quot;abs_x&quot;:348,&quot;abs_y&quot;:470}" class="tpk-tab active">Overview</div>
+
+<div bis_size="{&quot;x&quot;:316,&quot;y&quot;:188,&quot;w&quot;:265,&quot;h&quot;:52,&quot;abs_x&quot;:614,&quot;abs_y&quot;:470}" class="tpk-tab">Discussion Forum</div>
+
+<div bis_size="{&quot;x&quot;:582,&quot;y&quot;:188,&quot;w&quot;:265,&quot;h&quot;:52,&quot;abs_x&quot;:880,&quot;abs_y&quot;:470}" class="tpk-tab">Practice Test</div>
+
+<div bis_size="{&quot;x&quot;:848,&quot;y&quot;:188,&quot;w&quot;:265,&quot;h&quot;:52,&quot;abs_x&quot;:1146,&quot;abs_y&quot;:470}" class="tpk-tab performance">↗ Performance</div>
+</div>
+
+<div bis_size="{&quot;x&quot;:50,&quot;y&quot;:241,&quot;w&quot;:1063,&quot;h&quot;:13912,&quot;abs_x&quot;:348,&quot;abs_y&quot;:523}" class="tpk-content">
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:257,&quot;w&quot;:1031,&quot;h&quot;:557,&quot;abs_x&quot;:364,&quot;abs_y&quot;:539}" class="tpk-hero">
+<div bis_size="{&quot;x&quot;:82,&quot;y&quot;:283,&quot;w&quot;:509,&quot;h&quot;:505,&quot;abs_x&quot;:380,&quot;abs_y&quot;:565}"><span bis_size="{&quot;x&quot;:82,&quot;y&quot;:295,&quot;w&quot;:214,&quot;h&quot;:14,&quot;abs_x&quot;:380,&quot;abs_y&quot;:577}" style="color:#330099;"><span bis_size="{&quot;x&quot;:82,&quot;y&quot;:283,&quot;w&quot;:214,&quot;h&quot;:39,&quot;abs_x&quot;:380,&quot;abs_y&quot;:565}" class="tpk-pill">NEET Planning &middot; Stage 1 of 13</span></span>
+
+<h2 bis_size="{&quot;x&quot;:82,&quot;y&quot;:356,&quot;w&quot;:509,&quot;h&quot;:54,&quot;abs_x&quot;:380,&quot;abs_y&quot;:638}"><span bis_size="{&quot;x&quot;:82,&quot;y&quot;:358,&quot;w&quot;:487,&quot;h&quot;:49,&quot;abs_x&quot;:380,&quot;abs_y&quot;:640}" style="color:#330099;">Planning NEET in USA - The NRI Parent&#39;s Complete Starting Guide</span></h2>
+
+<p bis_size="{&quot;x&quot;:82,&quot;y&quot;:422,&quot;w&quot;:509,&quot;h&quot;:74,&quot;abs_x&quot;:380,&quot;abs_y&quot;:704}">In the United States, your youngster aspires to become a doctor in India. This is all the information you need to make a clear decision, make an accurate plan, and get started without wasting a single month.</p>
+
+<div bis_size="{&quot;x&quot;:82,&quot;y&quot;:513,&quot;w&quot;:509,&quot;h&quot;:88,&quot;abs_x&quot;:380,&quot;abs_y&quot;:795}" class="tpk-chip-row"><span bis_size="{&quot;x&quot;:82,&quot;y&quot;:513,&quot;w&quot;:170,&quot;h&quot;:39,&quot;abs_x&quot;:380,&quot;abs_y&quot;:795}" class="tpk-chip">USA Student Scenarios</span> <span bis_size="{&quot;x&quot;:263,&quot;y&quot;:513,&quot;w&quot;:109,&quot;h&quot;:39,&quot;abs_x&quot;:561,&quot;abs_y&quot;:795}" class="tpk-chip">NRI Eligibility</span> <span bis_size="{&quot;x&quot;:382,&quot;y&quot;:513,&quot;w&quot;:173,&quot;h&quot;:39,&quot;abs_x&quot;:680,&quot;abs_y&quot;:795}" class="tpk-chip">3 Science Subject Issue</span> <span bis_size="{&quot;x&quot;:82,&quot;y&quot;:562,&quot;w&quot;:150,&quot;h&quot;:39,&quot;abs_x&quot;:380,&quot;abs_y&quot;:844}" class="tpk-chip">Medical Fee &amp; Seats</span> <span bis_size="{&quot;x&quot;:243,&quot;y&quot;:562,&quot;w&quot;:233,&quot;h&quot;:39,&quot;abs_x&quot;:541,&quot;abs_y&quot;:844}" class="tpk-chip">Admission Process &amp; Application</span></div>
+
+<div bis_size="{&quot;x&quot;:82,&quot;y&quot;:619,&quot;w&quot;:509,&quot;h&quot;:170,&quot;abs_x&quot;:380,&quot;abs_y&quot;:901}" class="tpk-btn-row"><a bis_size="{&quot;x&quot;:82,&quot;y&quot;:619,&quot;w&quot;:276,&quot;h&quot;:48,&quot;abs_x&quot;:380,&quot;abs_y&quot;:901}" class="tpk-btn tpk-btn-purple" href="https://www.testprepkart.com/self-study/neet/pages/buy-neet-counseling-package" rel="noopener" target="_blank">&rarr; Get Counseling Package $99</a> <a bis_size="{&quot;x&quot;:82,&quot;y&quot;:679,&quot;w&quot;:267,&quot;h&quot;:48,&quot;abs_x&quot;:380,&quot;abs_y&quot;:961}" class="tpk-btn tpk-btn-white" href="https://www.testprepkart.com/self-study/neet/download/ebooks-pdfs/nri-quota-ebook" rel="noopener" target="_blank">&rarr; Download NRI Quota eBook</a> <a bis_size="{&quot;x&quot;:82,&quot;y&quot;:740,&quot;w&quot;:237,&quot;h&quot;:48,&quot;abs_x&quot;:380,&quot;abs_y&quot;:1022}" class="tpk-btn tpk-btn-white" href="https://www.testprepkart.com/self-study/neet/pages/schedule-neet-demo-session" rel="noopener" target="_blank">&rarr; Book Free Trial Session</a></div>
+</div>
+
+<div bis_size="{&quot;x&quot;:620,&quot;y&quot;:389,&quot;w&quot;:461,&quot;h&quot;:294,&quot;abs_x&quot;:918,&quot;abs_y&quot;:671}" class="tpk-video-box">
+<div bis_size="{&quot;x&quot;:632,&quot;y&quot;:413,&quot;w&quot;:437,&quot;h&quot;:246,&quot;abs_x&quot;:930,&quot;abs_y&quot;:695}" class="video-popup-wrapper" style="text-align:left"><a bis_size="{&quot;x&quot;:632,&quot;y&quot;:413,&quot;w&quot;:437,&quot;h&quot;:246,&quot;abs_x&quot;:930,&quot;abs_y&quot;:695}" class="popup-youtube position-relative d-inline-block" href="https://www.youtube.com/watch?v=3DYdUQ1IdW8 " rel="noopener noreferrer" target="_blank"><img alt="NEET Planning in USA" bis_size="{&quot;x&quot;:632,&quot;y&quot;:413,&quot;w&quot;:437,&quot;h&quot;:246,&quot;abs_x&quot;:930,&quot;abs_y&quot;:695}" class="video-thumbnail rbt-radius" decoding="async" src="http://blog.testprepkart.com/neet/wp-content/uploads/sites/5/2026/06/MBBS-NEET-preparation-in-USA-thumbnail.webp 
+" style="max-width:100%;height:auto;border-radius:15px" /> </a></div>
+</div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:845,&quot;w&quot;:1031,&quot;h&quot;:328,&quot;abs_x&quot;:364,&quot;abs_y&quot;:1127}" class="tpk-section">
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:845,&quot;w&quot;:1031,&quot;h&quot;:328,&quot;abs_x&quot;:364,&quot;abs_y&quot;:1127}" class="tpk-card">
+<p bis_size="{&quot;x&quot;:87,&quot;y&quot;:878,&quot;w&quot;:989,&quot;h&quot;:74,&quot;abs_x&quot;:385,&quot;abs_y&quot;:1160}"><strong bis_size="{&quot;x&quot;:87,&quot;y&quot;:881,&quot;w&quot;:152,&quot;h&quot;:16,&quot;abs_x&quot;:385,&quot;abs_y&quot;:1163}">Who this stage is for:</strong> You live in the United States and are a parent. Currently enrolled in a U.S. high school (Grades 8&ndash;12), your child is thinking of studying medicine in India through the NEET admission exam. You&#39;ve heard about NEET from relatives or friends in India, but no one has provided you with a clear, honest route map that takes into consideration your situation, including NRI quota regulations, curriculum gaps, time-zone coaching, and U.S. school calendars.<br />
+<br />
+That route map is this page. Before investing a single dollar in tutoring, Stage 1 addresses the fundamental issues that every NRI parent needs to address.</p>
+
+<div bis_size="{&quot;x&quot;:87,&quot;y&quot;:1009,&quot;w&quot;:989,&quot;h&quot;:123,&quot;abs_x&quot;:385,&quot;abs_y&quot;:1291}" class="tpk-stats">
+<div bis_size="{&quot;x&quot;:87,&quot;y&quot;:1009,&quot;w&quot;:236,&quot;h&quot;:123,&quot;abs_x&quot;:385,&quot;abs_y&quot;:1291}" class="tpk-stat"><strong bis_size="{&quot;x&quot;:104,&quot;y&quot;:1025,&quot;w&quot;:203,&quot;h&quot;:41,&quot;abs_x&quot;:402,&quot;abs_y&quot;:1307}">5,000+</strong><span bis_size="{&quot;x&quot;:104,&quot;y&quot;:1073,&quot;w&quot;:203,&quot;h&quot;:42,&quot;abs_x&quot;:402,&quot;abs_y&quot;:1355}">NRI students trained by TestPrepKart worldwide</span></div>
+
+<div bis_size="{&quot;x&quot;:338,&quot;y&quot;:1009,&quot;w&quot;:236,&quot;h&quot;:123,&quot;abs_x&quot;:636,&quot;abs_y&quot;:1291}" class="tpk-stat"><strong bis_size="{&quot;x&quot;:355,&quot;y&quot;:1025,&quot;w&quot;:203,&quot;h&quot;:41,&quot;abs_x&quot;:653,&quot;abs_y&quot;:1307}">13</strong><span bis_size="{&quot;x&quot;:355,&quot;y&quot;:1073,&quot;w&quot;:203,&quot;h&quot;:42,&quot;abs_x&quot;:653,&quot;abs_y&quot;:1355}">Structured stages to MBBS admission from USA</span></div>
+
+<div bis_size="{&quot;x&quot;:589,&quot;y&quot;:1009,&quot;w&quot;:236,&quot;h&quot;:123,&quot;abs_x&quot;:887,&quot;abs_y&quot;:1291}" class="tpk-stat"><strong bis_size="{&quot;x&quot;:606,&quot;y&quot;:1025,&quot;w&quot;:203,&quot;h&quot;:41,&quot;abs_x&quot;:904,&quot;abs_y&quot;:1307}">720</strong><span bis_size="{&quot;x&quot;:606,&quot;y&quot;:1073,&quot;w&quot;:203,&quot;h&quot;:42,&quot;abs_x&quot;:904,&quot;abs_y&quot;:1355}">Max NEET score (Biology + Physics + Chemistry)</span></div>
+
+<div bis_size="{&quot;x&quot;:840,&quot;y&quot;:1009,&quot;w&quot;:236,&quot;h&quot;:123,&quot;abs_x&quot;:1138,&quot;abs_y&quot;:1291}" class="tpk-stat"><strong bis_size="{&quot;x&quot;:857,&quot;y&quot;:1025,&quot;w&quot;:203,&quot;h&quot;:41,&quot;abs_x&quot;:1155,&quot;abs_y&quot;:1307}">NRI Quota</strong><span bis_size="{&quot;x&quot;:857,&quot;y&quot;:1073,&quot;w&quot;:203,&quot;h&quot;:42,&quot;abs_x&quot;:1155,&quot;abs_y&quot;:1355}">Separate seats reserved in most Indian medical colleges</span></div>
+</div>
+</div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:1203,&quot;w&quot;:1031,&quot;h&quot;:772,&quot;abs_x&quot;:364,&quot;abs_y&quot;:1485}" class="tpk-section">
+<h2 bis_size="{&quot;x&quot;:66,&quot;y&quot;:1203,&quot;w&quot;:1031,&quot;h&quot;:27,&quot;abs_x&quot;:364,&quot;abs_y&quot;:1485}"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:1205,&quot;w&quot;:393,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:1487}" style="color:#16a085;"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:1205,&quot;w&quot;:393,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:1487}">Key Topics Being Covered in this Stage 1</span></span></h2>
+
+<p bis_size="{&quot;x&quot;:66,&quot;y&quot;:1242,&quot;w&quot;:1031,&quot;h&quot;:24,&quot;abs_x&quot;:364,&quot;abs_y&quot;:1524}">Before jumping into preparation, every NRI parent needs clarity on the 14 questions below. Stage 1 is designed to answer all of them in one place.</p>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:1283,&quot;w&quot;:1031,&quot;h&quot;:692,&quot;abs_x&quot;:364,&quot;abs_y&quot;:1565}" class="tpk-table-wrap">
+<table bis_size="{&quot;x&quot;:67,&quot;y&quot;:1300,&quot;w&quot;:1029,&quot;h&quot;:659,&quot;abs_x&quot;:365,&quot;abs_y&quot;:1582}" class="tpk-table">
+	<thead bis_size="{&quot;x&quot;:68,&quot;y&quot;:1300,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1582}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:1300,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1582}">
+			<th bis_size="{&quot;x&quot;:68,&quot;y&quot;:1300,&quot;w&quot;:357,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1582}"><span bis_size="{&quot;x&quot;:80,&quot;y&quot;:1314,&quot;w&quot;:98,&quot;h&quot;:16,&quot;abs_x&quot;:378,&quot;abs_y&quot;:1596}" style="color:#d35400;">Decision Topic</span></th>
+			<th bis_size="{&quot;x&quot;:425,&quot;y&quot;:1300,&quot;w&quot;:671,&quot;h&quot;:43,&quot;abs_x&quot;:723,&quot;abs_y&quot;:1582}"><span bis_size="{&quot;x&quot;:438,&quot;y&quot;:1314,&quot;w&quot;:173,&quot;h&quot;:16,&quot;abs_x&quot;:736,&quot;abs_y&quot;:1596}" style="color:#d35400;">What You Will Understand</span></th>
+		</tr>
+	</thead>
+	<tbody bis_size="{&quot;x&quot;:68,&quot;y&quot;:1344,&quot;w&quot;:1028,&quot;h&quot;:614,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1626}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:1344,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1626}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:1344,&quot;w&quot;:357,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1626}">India MBBS vs USA MD</td>
+			<td bis_size="{&quot;x&quot;:425,&quot;y&quot;:1344,&quot;w&quot;:671,&quot;h&quot;:43,&quot;abs_x&quot;:723,&quot;abs_y&quot;:1626}">How do preparation, timeliness and reality. Not on paper. Differ between the two medical approaches?</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:1388,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1670}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:1388,&quot;w&quot;:357,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1670}">Is MBBS in India worth it for a US student?</td>
+			<td bis_size="{&quot;x&quot;:425,&quot;y&quot;:1388,&quot;w&quot;:671,&quot;h&quot;:43,&quot;abs_x&quot;:723,&quot;abs_y&quot;:1670}">Depending on your childs profile you need to figure out when it makes sense to choose one over the other and when it doesn&#39;t.</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:1432,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1714}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:1432,&quot;w&quot;:357,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1714}">Indian MBBS degree validity in USA</td>
+			<td bis_size="{&quot;x&quot;:425,&quot;y&quot;:1432,&quot;w&quot;:671,&quot;h&quot;:43,&quot;abs_x&quot;:723,&quot;abs_y&quot;:1714}">Lets talk about what you can do after getting an MBBS degree from India and what you can&#39;t.</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:1476,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1758}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:1476,&quot;w&quot;:357,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1758}">Career outcomes after MBBS India for NRIs</td>
+			<td bis_size="{&quot;x&quot;:425,&quot;y&quot;:1476,&quot;w&quot;:671,&quot;h&quot;:43,&quot;abs_x&quot;:723,&quot;abs_y&quot;:1758}">If you choose the USMLE route you need to know about residency obstacles, alternatives for specialization and how to prepare for returning to the United States.</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:1520,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1802}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:1520,&quot;w&quot;:357,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1802}">Full cost breakdown (MBBS India vs MD USA)</td>
+			<td bis_size="{&quot;x&quot;:425,&quot;y&quot;:1520,&quot;w&quot;:671,&quot;h&quot;:43,&quot;abs_x&quot;:723,&quot;abs_y&quot;:1802}">You have to consider all expenses, including hidden fees, lodging, transit and how exchange rates will affect you.</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:1563,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1845}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:1563,&quot;w&quot;:357,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1845}">Medical admission timeline comparison</td>
+			<td bis_size="{&quot;x&quot;:425,&quot;y&quot;:1563,&quot;w&quot;:671,&quot;h&quot;:43,&quot;abs_x&quot;:723,&quot;abs_y&quot;:1845}">It&#39;s also important to know how long it usually takes to become a practicing physician through each route.</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:1607,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1889}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:1607,&quot;w&quot;:357,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1889}">NEET risk vs NRI success certainty</td>
+			<td bis_size="{&quot;x&quot;:425,&quot;y&quot;:1607,&quot;w&quot;:671,&quot;h&quot;:43,&quot;abs_x&quot;:723,&quot;abs_y&quot;:1889}">Some things you can control some things are variable. Some things are predictable.</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:1651,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1933}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:1651,&quot;w&quot;:357,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1933}">Primary plan vs backup plan structure</td>
+			<td bis_size="{&quot;x&quot;:425,&quot;y&quot;:1651,&quot;w&quot;:671,&quot;h&quot;:43,&quot;abs_x&quot;:723,&quot;abs_y&quot;:1933}">To organize your training with professors you need to avoid getting burned out.</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:1695,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1977}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:1695,&quot;w&quot;:357,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:1977}">Living-in-India factors</td>
+			<td bis_size="{&quot;x&quot;:425,&quot;y&quot;:1695,&quot;w&quot;:671,&quot;h&quot;:43,&quot;abs_x&quot;:723,&quot;abs_y&quot;:1977}">Plan for family support, hostel life, safety and the adjustment phase.</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:1739,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:2021}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:1739,&quot;w&quot;:357,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:2021}">Is my child &quot;NEET type&quot; or &quot;MCAT type&quot;?</td>
+			<td bis_size="{&quot;x&quot;:425,&quot;y&quot;:1739,&quot;w&quot;:671,&quot;h&quot;:43,&quot;abs_x&quot;:723,&quot;abs_y&quot;:2021}">Certain student characteristics and learning preferences work better with the U.S. -Med path while others are better suited for NEET.</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:1783,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:2065}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:1783,&quot;w&quot;:357,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:2065}">Optimal grade to start NEET coaching</td>
+			<td bis_size="{&quot;x&quot;:425,&quot;y&quot;:1783,&quot;w&quot;:671,&quot;h&quot;:43,&quot;abs_x&quot;:723,&quot;abs_y&quot;:2065}">Grade-wise preparation start plan for U.S. students -&nbsp;what to do in Grade 9, 10, 11, 12</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:1827,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:2109}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:1827,&quot;w&quot;:357,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:2109}">What happens if my child changes their mind?</td>
+			<td bis_size="{&quot;x&quot;:425,&quot;y&quot;:1827,&quot;w&quot;:671,&quot;h&quot;:43,&quot;abs_x&quot;:723,&quot;abs_y&quot;:2109}">If you change your mind in the middle you need to know what you can recover.</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:1871,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:2153}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:1871,&quot;w&quot;:357,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:2153}">NRI quota fee and seat concepts</td>
+			<td bis_size="{&quot;x&quot;:425,&quot;y&quot;:1871,&quot;w&quot;:671,&quot;h&quot;:43,&quot;abs_x&quot;:723,&quot;abs_y&quot;:2153}">Before going for counseling parents should know about the seats, cost and state-specific regulations.</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:1915,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:2197}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:1915,&quot;w&quot;:357,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:2197}">Student academic diagnostics</td>
+			<td bis_size="{&quot;x&quot;:425,&quot;y&quot;:1915,&quot;w&quot;:671,&quot;h&quot;:43,&quot;abs_x&quot;:723,&quot;abs_y&quot;:2197}">To assess your preparedness, for exams you need to determine your next steps.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:2006,&quot;w&quot;:1031,&quot;h&quot;:1853,&quot;abs_x&quot;:364,&quot;abs_y&quot;:2288}" class="tpk-section">
+<h2 bis_size="{&quot;x&quot;:66,&quot;y&quot;:2006,&quot;w&quot;:1031,&quot;h&quot;:27,&quot;abs_x&quot;:364,&quot;abs_y&quot;:2288}"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:2007,&quot;w&quot;:584,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:2289}" style="color:#16a085;"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:2007,&quot;w&quot;:584,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:2289}">Stage 1 NEET Preparation Roadmap (For NRI Parents in USA)</span></span></h2>
+
+<p bis_size="{&quot;x&quot;:66,&quot;y&quot;:2045,&quot;w&quot;:1031,&quot;h&quot;:49,&quot;abs_x&quot;:364,&quot;abs_y&quot;:2327}">This roadmap is designed for a U.S.-based parent whose child is anywhere between Grade 8 and Grade 12. Follow these steps in order - each one unlocks the next.</p>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:2106,&quot;w&quot;:1031,&quot;h&quot;:1752,&quot;abs_x&quot;:364,&quot;abs_y&quot;:2388}" class="tpk-roadmap">
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:2106,&quot;w&quot;:1031,&quot;h&quot;:170,&quot;abs_x&quot;:364,&quot;abs_y&quot;:2388}" class="tpk-step">
+<div bis_size="{&quot;x&quot;:83,&quot;y&quot;:2123,&quot;w&quot;:40,&quot;h&quot;:40,&quot;abs_x&quot;:381,&quot;abs_y&quot;:2405}" class="tpk-step-no">1</div>
+
+<div bis_size="{&quot;x&quot;:145,&quot;y&quot;:2123,&quot;w&quot;:935,&quot;h&quot;:136,&quot;abs_x&quot;:443,&quot;abs_y&quot;:2405}">
+<h3 bis_size="{&quot;x&quot;:145,&quot;y&quot;:2137,&quot;w&quot;:935,&quot;h&quot;:24,&quot;abs_x&quot;:443,&quot;abs_y&quot;:2419}">Confirm Eligibility and NRI / OCI / Passport Status</h3>
+
+<p bis_size="{&quot;x&quot;:145,&quot;y&quot;:2173,&quot;w&quot;:935,&quot;h&quot;:74,&quot;abs_x&quot;:443,&quot;abs_y&quot;:2455}">Check the prerequisites for a passport, comprehend the consequences of an OCI card, and confirm if your child is eligible as an NRI candidate for NEET. Families lose out on a whole admissions cycle if they miss this crucial first step. For complete information, see Stage 2-NRI/OCI/Passport Status.</p>
+</div>
+</div>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:2290,&quot;w&quot;:1031,&quot;h&quot;:145,&quot;abs_x&quot;:364,&quot;abs_y&quot;:2572}" class="tpk-step">
+<div bis_size="{&quot;x&quot;:83,&quot;y&quot;:2307,&quot;w&quot;:40,&quot;h&quot;:40,&quot;abs_x&quot;:381,&quot;abs_y&quot;:2589}" class="tpk-step-no">2</div>
+
+<div bis_size="{&quot;x&quot;:145,&quot;y&quot;:2307,&quot;w&quot;:935,&quot;h&quot;:111,&quot;abs_x&quot;:443,&quot;abs_y&quot;:2589}">
+<h3 bis_size="{&quot;x&quot;:145,&quot;y&quot;:2321,&quot;w&quot;:935,&quot;h&quot;:24,&quot;abs_x&quot;:443,&quot;abs_y&quot;:2603}">Run the India MBBS vs USA MD Decision Filter</h3>
+
+<p bis_size="{&quot;x&quot;:145,&quot;y&quot;:2357,&quot;w&quot;:935,&quot;h&quot;:49,&quot;abs_x&quot;:443,&quot;abs_y&quot;:2639}">Sincerely compare the two options in terms of expense, schedule, career outcome, and your child&#39;s preferred method of learning. This choice cannot be postponed until Grade 12; it must be made at Stage 1. Families who put off making this decision regularly squander 12 to 18 months of planning time.</p>
+</div>
+</div>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:2450,&quot;w&quot;:1031,&quot;h&quot;:170,&quot;abs_x&quot;:364,&quot;abs_y&quot;:2732}" class="tpk-step">
+<div bis_size="{&quot;x&quot;:83,&quot;y&quot;:2466,&quot;w&quot;:40,&quot;h&quot;:40,&quot;abs_x&quot;:381,&quot;abs_y&quot;:2748}" class="tpk-step-no">3</div>
+
+<div bis_size="{&quot;x&quot;:145,&quot;y&quot;:2466,&quot;w&quot;:935,&quot;h&quot;:136,&quot;abs_x&quot;:443,&quot;abs_y&quot;:2748}">
+<h3 bis_size="{&quot;x&quot;:145,&quot;y&quot;:2480,&quot;w&quot;:935,&quot;h&quot;:24,&quot;abs_x&quot;:443,&quot;abs_y&quot;:2762}">Decide: Primary Plan or Backup Plan for the Next 6 Months</h3>
+
+<p bis_size="{&quot;x&quot;:145,&quot;y&quot;:2517,&quot;w&quot;:935,&quot;h&quot;:74,&quot;abs_x&quot;:443,&quot;abs_y&quot;:2799}">Planning for the next five years is not necessary right now. However, you have to determine NEET&#39;s role during the next six months. Five to six NEET study blocks a week are part of the primary plan. A backup plan involves at least three to four regular blocks per week. Costly stop-start preparation results from an unclear plan.</p>
+</div>
+</div>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:2634,&quot;w&quot;:1031,&quot;h&quot;:145,&quot;abs_x&quot;:364,&quot;abs_y&quot;:2916}" class="tpk-step">
+<div bis_size="{&quot;x&quot;:83,&quot;y&quot;:2651,&quot;w&quot;:40,&quot;h&quot;:40,&quot;abs_x&quot;:381,&quot;abs_y&quot;:2933}" class="tpk-step-no">4</div>
+
+<div bis_size="{&quot;x&quot;:145,&quot;y&quot;:2651,&quot;w&quot;:935,&quot;h&quot;:111,&quot;abs_x&quot;:443,&quot;abs_y&quot;:2933}">
+<h3 bis_size="{&quot;x&quot;:145,&quot;y&quot;:2664,&quot;w&quot;:935,&quot;h&quot;:24,&quot;abs_x&quot;:443,&quot;abs_y&quot;:2946}">Take a Diagnostic Test - Before Choosing Any Coaching</h3>
+
+<p bis_size="{&quot;x&quot;:145,&quot;y&quot;:2701,&quot;w&quot;:935,&quot;h&quot;:49,&quot;abs_x&quot;:443,&quot;abs_y&quot;:2983}">Subject-wise gaps, accuracy percentage, speed, and error patterns are all revealed via a structured NEET diagnostic test. Months of speculation are replaced by this one step. Make an appointment with TestPrepKart for a free diagnostic session.</p>
+</div>
+</div>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:2793,&quot;w&quot;:1031,&quot;h&quot;:170,&quot;abs_x&quot;:364,&quot;abs_y&quot;:3075}" class="tpk-step">
+<div bis_size="{&quot;x&quot;:83,&quot;y&quot;:2810,&quot;w&quot;:40,&quot;h&quot;:40,&quot;abs_x&quot;:381,&quot;abs_y&quot;:3092}" class="tpk-step-no">5</div>
+
+<div bis_size="{&quot;x&quot;:145,&quot;y&quot;:2810,&quot;w&quot;:935,&quot;h&quot;:136,&quot;abs_x&quot;:443,&quot;abs_y&quot;:3092}">
+<h3 bis_size="{&quot;x&quot;:145,&quot;y&quot;:2824,&quot;w&quot;:935,&quot;h&quot;:24,&quot;abs_x&quot;:443,&quot;abs_y&quot;:3106}">Map the U.S.- NCERT Curriculum Gap</h3>
+
+<p bis_size="{&quot;x&quot;:145,&quot;y&quot;:2860,&quot;w&quot;:935,&quot;h&quot;:74,&quot;abs_x&quot;:443,&quot;abs_y&quot;:3142}">While intellectually sound, U.S. curriculum (AP Biology, Honors Chemistry, IB) differ structurally from NCERT, which is directly tested by NEET. You can determine how many &quot;bridge months&quot; your child needs before the start of regular NEET preparation by mapping this gap early. For a thorough subject-by-subject comparison, see Stage 3: USA Curriculum vs. NEET.</p>
+</div>
+</div>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:2977,&quot;w&quot;:1031,&quot;h&quot;:170,&quot;abs_x&quot;:364,&quot;abs_y&quot;:3259}" class="tpk-step">
+<div bis_size="{&quot;x&quot;:83,&quot;y&quot;:2994,&quot;w&quot;:40,&quot;h&quot;:40,&quot;abs_x&quot;:381,&quot;abs_y&quot;:3276}" class="tpk-step-no">6</div>
+
+<div bis_size="{&quot;x&quot;:145,&quot;y&quot;:2994,&quot;w&quot;:935,&quot;h&quot;:136,&quot;abs_x&quot;:443,&quot;abs_y&quot;:3276}">
+<h3 bis_size="{&quot;x&quot;:145,&quot;y&quot;:3008,&quot;w&quot;:935,&quot;h&quot;:24,&quot;abs_x&quot;:443,&quot;abs_y&quot;:3290}">Build a 3-Layer Weekly Routine Around the U.S. School Calendar</h3>
+
+<p bis_size="{&quot;x&quot;:145,&quot;y&quot;:3044,&quot;w&quot;:935,&quot;h&quot;:74,&quot;abs_x&quot;:443,&quot;abs_y&quot;:3326}">Layer 1: Base routine (during busy school weeks): at least two to three NEET blocks each week, never zero. Layer 2: Acceleration (long weekends, winter break, and summers): thorough syllabus review and practice exams. Layer 3: Recovery (after finals): timed multiple-choice questions during a brief ramp-back week.</p>
+</div>
+</div>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:3161,&quot;w&quot;:1031,&quot;h&quot;:170,&quot;abs_x&quot;:364,&quot;abs_y&quot;:3443}" class="tpk-step">
+<div bis_size="{&quot;x&quot;:83,&quot;y&quot;:3178,&quot;w&quot;:40,&quot;h&quot;:40,&quot;abs_x&quot;:381,&quot;abs_y&quot;:3460}" class="tpk-step-no">7</div>
+
+<div bis_size="{&quot;x&quot;:145,&quot;y&quot;:3178,&quot;w&quot;:935,&quot;h&quot;:136,&quot;abs_x&quot;:443,&quot;abs_y&quot;:3460}">
+<h3 bis_size="{&quot;x&quot;:145,&quot;y&quot;:3192,&quot;w&quot;:935,&quot;h&quot;:24,&quot;abs_x&quot;:443,&quot;abs_y&quot;:3474}">Start NCERT Habit - Immediately, Not Later</h3>
+
+<p bis_size="{&quot;x&quot;:145,&quot;y&quot;:3228,&quot;w&quot;:935,&quot;h&quot;:74,&quot;abs_x&quot;:443,&quot;abs_y&quot;:3510}">Exact NCERT wording is rewarded by NEET, especially in Biology and Inorganic Chemistry. Students in the United States who put off reading the NCERT until Grade 12 nearly invariably become anxious. One of the most beneficial things a parent can do today is to start a 20-minute daily NCERT micro-reading habit in Grade 9 or 10.</p>
+</div>
+</div>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:3345,&quot;w&quot;:1031,&quot;h&quot;:145,&quot;abs_x&quot;:364,&quot;abs_y&quot;:3627}" class="tpk-step">
+<div bis_size="{&quot;x&quot;:83,&quot;y&quot;:3362,&quot;w&quot;:40,&quot;h&quot;:40,&quot;abs_x&quot;:381,&quot;abs_y&quot;:3644}" class="tpk-step-no">8</div>
+
+<div bis_size="{&quot;x&quot;:145,&quot;y&quot;:3362,&quot;w&quot;:935,&quot;h&quot;:111,&quot;abs_x&quot;:443,&quot;abs_y&quot;:3644}">
+<h3 bis_size="{&quot;x&quot;:145,&quot;y&quot;:3376,&quot;w&quot;:935,&quot;h&quot;:24,&quot;abs_x&quot;:443,&quot;abs_y&quot;:3658}">Choose a Structured Coaching Provider That Fits U.S. Time Zones</h3>
+
+<p bis_size="{&quot;x&quot;:145,&quot;y&quot;:3412,&quot;w&quot;:935,&quot;h&quot;:49,&quot;abs_x&quot;:443,&quot;abs_y&quot;:3694}">Not every coaching program is made with NRI students in mind. Look for NCERT-first instruction, weekly assessment, parent visibility, EST/CST/PST-aligned session schedules, and bridging the U.S. curriculum gap. For a comprehensive evaluation guide, see Stage 6: NEET Coaching Providers.</p>
+</div>
+</div>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:3505,&quot;w&quot;:1031,&quot;h&quot;:170,&quot;abs_x&quot;:364,&quot;abs_y&quot;:3787}" class="tpk-step">
+<div bis_size="{&quot;x&quot;:83,&quot;y&quot;:3522,&quot;w&quot;:40,&quot;h&quot;:40,&quot;abs_x&quot;:381,&quot;abs_y&quot;:3804}" class="tpk-step-no">9</div>
+
+<div bis_size="{&quot;x&quot;:145,&quot;y&quot;:3522,&quot;w&quot;:935,&quot;h&quot;:136,&quot;abs_x&quot;:443,&quot;abs_y&quot;:3804}">
+<h3 bis_size="{&quot;x&quot;:145,&quot;y&quot;:3535,&quot;w&quot;:935,&quot;h&quot;:24,&quot;abs_x&quot;:443,&quot;abs_y&quot;:3817}">Understand NRI Quota, Fee Structure, and College Options</h3>
+
+<p bis_size="{&quot;x&quot;:145,&quot;y&quot;:3572,&quot;w&quot;:935,&quot;h&quot;:74,&quot;abs_x&quot;:443,&quot;abs_y&quot;:3854}">Both public and private medical schools have NRI quota seats. States and NRI quota categories have quite different fee schedules. It is necessary to comprehend this at the planning stage; it is not something to investigate during counseling week. For a detailed explanation, see Stage 8-NEET NRI Quota Details.</p>
+</div>
+</div>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:3689,&quot;w&quot;:1031,&quot;h&quot;:170,&quot;abs_x&quot;:364,&quot;abs_y&quot;:3971}" class="tpk-step">
+<div bis_size="{&quot;x&quot;:83,&quot;y&quot;:3706,&quot;w&quot;:40,&quot;h&quot;:40,&quot;abs_x&quot;:381,&quot;abs_y&quot;:3988}" class="tpk-step-no">10</div>
+
+<div bis_size="{&quot;x&quot;:145,&quot;y&quot;:3706,&quot;w&quot;:935,&quot;h&quot;:136,&quot;abs_x&quot;:443,&quot;abs_y&quot;:3988}">
+<h3 bis_size="{&quot;x&quot;:145,&quot;y&quot;:3719,&quot;w&quot;:935,&quot;h&quot;:24,&quot;abs_x&quot;:443,&quot;abs_y&quot;:4001}">Set Up a Tracking System and Parent Visibility Dashboard</h3>
+
+<p bis_size="{&quot;x&quot;:145,&quot;y&quot;:3756,&quot;w&quot;:935,&quot;h&quot;:74,&quot;abs_x&quot;:443,&quot;abs_y&quot;:4038}">Track: weekly MCQ attempts, accuracy percentage, exam dates and results, completion by subject, and error trends. Parental worry is significantly reduced when progress is measured. Additionally, it allows for data-driven coaching modifications rather than emotional responses to a single poor exam.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:3889,&quot;w&quot;:1031,&quot;h&quot;:1677,&quot;abs_x&quot;:364,&quot;abs_y&quot;:4171}" class="tpk-section">
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:3889,&quot;w&quot;:1031,&quot;h&quot;:1677,&quot;abs_x&quot;:364,&quot;abs_y&quot;:4171}" style="text-align:center; margin:20px 0;"><a bis_size="{&quot;x&quot;:66,&quot;y&quot;:3889,&quot;w&quot;:1031,&quot;h&quot;:282,&quot;abs_x&quot;:364,&quot;abs_y&quot;:4171}" href="https://testprepkart.com/self-study/neet/pages/testprepkart-neet-nris-prep-app" rel="noopener noreferrer" target="_blank"><img alt="NEET App Banner" bis_size="{&quot;x&quot;:66,&quot;y&quot;:3889,&quot;w&quot;:1012,&quot;h&quot;:282,&quot;abs_x&quot;:364,&quot;abs_y&quot;:4171}" src="https://testprepkart.com/self-study/api/uploads/media/neet/NEET_Banner_1_1782118042474.webp" style="max-width:100%; height:auto;" /> </a>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:4183,&quot;w&quot;:1031,&quot;h&quot;:48,&quot;abs_x&quot;:364,&quot;abs_y&quot;:4465}" style="text-align: left;"><a bis_size="{&quot;x&quot;:66,&quot;y&quot;:4183,&quot;w&quot;:242,&quot;h&quot;:48,&quot;abs_x&quot;:364,&quot;abs_y&quot;:4465}" class="tpk-btn tpk-btn-purple" href="https://testprepkart.com/self-study/neet/pages/testprepkart-neet-nris-prep-app" rel="noopener" target="_blank">&rarr; Download the NEET App</a></div>
+
+<h2 bis_size="{&quot;x&quot;:66,&quot;y&quot;:4248,&quot;w&quot;:1031,&quot;h&quot;:27,&quot;abs_x&quot;:364,&quot;abs_y&quot;:4530}" style="text-align: left;">&nbsp;</h2>
+
+<h2 bis_size="{&quot;x&quot;:66,&quot;y&quot;:4291,&quot;w&quot;:1031,&quot;h&quot;:27,&quot;abs_x&quot;:364,&quot;abs_y&quot;:4573}" style="text-align: left;"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:4292,&quot;w&quot;:644,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:4574}" style="color:#16a085;"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:4292,&quot;w&quot;:644,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:4574}">India MBBS vs USA MD - The Honest Comparison NRI Parents Need</span></span></h2>
+
+<p bis_size="{&quot;x&quot;:66,&quot;y&quot;:4330,&quot;w&quot;:1031,&quot;h&quot;:49,&quot;abs_x&quot;:364,&quot;abs_y&quot;:4612}" style="text-align: left;">The majority of NRI families see this as a straightforward nation comparison: &quot;India vs USA.&quot; Exam-driven entry and profile-driven entry are the true comparison, and this difference completely alters your planning.</p>
+
+<h3 bis_size="{&quot;x&quot;:66,&quot;y&quot;:4393,&quot;w&quot;:1031,&quot;h&quot;:24,&quot;abs_x&quot;:364,&quot;abs_y&quot;:4675}" style="text-align: left;">A) High-Level Admission and Preparation Comparison</h3>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:4433,&quot;w&quot;:1031,&quot;h&quot;:568,&quot;abs_x&quot;:364,&quot;abs_y&quot;:4715}" class="tpk-table-wrap">
+<table bis_size="{&quot;x&quot;:67,&quot;y&quot;:4450,&quot;w&quot;:1029,&quot;h&quot;:534,&quot;abs_x&quot;:365,&quot;abs_y&quot;:4732}" class="tpk-table">
+	<thead bis_size="{&quot;x&quot;:68,&quot;y&quot;:4451,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:4733}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:4451,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:4733}">
+			<th bis_size="{&quot;x&quot;:68,&quot;y&quot;:4451,&quot;w&quot;:235,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:4733}"><span bis_size="{&quot;x&quot;:80,&quot;y&quot;:4464,&quot;w&quot;:42,&quot;h&quot;:16,&quot;abs_x&quot;:378,&quot;abs_y&quot;:4746}" style="color:#d35400;">Factor</span></th>
+			<th bis_size="{&quot;x&quot;:303,&quot;y&quot;:4451,&quot;w&quot;:384,&quot;h&quot;:43,&quot;abs_x&quot;:601,&quot;abs_y&quot;:4733}"><span bis_size="{&quot;x&quot;:316,&quot;y&quot;:4464,&quot;w&quot;:168,&quot;h&quot;:16,&quot;abs_x&quot;:614,&quot;abs_y&quot;:4746}" style="color:#d35400;">MBBS in India (via NEET)</span></th>
+			<th bis_size="{&quot;x&quot;:688,&quot;y&quot;:4451,&quot;w&quot;:408,&quot;h&quot;:43,&quot;abs_x&quot;:986,&quot;abs_y&quot;:4733}"><span bis_size="{&quot;x&quot;:700,&quot;y&quot;:4464,&quot;w&quot;:201,&quot;h&quot;:16,&quot;abs_x&quot;:998,&quot;abs_y&quot;:4746}" style="color:#d35400;">USA MD (via Pre-Med + MCAT)</span></th>
+		</tr>
+	</thead>
+	<tbody bis_size="{&quot;x&quot;:68,&quot;y&quot;:4494,&quot;w&quot;:1028,&quot;h&quot;:489,&quot;abs_x&quot;:366,&quot;abs_y&quot;:4776}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:4494,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:4776}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:4494,&quot;w&quot;:235,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:4776}">Entry gate</td>
+			<td bis_size="{&quot;x&quot;:303,&quot;y&quot;:4494,&quot;w&quot;:384,&quot;h&quot;:43,&quot;abs_x&quot;:601,&quot;abs_y&quot;:4776}">One good score in an exam and a good national rank is very important.</td>
+			<td bis_size="{&quot;x&quot;:688,&quot;y&quot;:4494,&quot;w&quot;:408,&quot;h&quot;:43,&quot;abs_x&quot;:986,&quot;abs_y&quot;:4776}">Multi-year academic record plus MCAT score plus applications</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:4538,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:4820}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:4538,&quot;w&quot;:235,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:4820}">Predictability</td>
+			<td bis_size="{&quot;x&quot;:303,&quot;y&quot;:4538,&quot;w&quot;:384,&quot;h&quot;:67,&quot;abs_x&quot;:601,&quot;abs_y&quot;:4820}">If you study and take tests regularly for two or three years your score can be really high.</td>
+			<td bis_size="{&quot;x&quot;:688,&quot;y&quot;:4538,&quot;w&quot;:408,&quot;h&quot;:67,&quot;abs_x&quot;:986,&quot;abs_y&quot;:4820}">Lower. Lots of factors across university, applications and admission cycles</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:4605,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:4887}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:4605,&quot;w&quot;:235,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:4887}">Time to enter medical school</td>
+			<td bis_size="{&quot;x&quot;:303,&quot;y&quot;:4605,&quot;w&quot;:384,&quot;h&quot;:43,&quot;abs_x&quot;:601,&quot;abs_y&quot;:4887}">You can even get a score right after Grade 12.</td>
+			<td bis_size="{&quot;x&quot;:688,&quot;y&quot;:4605,&quot;w&quot;:408,&quot;h&quot;:43,&quot;abs_x&quot;:986,&quot;abs_y&quot;:4887}">Later. After completing a four-year undergraduate degree to become a doctor</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:4649,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:4931}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:4649,&quot;w&quot;:235,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:4931}">Learning style required</td>
+			<td bis_size="{&quot;x&quot;:303,&quot;y&quot;:4649,&quot;w&quot;:384,&quot;h&quot;:67,&quot;abs_x&quot;:601,&quot;abs_y&quot;:4931}">To do well you need to be very good at NCERT you need to be fast you need to know how to answer choice questions and you need to remember things well.</td>
+			<td bis_size="{&quot;x&quot;:688,&quot;y&quot;:4649,&quot;w&quot;:408,&quot;h&quot;:67,&quot;abs_x&quot;:986,&quot;abs_y&quot;:4931}">Long-term critical thinking reading stamina, profile and extracurricular building</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:4716,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:4998}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:4716,&quot;w&quot;:235,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:4998}">Parent involvement window</td>
+			<td bis_size="{&quot;x&quot;:303,&quot;y&quot;:4716,&quot;w&quot;:384,&quot;h&quot;:67,&quot;abs_x&quot;:601,&quot;abs_y&quot;:4998}">
+			<p>You have to work hard during&nbsp;high school years,&nbsp;make plans, make a schedule and keep a track</p>
+			</td>
+			<td bis_size="{&quot;x&quot;:688,&quot;y&quot;:4716,&quot;w&quot;:408,&quot;h&quot;:67,&quot;abs_x&quot;:986,&quot;abs_y&quot;:4998}">High across several years from high school to college applications</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:4783,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5065}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:4783,&quot;w&quot;:235,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5065}">Curriculum alignment for U.S. student</td>
+			<td bis_size="{&quot;x&quot;:303,&quot;y&quot;:4783,&quot;w&quot;:384,&quot;h&quot;:67,&quot;abs_x&quot;:601,&quot;abs_y&quot;:5065}">Gap exists -&nbsp;NCERT bridging required (see Stage 3)</td>
+			<td bis_size="{&quot;x&quot;:688,&quot;y&quot;:4783,&quot;w&quot;:408,&quot;h&quot;:67,&quot;abs_x&quot;:986,&quot;abs_y&quot;:5065}">Closer to what U.S. Schools teach</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:4850,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5132}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:4850,&quot;w&quot;:235,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5132}">Cost certainty</td>
+			<td bis_size="{&quot;x&quot;:303,&quot;y&quot;:4850,&quot;w&quot;:384,&quot;h&quot;:67,&quot;abs_x&quot;:601,&quot;abs_y&quot;:5132}">Clearer upfront (varies by college type and NRI quota category)</td>
+			<td bis_size="{&quot;x&quot;:688,&quot;y&quot;:4850,&quot;w&quot;:408,&quot;h&quot;:67,&quot;abs_x&quot;:986,&quot;abs_y&quot;:5132}">Spread across several years and multiple college application cycles</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:4917,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5199}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:4917,&quot;w&quot;:235,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5199}">Option to return to USA later</td>
+			<td bis_size="{&quot;x&quot;:303,&quot;y&quot;:4917,&quot;w&quot;:384,&quot;h&quot;:67,&quot;abs_x&quot;:601,&quot;abs_y&quot;:5199}">Possible via USMLE after MBBS, but competitive and takes time</td>
+			<td bis_size="{&quot;x&quot;:688,&quot;y&quot;:4917,&quot;w&quot;:408,&quot;h&quot;:67,&quot;abs_x&quot;:986,&quot;abs_y&quot;:5199}">Stays within the U.S. Education system, throughout medical school applications</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:5019,&quot;w&quot;:1031,&quot;h&quot;:97,&quot;abs_x&quot;:364,&quot;abs_y&quot;:5301}" class="tpk-takeaway" style="text-align: left;"><strong bis_size="{&quot;x&quot;:480,&quot;y&quot;:5039,&quot;w&quot;:207,&quot;h&quot;:14,&quot;abs_x&quot;:778,&quot;abs_y&quot;:5321}">💡 Key Takeaway for NRI Parents -&nbsp;</strong>Testing consistency and organized preparation are rewarded by NEET. Long-term profile development is rewarded by the U.S. route. Making a realistic total-cost and total-timeline sheet for both options before committing results in the best family decision.</div>
+
+<h3 bis_size="{&quot;x&quot;:66,&quot;y&quot;:5135,&quot;w&quot;:1031,&quot;h&quot;:24,&quot;abs_x&quot;:364,&quot;abs_y&quot;:5417}" style="text-align: left;"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:5137,&quot;w&quot;:470,&quot;h&quot;:20,&quot;abs_x&quot;:364,&quot;abs_y&quot;:5419}" style="color:#16a085;">B) Cost Comparison - Planning Level (Not Final Figures)</span></h3>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:5176,&quot;w&quot;:1031,&quot;h&quot;:390,&quot;abs_x&quot;:364,&quot;abs_y&quot;:5458}" class="tpk-table-wrap">
+<table bis_size="{&quot;x&quot;:67,&quot;y&quot;:5193,&quot;w&quot;:1029,&quot;h&quot;:356,&quot;abs_x&quot;:365,&quot;abs_y&quot;:5475}" class="tpk-table">
+	<thead bis_size="{&quot;x&quot;:68,&quot;y&quot;:5193,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5475}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:5193,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5475}">
+			<th bis_size="{&quot;x&quot;:68,&quot;y&quot;:5193,&quot;w&quot;:201,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5475}"><span bis_size="{&quot;x&quot;:80,&quot;y&quot;:5207,&quot;w&quot;:106,&quot;h&quot;:16,&quot;abs_x&quot;:378,&quot;abs_y&quot;:5489}" style="color:#d35400;">Cost Dimension</span></th>
+			<th bis_size="{&quot;x&quot;:269,&quot;y&quot;:5193,&quot;w&quot;:426,&quot;h&quot;:43,&quot;abs_x&quot;:567,&quot;abs_y&quot;:5475}"><span bis_size="{&quot;x&quot;:282,&quot;y&quot;:5207,&quot;w&quot;:159,&quot;h&quot;:16,&quot;abs_x&quot;:580,&quot;abs_y&quot;:5489}" style="color:#d35400;">India MBBS (NRI Quota)</span></th>
+			<th bis_size="{&quot;x&quot;:696,&quot;y&quot;:5193,&quot;w&quot;:400,&quot;h&quot;:43,&quot;abs_x&quot;:994,&quot;abs_y&quot;:5475}"><span bis_size="{&quot;x&quot;:708,&quot;y&quot;:5207,&quot;w&quot;:125,&quot;h&quot;:16,&quot;abs_x&quot;:1006,&quot;abs_y&quot;:5489}" style="color:#d35400;">USA Pre-Med + MD</span></th>
+		</tr>
+	</thead>
+	<tbody bis_size="{&quot;x&quot;:68,&quot;y&quot;:5237,&quot;w&quot;:1028,&quot;h&quot;:311,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5519}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:5237,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5519}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:5237,&quot;w&quot;:201,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5519}">Medical college fee</td>
+			<td bis_size="{&quot;x&quot;:269,&quot;y&quot;:5237,&quot;w&quot;:426,&quot;h&quot;:67,&quot;abs_x&quot;:567,&quot;abs_y&quot;:5519}">Varies a lot. Government seats are less. Private NRI quota is more.</td>
+			<td bis_size="{&quot;x&quot;:696,&quot;y&quot;:5237,&quot;w&quot;:400,&quot;h&quot;:67,&quot;abs_x&quot;:994,&quot;abs_y&quot;:5519}">The cost of going to a U.S. School is really high. It is one of the expensive in the world.</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:5304,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5586}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:5304,&quot;w&quot;:201,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5586}">Coaching and preparation cost</td>
+			<td bis_size="{&quot;x&quot;:269,&quot;y&quot;:5304,&quot;w&quot;:426,&quot;h&quot;:67,&quot;abs_x&quot;:567,&quot;abs_y&quot;:5586}">NEET coaching takes 1 to 3 years. It is easy if you start early.</td>
+			<td bis_size="{&quot;x&quot;:696,&quot;y&quot;:5304,&quot;w&quot;:400,&quot;h&quot;:67,&quot;abs_x&quot;:994,&quot;abs_y&quot;:5586}">Pre-med advising, MCAT prep, application costs over many years</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:5371,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5653}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:5371,&quot;w&quot;:201,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5653}">Hidden costs</td>
+			<td bis_size="{&quot;x&quot;:269,&quot;y&quot;:5371,&quot;w&quot;:426,&quot;h&quot;:67,&quot;abs_x&quot;:567,&quot;abs_y&quot;:5653}">You also need to think about hostel and travel costs from India to the USA. The exchange rate can change.</td>
+			<td bis_size="{&quot;x&quot;:696,&quot;y&quot;:5371,&quot;w&quot;:400,&quot;h&quot;:67,&quot;abs_x&quot;:994,&quot;abs_y&quot;:5653}">Application fees (multiple cycles), gap year expenses, living costs</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:5438,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5720}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:5438,&quot;w&quot;:201,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5720}">Financial surprise risk</td>
+			<td bis_size="{&quot;x&quot;:269,&quot;y&quot;:5438,&quot;w&quot;:426,&quot;h&quot;:67,&quot;abs_x&quot;:567,&quot;abs_y&quot;:5720}">There are also fee changes and different counseling rules, for each state. The NRI quota category can also change.</td>
+			<td bis_size="{&quot;x&quot;:696,&quot;y&quot;:5438,&quot;w&quot;:400,&quot;h&quot;:67,&quot;abs_x&quot;:994,&quot;abs_y&quot;:5720}">Sometimes you have to apply to school more, than once. This can take longer than you think.</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:5505,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5787}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:5505,&quot;w&quot;:201,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:5787}">Timeline cost</td>
+			<td bis_size="{&quot;x&quot;:269,&quot;y&quot;:5505,&quot;w&quot;:426,&quot;h&quot;:43,&quot;abs_x&quot;:567,&quot;abs_y&quot;:5787}">If you start training earlier you can finish 1 to 2 years earlier.</td>
+			<td bis_size="{&quot;x&quot;:696,&quot;y&quot;:5505,&quot;w&quot;:400,&quot;h&quot;:43,&quot;abs_x&quot;:994,&quot;abs_y&quot;:5787}">You usually go to school after you finish your 4-year undergraduate degree</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:5596,&quot;w&quot;:1031,&quot;h&quot;:397,&quot;abs_x&quot;:364,&quot;abs_y&quot;:5878}" class="tpk-section">
+<h2 bis_size="{&quot;x&quot;:66,&quot;y&quot;:5596,&quot;w&quot;:1031,&quot;h&quot;:27,&quot;abs_x&quot;:364,&quot;abs_y&quot;:5878}">🎥 Watch: MBBS in India vs USA - Which Path Makes Sense for NRI Students</h2>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:5641,&quot;w&quot;:1031,&quot;h&quot;:352,&quot;abs_x&quot;:364,&quot;abs_y&quot;:5923}" class="tpk-soft-card">
+<div bis_size="{&quot;x&quot;:85,&quot;y&quot;:5680,&quot;w&quot;:993,&quot;h&quot;:274,&quot;abs_x&quot;:383,&quot;abs_y&quot;:5962}" class="video-grid-container" data-video-align="center" data-video-height="360" data-video-width="640" style="display: flex; justify-content: center; margin: 20px 0; width: 100%; box-sizing: border-box;">
+<div bis_size="{&quot;x&quot;:85,&quot;y&quot;:5680,&quot;w&quot;:993,&quot;h&quot;:274,&quot;abs_x&quot;:383,&quot;abs_y&quot;:5962}" class="video-grid-inner video-grid-cols-2" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; width: 100%; max-width: 100%; margin: 0; align-items: start; box-sizing: border-box;">
+<div bis_size="{&quot;x&quot;:85,&quot;y&quot;:5680,&quot;w&quot;:488,&quot;h&quot;:274,&quot;abs_x&quot;:383,&quot;abs_y&quot;:5962}" class="video-parent-container" style="width: 100%; min-width: 0; max-width: 640px; box-sizing: border-box;"><span bis_size="{&quot;x&quot;:85,&quot;y&quot;:5680,&quot;w&quot;:488,&quot;h&quot;:274,&quot;abs_x&quot;:383,&quot;abs_y&quot;:5962}" class="video-container" data-video-type="youtube" data-video-url="https://www.youtube.com/embed/NJ8FsxNU9t4" style="display: block; position: relative; width: 100%; height: 0; padding-bottom: 56.25%; max-width: 100%; cursor: pointer; border-radius: 8px; overflow: hidden; background: #000; box-sizing: border-box;"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" bis_chainid="36" bis_depth="1" bis_id="fr_9jpq30dcd1k4ed571d4t0o" bis_size="{&quot;x&quot;:85,&quot;y&quot;:5680,&quot;w&quot;:488,&quot;h&quot;:274,&quot;abs_x&quot;:383,&quot;abs_y&quot;:5962}" frameborder="0" src="https://www.youtube.com/embed/NJ8FsxNU9t4?controls=0&amp;showinfo=0&amp;rel=0&amp;modestbranding=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background: #000; pointer-events: none; display: block; border: none;" title="YouTube"></iframe></span></div>
+
+<div bis_size="{&quot;x&quot;:590,&quot;y&quot;:5680,&quot;w&quot;:488,&quot;h&quot;:274,&quot;abs_x&quot;:888,&quot;abs_y&quot;:5962}" class="video-parent-container" style="width: 100%; min-width: 0; max-width: 640px; box-sizing: border-box;"><span bis_size="{&quot;x&quot;:590,&quot;y&quot;:5680,&quot;w&quot;:488,&quot;h&quot;:274,&quot;abs_x&quot;:888,&quot;abs_y&quot;:5962}" class="video-container" data-video-type="youtube" data-video-url="https://www.youtube.com/embed/xznRutIsLzw" style="display: block; position: relative; width: 100%; height: 0; padding-bottom: 56.25%; max-width: 100%; cursor: pointer; border-radius: 8px; overflow: hidden; background: #000; box-sizing: border-box;"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" bis_chainid="36" bis_depth="1" bis_id="fr_ug9jxcuyerfec9zme6ncbb" bis_size="{&quot;x&quot;:590,&quot;y&quot;:5680,&quot;w&quot;:488,&quot;h&quot;:274,&quot;abs_x&quot;:888,&quot;abs_y&quot;:5962}" frameborder="0" src="https://www.youtube.com/embed/xznRutIsLzw?controls=0&amp;showinfo=0&amp;rel=0&amp;modestbranding=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background: #000; pointer-events: none; display: block; border: none;" title="YouTube"></iframe></span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:6024,&quot;w&quot;:1031,&quot;h&quot;:262,&quot;abs_x&quot;:364,&quot;abs_y&quot;:6306}" class="tpk-section">
+<h2 bis_size="{&quot;x&quot;:66,&quot;y&quot;:6024,&quot;w&quot;:1031,&quot;h&quot;:27,&quot;abs_x&quot;:364,&quot;abs_y&quot;:6306}"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:6025,&quot;w&quot;:420,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:6307}" style="color:#16a085;"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:6025,&quot;w&quot;:420,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:6307}">Is My Child a &quot;NEET Type&quot; or &quot;MCAT Type&quot;?</span></span></h2>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:6060,&quot;w&quot;:1031,&quot;h&quot;:226,&quot;abs_x&quot;:364,&quot;abs_y&quot;:6342}" class="tpk-card">
+<p bis_size="{&quot;x&quot;:87,&quot;y&quot;:6093,&quot;w&quot;:989,&quot;h&quot;:74,&quot;abs_x&quot;:385,&quot;abs_y&quot;:6375}">Whether NEET or MCAT may be more comfortable for a child depends on their innate learning pattern. Pupils who do well in NCERT-based study, systematic coaching, frequent testing, and repetition frequently adjust to NEET more easily. MCAT is frequently more in line with the interests of students who value independent study, critical thinking, in-depth reading, and concept-based learning.<br />
+<br />
+But this is really a recommendation, not a definitive choice. With constant practice, regular mock exams, and dedicated coaching, many students with an MCAT-oriented learning approach pass NEET. The idea is to identify your child&#39;s strengths early on and adjust your preparation plan accordingly.</p>
+</div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:6316,&quot;w&quot;:1031,&quot;h&quot;:999,&quot;abs_x&quot;:364,&quot;abs_y&quot;:6598}" class="tpk-section">
+<h2 bis_size="{&quot;x&quot;:66,&quot;y&quot;:6316,&quot;w&quot;:1031,&quot;h&quot;:27,&quot;abs_x&quot;:364,&quot;abs_y&quot;:6598}"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:6318,&quot;w&quot;:518,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:6600}" style="color:#16a085;"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:6318,&quot;w&quot;:518,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:6600}">The U.S. School Reality - How NEET Must Fit Around It</span></span></h2>
+
+<p bis_size="{&quot;x&quot;:66,&quot;y&quot;:6355,&quot;w&quot;:1031,&quot;h&quot;:74,&quot;abs_x&quot;:364,&quot;abs_y&quot;:6637}">Calendar mismatch is the main cause of NRI students&#39; failure to prepare for the NEET from the USA, not hard work. AP season, IB deadlines, SAT preparation, finals, sports seasons, and college application periods are all part of the U.S. academic calendar. On a fixed weekly timetable, NEET is unable to compete with all of these concurrently.<br />
+<br />
+The answer is a three-layer planning method that automatically adjusts to the academic year so your child doesn&#39;t have to start over every time school becomes busy.</p>
+
+<h3 bis_size="{&quot;x&quot;:66,&quot;y&quot;:6505,&quot;w&quot;:1031,&quot;h&quot;:24,&quot;abs_x&quot;:364,&quot;abs_y&quot;:6787}"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:6506,&quot;w&quot;:444,&quot;h&quot;:20,&quot;abs_x&quot;:364,&quot;abs_y&quot;:6788}" style="color:#330066;">The 3-Layer NEET Planning System for U.S. Students</span></h3>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:6545,&quot;w&quot;:1031,&quot;h&quot;:302,&quot;abs_x&quot;:364,&quot;abs_y&quot;:6827}" class="tpk-table-wrap">
+<table bis_size="{&quot;x&quot;:67,&quot;y&quot;:6562,&quot;w&quot;:1029,&quot;h&quot;:268,&quot;abs_x&quot;:365,&quot;abs_y&quot;:6844}" class="tpk-table">
+	<thead bis_size="{&quot;x&quot;:68,&quot;y&quot;:6563,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:6845}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:6563,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:6845}">
+			<th bis_size="{&quot;x&quot;:68,&quot;y&quot;:6563,&quot;w&quot;:123,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:6845}"><span bis_size="{&quot;x&quot;:80,&quot;y&quot;:6588,&quot;w&quot;:37,&quot;h&quot;:16,&quot;abs_x&quot;:378,&quot;abs_y&quot;:6870}" style="color:#d35400;">Layer</span></th>
+			<th bis_size="{&quot;x&quot;:191,&quot;y&quot;:6563,&quot;w&quot;:329,&quot;h&quot;:67,&quot;abs_x&quot;:489,&quot;abs_y&quot;:6845}"><span bis_size="{&quot;x&quot;:203,&quot;y&quot;:6588,&quot;w&quot;:84,&quot;h&quot;:16,&quot;abs_x&quot;:501,&quot;abs_y&quot;:6870}" style="color:#d35400;">When to Use</span></th>
+			<th bis_size="{&quot;x&quot;:520,&quot;y&quot;:6563,&quot;w&quot;:427,&quot;h&quot;:67,&quot;abs_x&quot;:818,&quot;abs_y&quot;:6845}"><span bis_size="{&quot;x&quot;:532,&quot;y&quot;:6588,&quot;w&quot;:91,&quot;h&quot;:16,&quot;abs_x&quot;:830,&quot;abs_y&quot;:6870}" style="color:#d35400;">NEET Activity</span></th>
+			<th bis_size="{&quot;x&quot;:947,&quot;y&quot;:6563,&quot;w&quot;:148,&quot;h&quot;:67,&quot;abs_x&quot;:1245,&quot;abs_y&quot;:6845}"><span bis_size="{&quot;x&quot;:960,&quot;y&quot;:6576,&quot;w&quot;:80,&quot;h&quot;:39,&quot;abs_x&quot;:1258,&quot;abs_y&quot;:6858}" style="color:#d35400;">Minimum Hours/Week</span></th>
+		</tr>
+	</thead>
+	<tbody bis_size="{&quot;x&quot;:68,&quot;y&quot;:6630,&quot;w&quot;:1028,&quot;h&quot;:201,&quot;abs_x&quot;:366,&quot;abs_y&quot;:6912}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:6630,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:6912}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:6630,&quot;w&quot;:123,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:6912}">Base Layer</td>
+			<td bis_size="{&quot;x&quot;:191,&quot;y&quot;:6630,&quot;w&quot;:329,&quot;h&quot;:67,&quot;abs_x&quot;:489,&quot;abs_y&quot;:6912}">Regular school weeks, mid-term periods</td>
+			<td bis_size="{&quot;x&quot;:520,&quot;y&quot;:6630,&quot;w&quot;:427,&quot;h&quot;:67,&quot;abs_x&quot;:818,&quot;abs_y&quot;:6912}">NCERT micro-reading, two to three brief NEET blocks (30 to 45 minutes each), and never zero</td>
+			<td bis_size="{&quot;x&quot;:947,&quot;y&quot;:6630,&quot;w&quot;:148,&quot;h&quot;:67,&quot;abs_x&quot;:1245,&quot;abs_y&quot;:6912}">3-5 hours</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:6697,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:6979}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:6697,&quot;w&quot;:123,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:6979}">Acceleration Layer</td>
+			<td bis_size="{&quot;x&quot;:191,&quot;y&quot;:6697,&quot;w&quot;:329,&quot;h&quot;:67,&quot;abs_x&quot;:489,&quot;abs_y&quot;:6979}">Summer break, winter break, spring break, long weekends</td>
+			<td bis_size="{&quot;x&quot;:520,&quot;y&quot;:6697,&quot;w&quot;:427,&quot;h&quot;:67,&quot;abs_x&quot;:818,&quot;abs_y&quot;:6979}">thorough review of the material, extensive practice exams, and an analysis of the error logs</td>
+			<td bis_size="{&quot;x&quot;:947,&quot;y&quot;:6697,&quot;w&quot;:148,&quot;h&quot;:67,&quot;abs_x&quot;:1245,&quot;abs_y&quot;:6979}">20-30 hours</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:6764,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7046}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:6764,&quot;w&quot;:123,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7046}">Recovery Layer</td>
+			<td bis_size="{&quot;x&quot;:191,&quot;y&quot;:6764,&quot;w&quot;:329,&quot;h&quot;:67,&quot;abs_x&quot;:489,&quot;abs_y&quot;:7046}">The week immediately after finals or AP exams</td>
+			<td bis_size="{&quot;x&quot;:520,&quot;y&quot;:6764,&quot;w&quot;:427,&quot;h&quot;:67,&quot;abs_x&quot;:818,&quot;abs_y&quot;:7046}">Ramp-back week: rebuild procedure, timed multiple-choice questions, and review of prior test errors</td>
+			<td bis_size="{&quot;x&quot;:947,&quot;y&quot;:6764,&quot;w&quot;:148,&quot;h&quot;:67,&quot;abs_x&quot;:1245,&quot;abs_y&quot;:7046}">8-12 hours</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<h3 bis_size="{&quot;x&quot;:66,&quot;y&quot;:6864,&quot;w&quot;:1031,&quot;h&quot;:24,&quot;abs_x&quot;:364,&quot;abs_y&quot;:7146}"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:6865,&quot;w&quot;:430,&quot;h&quot;:20,&quot;abs_x&quot;:364,&quot;abs_y&quot;:7147}" style="color:#330066;">U.S. Calendar Action Plan - What to Do Each Period</span></h3>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:6904,&quot;w&quot;:1031,&quot;h&quot;:297,&quot;abs_x&quot;:364,&quot;abs_y&quot;:7186}" class="tpk-table-wrap">
+<table bis_size="{&quot;x&quot;:67,&quot;y&quot;:6921,&quot;w&quot;:1029,&quot;h&quot;:264,&quot;abs_x&quot;:365,&quot;abs_y&quot;:7203}" class="tpk-table">
+	<thead bis_size="{&quot;x&quot;:68,&quot;y&quot;:6922,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7204}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:6922,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7204}">
+			<th bis_size="{&quot;x&quot;:68,&quot;y&quot;:6922,&quot;w&quot;:311,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7204}"><span bis_size="{&quot;x&quot;:80,&quot;y&quot;:6935,&quot;w&quot;:125,&quot;h&quot;:16,&quot;abs_x&quot;:378,&quot;abs_y&quot;:7217}" style="color:#d35400;">U.S. School Period</span></th>
+			<th bis_size="{&quot;x&quot;:379,&quot;y&quot;:6922,&quot;w&quot;:717,&quot;h&quot;:43,&quot;abs_x&quot;:677,&quot;abs_y&quot;:7204}"><span bis_size="{&quot;x&quot;:391,&quot;y&quot;:6935,&quot;w&quot;:97,&quot;h&quot;:16,&quot;abs_x&quot;:689,&quot;abs_y&quot;:7217}" style="color:#d35400;">NEET Strategy</span></th>
+		</tr>
+	</thead>
+	<tbody bis_size="{&quot;x&quot;:68,&quot;y&quot;:6966,&quot;w&quot;:1028,&quot;h&quot;:219,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7248}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:6966,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7248}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:6966,&quot;w&quot;:311,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7248}">Regular school week (Sep&ndash;Nov, Jan&ndash;Mar)</td>
+			<td bis_size="{&quot;x&quot;:379,&quot;y&quot;:6966,&quot;w&quot;:717,&quot;h&quot;:43,&quot;abs_x&quot;:677,&quot;abs_y&quot;:7248}">Base layer -&nbsp;daily blocks of study time reading from NCERT books and doing one session of multiple choice questions on the weekend.</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:7009,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7291}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:7009,&quot;w&quot;:311,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7291}">Finals / AP peak weeks (May&ndash;Jun)</td>
+			<td bis_size="{&quot;x&quot;:379,&quot;y&quot;:7009,&quot;w&quot;:717,&quot;h&quot;:43,&quot;abs_x&quot;:677,&quot;abs_y&quot;:7291}">Don&#39;t stop reducing to the minimum base. To keep the pace going, one or two biology reading sessions are sufficient.</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:7053,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7335}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:7053,&quot;w&quot;:311,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7335}">Summer break (Jun&ndash;Aug)</td>
+			<td bis_size="{&quot;x&quot;:379,&quot;y&quot;:7053,&quot;w&quot;:717,&quot;h&quot;:43,&quot;abs_x&quot;:677,&quot;abs_y&quot;:7335}">Acceleration layer: extensive NCERT revision, two to three full mock exams per week, and comprehensive curriculum covering</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:7097,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7379}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:7097,&quot;w&quot;:311,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7379}">Winter break (Dec&ndash;Jan)</td>
+			<td bis_size="{&quot;x&quot;:379,&quot;y&quot;:7097,&quot;w&quot;:717,&quot;h&quot;:43,&quot;abs_x&quot;:677,&quot;abs_y&quot;:7379}">Acceleration layer: gap chapter completion, topic-wise exam series, and chapter revision</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:7141,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7423}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:7141,&quot;w&quot;:311,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7423}">Post-finals recovery week</td>
+			<td bis_size="{&quot;x&quot;:379,&quot;y&quot;:7141,&quot;w&quot;:717,&quot;h&quot;:43,&quot;abs_x&quot;:677,&quot;abs_y&quot;:7423}">Recovery layer: quickly resume timed practice and examine the error log from the prior month.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:7218,&quot;w&quot;:1031,&quot;h&quot;:97,&quot;abs_x&quot;:364,&quot;abs_y&quot;:7500}" class="tpk-warning"><strong bis_size="{&quot;x&quot;:87,&quot;y&quot;:7238,&quot;w&quot;:269,&quot;h&quot;:14,&quot;abs_x&quot;:385,&quot;abs_y&quot;:7520}">⚠ Most Common Mistake NRI Parents Make -&nbsp;</strong>allowing &quot;zero months&quot; - months in which there is absolutely no NEET preparation. It usually takes a another 4-6 weeks for a pupil to regain rhythm, confidence, and MCQ speed after stopping for 4-6 weeks. Maintaining a minimum foundation layer completely stops this loss, even during the busiest school period.</div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:7346,&quot;w&quot;:1031,&quot;h&quot;:426,&quot;abs_x&quot;:364,&quot;abs_y&quot;:7628}" class="tpk-section">
+<h2 bis_size="{&quot;x&quot;:66,&quot;y&quot;:7346,&quot;w&quot;:1031,&quot;h&quot;:27,&quot;abs_x&quot;:364,&quot;abs_y&quot;:7628}"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:7348,&quot;w&quot;:582,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:7630}" style="color:#330066;">Grade-Wise NEET Planning Framework for NRI USA Students</span></h2>
+
+<p bis_size="{&quot;x&quot;:66,&quot;y&quot;:7385,&quot;w&quot;:1031,&quot;h&quot;:24,&quot;abs_x&quot;:364,&quot;abs_y&quot;:7667}">The right NEET plan is not the same intensity every year. It should match the grade&#39;s real-world school load and the student&#39;s developmental readiness.</p>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:7426,&quot;w&quot;:1031,&quot;h&quot;:346,&quot;abs_x&quot;:364,&quot;abs_y&quot;:7708}" class="tpk-table-wrap">
+<table bis_size="{&quot;x&quot;:67,&quot;y&quot;:7443,&quot;w&quot;:1029,&quot;h&quot;:312,&quot;abs_x&quot;:365,&quot;abs_y&quot;:7725}" class="tpk-table">
+	<thead bis_size="{&quot;x&quot;:68,&quot;y&quot;:7443,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7725}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:7443,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7725}">
+			<th bis_size="{&quot;x&quot;:68,&quot;y&quot;:7443,&quot;w&quot;:70,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7725}"><span bis_size="{&quot;x&quot;:80,&quot;y&quot;:7457,&quot;w&quot;:40,&quot;h&quot;:16,&quot;abs_x&quot;:378,&quot;abs_y&quot;:7739}" style="color:#d35400;">Grade</span></th>
+			<th bis_size="{&quot;x&quot;:138,&quot;y&quot;:7443,&quot;w&quot;:275,&quot;h&quot;:43,&quot;abs_x&quot;:436,&quot;abs_y&quot;:7725}"><span bis_size="{&quot;x&quot;:151,&quot;y&quot;:7457,&quot;w&quot;:159,&quot;h&quot;:16,&quot;abs_x&quot;:449,&quot;abs_y&quot;:7739}" style="color:#d35400;">Parent Goal for the Year</span></th>
+			<th bis_size="{&quot;x&quot;:414,&quot;y&quot;:7443,&quot;w&quot;:382,&quot;h&quot;:43,&quot;abs_x&quot;:712,&quot;abs_y&quot;:7725}"><span bis_size="{&quot;x&quot;:426,&quot;y&quot;:7457,&quot;w&quot;:171,&quot;h&quot;:16,&quot;abs_x&quot;:724,&quot;abs_y&quot;:7739}" style="color:#d35400;">What Success Looks Like</span></th>
+			<th bis_size="{&quot;x&quot;:796,&quot;y&quot;:7443,&quot;w&quot;:300,&quot;h&quot;:43,&quot;abs_x&quot;:1094,&quot;abs_y&quot;:7725}"><span bis_size="{&quot;x&quot;:808,&quot;y&quot;:7457,&quot;w&quot;:72,&quot;h&quot;:16,&quot;abs_x&quot;:1106,&quot;abs_y&quot;:7739}" style="color:#d35400;">Key Action</span></th>
+		</tr>
+	</thead>
+	<tbody bis_size="{&quot;x&quot;:68,&quot;y&quot;:7487,&quot;w&quot;:1028,&quot;h&quot;:268,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7769}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:7487,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7769}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:7487,&quot;w&quot;:70,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7769}">Grade 8&ndash;9</td>
+			<td bis_size="{&quot;x&quot;:138,&quot;y&quot;:7487,&quot;w&quot;:275,&quot;h&quot;:67,&quot;abs_x&quot;:436,&quot;abs_y&quot;:7769}">Build NEET awareness + early foundation habits</td>
+			<td bis_size="{&quot;x&quot;:414,&quot;y&quot;:7487,&quot;w&quot;:382,&quot;h&quot;:67,&quot;abs_x&quot;:712,&quot;abs_y&quot;:7769}">NCERT Biology reading began,&nbsp;a regular weekly schedule&nbsp;set.</td>
+			<td bis_size="{&quot;x&quot;:796,&quot;y&quot;:7487,&quot;w&quot;:300,&quot;h&quot;:67,&quot;abs_x&quot;:1094,&quot;abs_y&quot;:7769}">NCERT habit, foundation course, and no pressure to complete the entire curriculum</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:7554,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7836}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:7554,&quot;w&quot;:70,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7836}">Grade 10</td>
+			<td bis_size="{&quot;x&quot;:138,&quot;y&quot;:7554,&quot;w&quot;:275,&quot;h&quot;:67,&quot;abs_x&quot;:436,&quot;abs_y&quot;:7836}">Strengthen NCERT fundamentals, begin chapter-wise practice</td>
+			<td bis_size="{&quot;x&quot;:414,&quot;y&quot;:7554,&quot;w&quot;:382,&quot;h&quot;:67,&quot;abs_x&quot;:712,&quot;abs_y&quot;:7836}">Chapter-by-chapter MCQ practice began, and accuracy increased steadily every quarter.</td>
+			<td bis_size="{&quot;x&quot;:796,&quot;y&quot;:7554,&quot;w&quot;:300,&quot;h&quot;:67,&quot;abs_x&quot;:1094,&quot;abs_y&quot;:7836}">NCERT Chem + Bio, diagnostic evaluation, and chapter tests</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:7621,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7903}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:7621,&quot;w&quot;:70,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7903}">Grade 11</td>
+			<td bis_size="{&quot;x&quot;:138,&quot;y&quot;:7621,&quot;w&quot;:275,&quot;h&quot;:67,&quot;abs_x&quot;:436,&quot;abs_y&quot;:7903}">Serious NEET alignment with regular weekly testing</td>
+			<td bis_size="{&quot;x&quot;:414,&quot;y&quot;:7621,&quot;w&quot;:382,&quot;h&quot;:67,&quot;abs_x&quot;:712,&quot;abs_y&quot;:7903}">Even during school exams, weekly tests are conducted; the syllabus rhythm endures despite the workload.</td>
+			<td bis_size="{&quot;x&quot;:796,&quot;y&quot;:7621,&quot;w&quot;:300,&quot;h&quot;:67,&quot;abs_x&quot;:1094,&quot;abs_y&quot;:7903}">Frequent practice exams, comprehensive NEET syllabus coverage, and an error log</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:7688,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7970}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:7688,&quot;w&quot;:70,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:7970}">Grade 12</td>
+			<td bis_size="{&quot;x&quot;:138,&quot;y&quot;:7688,&quot;w&quot;:275,&quot;h&quot;:67,&quot;abs_x&quot;:436,&quot;abs_y&quot;:7970}">Peak performance through revision cycles + full mock tests</td>
+			<td bis_size="{&quot;x&quot;:414,&quot;y&quot;:7688,&quot;w&quot;:382,&quot;h&quot;:67,&quot;abs_x&quot;:712,&quot;abs_y&quot;:7970}">Complete mocks including cycles of error correction; consistent accuracy in timed situations</td>
+			<td bis_size="{&quot;x&quot;:796,&quot;y&quot;:7688,&quot;w&quot;:300,&quot;h&quot;:67,&quot;abs_x&quot;:1094,&quot;abs_y&quot;:7970}">Complete simulations, study on NRI quotas, college shortlisting, and counseling preparation</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:7802,&quot;w&quot;:1031,&quot;h&quot;:234,&quot;abs_x&quot;:364,&quot;abs_y&quot;:8084}" class="tpk-section">
+<h2 bis_size="{&quot;x&quot;:66,&quot;y&quot;:7802,&quot;w&quot;:1031,&quot;h&quot;:27,&quot;abs_x&quot;:364,&quot;abs_y&quot;:8084}">🎥 Watch: NEET Preparation Strategy for NRI Students in USA - Grade-Wise Plan</h2>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:7849,&quot;w&quot;:1031,&quot;h&quot;:187,&quot;abs_x&quot;:364,&quot;abs_y&quot;:8131}" class="video-grid-container" data-video-align="center" data-video-height="360" data-video-width="640" style="display: flex; justify-content: center; margin: 20px 0; width: 100%; box-sizing: border-box;">
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:7849,&quot;w&quot;:1031,&quot;h&quot;:187,&quot;abs_x&quot;:364,&quot;abs_y&quot;:8131}" class="video-grid-inner video-grid-cols-3" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; width: 100%; max-width: 100%; margin: 0; align-items: start; box-sizing: border-box;">
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:7849,&quot;w&quot;:333,&quot;h&quot;:187,&quot;abs_x&quot;:364,&quot;abs_y&quot;:8131}" class="video-parent-container" style="width: 100%; min-width: 0; max-width: 640px; box-sizing: border-box;"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:7849,&quot;w&quot;:333,&quot;h&quot;:187,&quot;abs_x&quot;:364,&quot;abs_y&quot;:8131}" class="video-container" data-video-type="youtube" data-video-url="https://www.youtube.com/embed/W99xcaVDCkM" style="display: block; position: relative; width: 100%; height: 0; padding-bottom: 56.25%; max-width: 100%; cursor: pointer; border-radius: 8px; overflow: hidden; background: #000; box-sizing: border-box;"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" bis_chainid="36" bis_depth="1" bis_id="fr_nfy7emqpwlfi87fib89vcn" bis_size="{&quot;x&quot;:66,&quot;y&quot;:7849,&quot;w&quot;:333,&quot;h&quot;:187,&quot;abs_x&quot;:364,&quot;abs_y&quot;:8131}" frameborder="0" src="https://www.youtube.com/embed/W99xcaVDCkM?controls=0&amp;showinfo=0&amp;rel=0&amp;modestbranding=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background: #000; pointer-events: none; display: block; border: none;" title="YouTube"></iframe></span></div>
+
+<div bis_size="{&quot;x&quot;:415,&quot;y&quot;:7849,&quot;w&quot;:333,&quot;h&quot;:187,&quot;abs_x&quot;:713,&quot;abs_y&quot;:8131}" class="video-parent-container" style="width: 100%; min-width: 0; max-width: 640px; box-sizing: border-box;"><span bis_size="{&quot;x&quot;:415,&quot;y&quot;:7849,&quot;w&quot;:333,&quot;h&quot;:187,&quot;abs_x&quot;:713,&quot;abs_y&quot;:8131}" class="video-container" data-video-type="youtube" data-video-url="https://www.youtube.com/embed/KzqS_LUX6UQ" style="display: block; position: relative; width: 100%; height: 0; padding-bottom: 56.25%; max-width: 100%; cursor: pointer; border-radius: 8px; overflow: hidden; background: #000; box-sizing: border-box;"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" bis_chainid="36" bis_depth="1" bis_id="fr_fpxsxj30rkchmbbme08ytm" bis_size="{&quot;x&quot;:415,&quot;y&quot;:7849,&quot;w&quot;:333,&quot;h&quot;:187,&quot;abs_x&quot;:713,&quot;abs_y&quot;:8131}" frameborder="0" src="https://www.youtube.com/embed/KzqS_LUX6UQ?controls=0&amp;showinfo=0&amp;rel=0&amp;modestbranding=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background: #000; pointer-events: none; display: block; border: none;" title="YouTube"></iframe></span></div>
+
+<div bis_size="{&quot;x&quot;:764,&quot;y&quot;:7849,&quot;w&quot;:333,&quot;h&quot;:187,&quot;abs_x&quot;:1062,&quot;abs_y&quot;:8131}" class="video-parent-container" style="width: 100%; min-width: 0; max-width: 640px; box-sizing: border-box;"><span bis_size="{&quot;x&quot;:764,&quot;y&quot;:7849,&quot;w&quot;:333,&quot;h&quot;:187,&quot;abs_x&quot;:1062,&quot;abs_y&quot;:8131}" class="video-container" data-video-type="youtube" data-video-url="https://www.youtube.com/embed/3DYdUQ1IdW8" style="display: block; position: relative; width: 100%; height: 0; padding-bottom: 56.25%; max-width: 100%; cursor: pointer; border-radius: 8px; overflow: hidden; background: #000; box-sizing: border-box;"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" bis_chainid="36" bis_depth="1" bis_id="fr_fmtpwvhuyql70u0i3acojt" bis_size="{&quot;x&quot;:764,&quot;y&quot;:7849,&quot;w&quot;:333,&quot;h&quot;:187,&quot;abs_x&quot;:1062,&quot;abs_y&quot;:8131}" frameborder="0" src="https://www.youtube.com/embed/3DYdUQ1IdW8?controls=0&amp;showinfo=0&amp;rel=0&amp;modestbranding=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background: #000; pointer-events: none; display: block; border: none;" title="YouTube"></iframe></span></div>
+</div>
+</div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:8067,&quot;w&quot;:1031,&quot;h&quot;:691,&quot;abs_x&quot;:364,&quot;abs_y&quot;:8349}" class="tpk-section">
+<h2 bis_size="{&quot;x&quot;:66,&quot;y&quot;:8067,&quot;w&quot;:1031,&quot;h&quot;:27,&quot;abs_x&quot;:364,&quot;abs_y&quot;:8349}"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:8068,&quot;w&quot;:585,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:8350}" style="color:#16a085;"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:8068,&quot;w&quot;:585,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:8350}">The NCERT Alignment Gap - The Silent Trap for U.S. Students</span></span></h2>
+
+<p bis_size="{&quot;x&quot;:66,&quot;y&quot;:8106,&quot;w&quot;:1031,&quot;h&quot;:74,&quot;abs_x&quot;:364,&quot;abs_y&quot;:8388}">Most NRI families learn about this issue too late. Students in the United States often have a strong understanding of science subjects; IB, Honors Chemistry, and AP Biology courses offer strong intellectual foundations. Nevertheless, NEET does not evaluate conceptual comprehension, in contrast to U.S. exams. NEET evaluates specific NCERT memory, specific vocabulary, and multiple-choice questions directly from Indian textbooks.<br />
+<br />
+A U.S. student may fail a NEET question on DNA replication even if they have a thorough understanding of the topic since it asks about a specific NCERT diagram label or a one-line explanation that they have never seen.</p>
+
+<h3 bis_size="{&quot;x&quot;:66,&quot;y&quot;:8255,&quot;w&quot;:1031,&quot;h&quot;:24,&quot;abs_x&quot;:364,&quot;abs_y&quot;:8537}"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:8257,&quot;w&quot;:362,&quot;h&quot;:20,&quot;abs_x&quot;:364,&quot;abs_y&quot;:8539}" style="color:#330066;">Subject-Wise NCERT Gap for U.S. Students</span></h3>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:8296,&quot;w&quot;:1031,&quot;h&quot;:346,&quot;abs_x&quot;:364,&quot;abs_y&quot;:8578}" class="tpk-table-wrap">
+<table bis_size="{&quot;x&quot;:67,&quot;y&quot;:8312,&quot;w&quot;:1029,&quot;h&quot;:312,&quot;abs_x&quot;:365,&quot;abs_y&quot;:8594}" class="tpk-table">
+	<thead bis_size="{&quot;x&quot;:68,&quot;y&quot;:8313,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:8595}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:8313,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:8595}">
+			<th bis_size="{&quot;x&quot;:68,&quot;y&quot;:8313,&quot;w&quot;:101,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:8595}"><span bis_size="{&quot;x&quot;:80,&quot;y&quot;:8326,&quot;w&quot;:50,&quot;h&quot;:16,&quot;abs_x&quot;:378,&quot;abs_y&quot;:8608}" style="color:#d35400;">Subject</span></th>
+			<th bis_size="{&quot;x&quot;:169,&quot;y&quot;:8313,&quot;w&quot;:340,&quot;h&quot;:43,&quot;abs_x&quot;:467,&quot;abs_y&quot;:8595}"><span bis_size="{&quot;x&quot;:182,&quot;y&quot;:8326,&quot;w&quot;:167,&quot;h&quot;:16,&quot;abs_x&quot;:480,&quot;abs_y&quot;:8608}" style="color:#d35400;">U.S. Curriculum Strength</span></th>
+			<th bis_size="{&quot;x&quot;:510,&quot;y&quot;:8313,&quot;w&quot;:319,&quot;h&quot;:43,&quot;abs_x&quot;:808,&quot;abs_y&quot;:8595}"><span bis_size="{&quot;x&quot;:522,&quot;y&quot;:8326,&quot;w&quot;:126,&quot;h&quot;:16,&quot;abs_x&quot;:820,&quot;abs_y&quot;:8608}" style="color:#d35400;">NEET-Specific Gap</span></th>
+			<th bis_size="{&quot;x&quot;:829,&quot;y&quot;:8313,&quot;w&quot;:267,&quot;h&quot;:43,&quot;abs_x&quot;:1127,&quot;abs_y&quot;:8595}"><span bis_size="{&quot;x&quot;:841,&quot;y&quot;:8326,&quot;w&quot;:80,&quot;h&quot;:16,&quot;abs_x&quot;:1139,&quot;abs_y&quot;:8608}" style="color:#d35400;">Fix Strategy</span></th>
+		</tr>
+	</thead>
+	<tbody bis_size="{&quot;x&quot;:68,&quot;y&quot;:8357,&quot;w&quot;:1028,&quot;h&quot;:268,&quot;abs_x&quot;:366,&quot;abs_y&quot;:8639}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:8357,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:8639}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:8357,&quot;w&quot;:101,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:8639}">Biology</td>
+			<td bis_size="{&quot;x&quot;:169,&quot;y&quot;:8357,&quot;w&quot;:340,&quot;h&quot;:67,&quot;abs_x&quot;:467,&quot;abs_y&quot;:8639}">strong intellectual grasp of various processes, including genetics, cell division, and photosynthesis</td>
+			<td bis_size="{&quot;x&quot;:510,&quot;y&quot;:8357,&quot;w&quot;:319,&quot;h&quot;:67,&quot;abs_x&quot;:808,&quot;abs_y&quot;:8639}">Exact NCERT one-liners, concrete examples, and statement-trap multiple-choice questions are absent.</td>
+			<td bis_size="{&quot;x&quot;:829,&quot;y&quot;:8357,&quot;w&quot;:267,&quot;h&quot;:67,&quot;abs_x&quot;:1127,&quot;abs_y&quot;:8639}">Daily NCERT micro-reading (20 min) + weekly NCERT based quiz</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:8424,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:8706}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:8424,&quot;w&quot;:101,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:8706}">Inorganic Chemistry</td>
+			<td bis_size="{&quot;x&quot;:169,&quot;y&quot;:8424,&quot;w&quot;:340,&quot;h&quot;:67,&quot;abs_x&quot;:467,&quot;abs_y&quot;:8706}">Reasonable coverage of the periodic table, fundamental reactions, and bonds</td>
+			<td bis_size="{&quot;x&quot;:510,&quot;y&quot;:8424,&quot;w&quot;:319,&quot;h&quot;:67,&quot;abs_x&quot;:808,&quot;abs_y&quot;:8706}">Poor recollection of exceptions, certain characteristics, and classification in Indian textbooks</td>
+			<td bis_size="{&quot;x&quot;:829,&quot;y&quot;:8424,&quot;w&quot;:267,&quot;h&quot;:67,&quot;abs_x&quot;:1127,&quot;abs_y&quot;:8706}">One-liner notebook + spaced repetition revision every 10 days</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:8491,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:8773}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:8491,&quot;w&quot;:101,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:8773}">Organic Chemistry</td>
+			<td bis_size="{&quot;x&quot;:169,&quot;y&quot;:8491,&quot;w&quot;:340,&quot;h&quot;:67,&quot;abs_x&quot;:467,&quot;abs_y&quot;:8773}">Reaction mechanisms in AP/IB are comparatively robust.</td>
+			<td bis_size="{&quot;x&quot;:510,&quot;y&quot;:8491,&quot;w&quot;:319,&quot;h&quot;:67,&quot;abs_x&quot;:808,&quot;abs_y&quot;:8773}">Reaction classification gaps and a lack of NEET&#39;s pattern-based MCQ style</td>
+			<td bis_size="{&quot;x&quot;:829,&quot;y&quot;:8491,&quot;w&quot;:267,&quot;h&quot;:67,&quot;abs_x&quot;:1127,&quot;abs_y&quot;:8773}">Reaction pattern revision + mixed MCQ practice weekly</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:8558,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:8840}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:8558,&quot;w&quot;:101,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:8840}">Physics</td>
+			<td bis_size="{&quot;x&quot;:169,&quot;y&quot;:8558,&quot;w&quot;:340,&quot;h&quot;:67,&quot;abs_x&quot;:467,&quot;abs_y&quot;:8840}">solid conceptual foundation, particularly in the areas of electricity and mechanics</td>
+			<td bis_size="{&quot;x&quot;:510,&quot;y&quot;:8558,&quot;w&quot;:319,&quot;h&quot;:67,&quot;abs_x&quot;:808,&quot;abs_y&quot;:8840}">Reduced formula-based recall and slower numerical application under time constraints</td>
+			<td bis_size="{&quot;x&quot;:829,&quot;y&quot;:8558,&quot;w&quot;:267,&quot;h&quot;:67,&quot;abs_x&quot;:1127,&quot;abs_y&quot;:8840}">Formula sheet + timed numerical drills 3x per week</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:8660,&quot;w&quot;:1031,&quot;h&quot;:97,&quot;abs_x&quot;:364,&quot;abs_y&quot;:8942}" class="tpk-takeaway"><strong bis_size="{&quot;x&quot;:87,&quot;y&quot;:8680,&quot;w&quot;:232,&quot;h&quot;:14,&quot;abs_x&quot;:385,&quot;abs_y&quot;:8962}">💡 NCERT Habit Rule for NRI Parents -&nbsp;</strong>NCERT reading becomes second nature by Grade 12 if it is started in Grades 9 or 10. In addition to academic deadlines, starting it in Grade 12 causes anxiety and cognitive stress. In Grade 9, 20 minutes of daily NCERT Biology reading is more beneficial than three hours of cramming in Grade 12.</div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:8788,&quot;w&quot;:1031,&quot;h&quot;:233,&quot;abs_x&quot;:364,&quot;abs_y&quot;:9070}" class="tpk-section">
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:8788,&quot;w&quot;:1031,&quot;h&quot;:233,&quot;abs_x&quot;:364,&quot;abs_y&quot;:9070}" class="tpk-ebook">
+<div bis_size="{&quot;x&quot;:87,&quot;y&quot;:8874,&quot;w&quot;:62,&quot;h&quot;:62,&quot;abs_x&quot;:385,&quot;abs_y&quot;:9156}" class="tpk-ebook-icon">📘</div>
+
+<div bis_size="{&quot;x&quot;:171,&quot;y&quot;:8809,&quot;w&quot;:905,&quot;h&quot;:191,&quot;abs_x&quot;:469,&quot;abs_y&quot;:9091}">
+<h2 bis_size="{&quot;x&quot;:171,&quot;y&quot;:8825,&quot;w&quot;:905,&quot;h&quot;:27,&quot;abs_x&quot;:469,&quot;abs_y&quot;:9107}">Free Download: NRI Quota NEET Admission eBook</h2>
+
+<p bis_size="{&quot;x&quot;:171,&quot;y&quot;:8864,&quot;w&quot;:905,&quot;h&quot;:74,&quot;abs_x&quot;:469,&quot;abs_y&quot;:9146}">covers all aspect of the NRI quota admissions procedure, including eligibility, state-specific seats, cost, document checklist, sponsor regulations, avoiding counseling traps, and college comparison. Written especially for NRI families in the Gulf, the United States, the United Kingdom, and Canada. Over 10,000 NRI parents downloaded it.</p>
+
+<div bis_size="{&quot;x&quot;:171,&quot;y&quot;:8952,&quot;w&quot;:905,&quot;h&quot;:48,&quot;abs_x&quot;:469,&quot;abs_y&quot;:9234}" class="tpk-btn-row"><a bis_size="{&quot;x&quot;:171,&quot;y&quot;:8952,&quot;w&quot;:198,&quot;h&quot;:48,&quot;abs_x&quot;:469,&quot;abs_y&quot;:9234}" class="tpk-btn tpk-btn-purple" href="https://www.testprepkart.com/self-study/neet/download/ebooks-pdfs/nri-quota-ebook" rel="noopener" target="_blank">&darr; Download Free PDF</a> <a bis_size="{&quot;x&quot;:381,&quot;y&quot;:8952,&quot;w&quot;:192,&quot;h&quot;:48,&quot;abs_x&quot;:679,&quot;abs_y&quot;:9234}" class="tpk-btn tpk-btn-white" href="https://www.testprepkart.com/self-study/neet/download/ebooks-pdfs/nri-quota-ebook" rel="noopener" target="_blank">&rarr; See What&#39;s Inside</a></div>
+</div>
+</div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:9051,&quot;w&quot;:1031,&quot;h&quot;:751,&quot;abs_x&quot;:364,&quot;abs_y&quot;:9333}" class="tpk-section">
+<h2 bis_size="{&quot;x&quot;:66,&quot;y&quot;:9051,&quot;w&quot;:1031,&quot;h&quot;:27,&quot;abs_x&quot;:364,&quot;abs_y&quot;:9333}"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:9053,&quot;w&quot;:538,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:9335}" style="color:#16a085;"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:9053,&quot;w&quot;:538,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:9335}">Student Academic Diagnostic - Measure Before You Plan</span></span></h2>
+
+<p bis_size="{&quot;x&quot;:66,&quot;y&quot;:9090,&quot;w&quot;:1031,&quot;h&quot;:49,&quot;abs_x&quot;:364,&quot;abs_y&quot;:9372}">Selecting a coaching provider or beginning a study plan before determining the student&#39;s actual position is the most frequent Stage 1 error. You may replace months of speculation with facts from a real NEET diagnostic test, which is administered under timed, NEET-like conditions.</p>
+
+<h3 bis_size="{&quot;x&quot;:66,&quot;y&quot;:9154,&quot;w&quot;:1031,&quot;h&quot;:24,&quot;abs_x&quot;:364,&quot;abs_y&quot;:9436}"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:9155,&quot;w&quot;:345,&quot;h&quot;:20,&quot;abs_x&quot;:364,&quot;abs_y&quot;:9437}" style="color:#330066;">What a NEET Diagnostic Should Measure</span></h3>
+
+<ul bis_size="{&quot;x&quot;:66,&quot;y&quot;:9190,&quot;w&quot;:1031,&quot;h&quot;:168,&quot;abs_x&quot;:364,&quot;abs_y&quot;:9472}" class="tpk-list">
+	<li bis_size="{&quot;x&quot;:88,&quot;y&quot;:9190,&quot;w&quot;:969,&quot;h&quot;:21,&quot;abs_x&quot;:386,&quot;abs_y&quot;:9472}">Subject-wise and chapter-wise gap size relative to NEET standard</li>
+	<li bis_size="{&quot;x&quot;:88,&quot;y&quot;:9220,&quot;w&quot;:969,&quot;h&quot;:21,&quot;abs_x&quot;:386,&quot;abs_y&quot;:9502}">Overall accuracy percentage under timed MCQ conditions</li>
+	<li bis_size="{&quot;x&quot;:88,&quot;y&quot;:9249,&quot;w&quot;:969,&quot;h&quot;:21,&quot;abs_x&quot;:386,&quot;abs_y&quot;:9531}">Average time per question (speed gap assessment)</li>
+	<li bis_size="{&quot;x&quot;:88,&quot;y&quot;:9279,&quot;w&quot;:969,&quot;h&quot;:21,&quot;abs_x&quot;:386,&quot;abs_y&quot;:9561}">Mistake classification: conceptual gap / calculation error / misread / time pressure</li>
+	<li bis_size="{&quot;x&quot;:88,&quot;y&quot;:9308,&quot;w&quot;:969,&quot;h&quot;:21,&quot;abs_x&quot;:386,&quot;abs_y&quot;:9590}">NCERT alignment score (can the student answer direct NCERT-line questions?)</li>
+	<li bis_size="{&quot;x&quot;:88,&quot;y&quot;:9337,&quot;w&quot;:969,&quot;h&quot;:21,&quot;abs_x&quot;:386,&quot;abs_y&quot;:9619}">Coachability indicator: does the student improve accuracy after reviewing corrections?</li>
+</ul>
+
+<h3 bis_size="{&quot;x&quot;:66,&quot;y&quot;:9372,&quot;w&quot;:1031,&quot;h&quot;:24,&quot;abs_x&quot;:364,&quot;abs_y&quot;:9654}"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:9374,&quot;w&quot;:404,&quot;h&quot;:20,&quot;abs_x&quot;:364,&quot;abs_y&quot;:9656}" style="color:#330066;">How to Interpret Your Child&#39;s Diagnostic Results</span></h3>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:9413,&quot;w&quot;:1031,&quot;h&quot;:390,&quot;abs_x&quot;:364,&quot;abs_y&quot;:9695}" class="tpk-table-wrap">
+<table bis_size="{&quot;x&quot;:67,&quot;y&quot;:9430,&quot;w&quot;:1029,&quot;h&quot;:356,&quot;abs_x&quot;:365,&quot;abs_y&quot;:9712}" class="tpk-table">
+	<thead bis_size="{&quot;x&quot;:68,&quot;y&quot;:9430,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:9712}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:9430,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:9712}">
+			<th bis_size="{&quot;x&quot;:68,&quot;y&quot;:9430,&quot;w&quot;:217,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:9712}"><span bis_size="{&quot;x&quot;:80,&quot;y&quot;:9444,&quot;w&quot;:136,&quot;h&quot;:16,&quot;abs_x&quot;:378,&quot;abs_y&quot;:9726}" style="color:#d35400;">Diagnostic Outcome</span></th>
+			<th bis_size="{&quot;x&quot;:285,&quot;y&quot;:9430,&quot;w&quot;:399,&quot;h&quot;:43,&quot;abs_x&quot;:583,&quot;abs_y&quot;:9712}"><span bis_size="{&quot;x&quot;:298,&quot;y&quot;:9444,&quot;w&quot;:147,&quot;h&quot;:16,&quot;abs_x&quot;:596,&quot;abs_y&quot;:9726}" style="color:#d35400;">What It Usually Means</span></th>
+			<th bis_size="{&quot;x&quot;:685,&quot;y&quot;:9430,&quot;w&quot;:411,&quot;h&quot;:43,&quot;abs_x&quot;:983,&quot;abs_y&quot;:9712}"><span bis_size="{&quot;x&quot;:697,&quot;y&quot;:9444,&quot;w&quot;:168,&quot;h&quot;:16,&quot;abs_x&quot;:995,&quot;abs_y&quot;:9726}" style="color:#d35400;">Recommended Next Step</span></th>
+		</tr>
+	</thead>
+	<tbody bis_size="{&quot;x&quot;:68,&quot;y&quot;:9474,&quot;w&quot;:1028,&quot;h&quot;:311,&quot;abs_x&quot;:366,&quot;abs_y&quot;:9756}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:9474,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:9756}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:9474,&quot;w&quot;:217,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:9756}">Good accuracy, slow speed</td>
+			<td bis_size="{&quot;x&quot;:285,&quot;y&quot;:9474,&quot;w&quot;:399,&quot;h&quot;:43,&quot;abs_x&quot;:583,&quot;abs_y&quot;:9756}">Knows the material but doesn&#39;t practice timed multiple-choice questions</td>
+			<td bis_size="{&quot;x&quot;:685,&quot;y&quot;:9474,&quot;w&quot;:411,&quot;h&quot;:43,&quot;abs_x&quot;:983,&quot;abs_y&quot;:9756}">Include timed drills every day (20&ndash;30 questions, 15-minute sessions).</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:9518,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:9800}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:9518,&quot;w&quot;:217,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:9800}">Low accuracy, normal speed</td>
+			<td bis_size="{&quot;x&quot;:285,&quot;y&quot;:9518,&quot;w&quot;:399,&quot;h&quot;:67,&quot;abs_x&quot;:583,&quot;abs_y&quot;:9800}">Conceptual gaps or NCERT mismatch -&nbsp;rushing without understanding</td>
+			<td bis_size="{&quot;x&quot;:685,&quot;y&quot;:9518,&quot;w&quot;:411,&quot;h&quot;:67,&quot;abs_x&quot;:983,&quot;abs_y&quot;:9800}">Before assessing speed, go back to NCERT fundamentals, slow down, and correct concepts.</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:9585,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:9867}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:9585,&quot;w&quot;:217,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:9867}">Low accuracy, slow speed</td>
+			<td bis_size="{&quot;x&quot;:285,&quot;y&quot;:9585,&quot;w&quot;:399,&quot;h&quot;:67,&quot;abs_x&quot;:583,&quot;abs_y&quot;:9867}">A longer runway is required because the foundation is weak and the routine is absent.</td>
+			<td bis_size="{&quot;x&quot;:685,&quot;y&quot;:9585,&quot;w&quot;:411,&quot;h&quot;:67,&quot;abs_x&quot;:983,&quot;abs_y&quot;:9867}">Take a foundation course right away and budget more than eighteen months for preparation.</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:9652,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:9934}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:9652,&quot;w&quot;:217,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:9934}">Strong improvement after correction</td>
+			<td bis_size="{&quot;x&quot;:285,&quot;y&quot;:9652,&quot;w&quot;:399,&quot;h&quot;:67,&quot;abs_x&quot;:583,&quot;abs_y&quot;:9934}">The student is coachable and picks up mistakes fast.</td>
+			<td bis_size="{&quot;x&quot;:685,&quot;y&quot;:9652,&quot;w&quot;:411,&quot;h&quot;:67,&quot;abs_x&quot;:983,&quot;abs_y&quot;:9934}">Boost test frequency and give error log review sessions a lot of attention.</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:9719,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:10001}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:9719,&quot;w&quot;:217,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:10001}">No improvement after correction</td>
+			<td bis_size="{&quot;x&quot;:285,&quot;y&quot;:9719,&quot;w&quot;:399,&quot;h&quot;:67,&quot;abs_x&quot;:583,&quot;abs_y&quot;:10001}">calls for altering the motivational element or teaching strategy.</td>
+			<td bis_size="{&quot;x&quot;:685,&quot;y&quot;:9719,&quot;w&quot;:411,&quot;h&quot;:67,&quot;abs_x&quot;:983,&quot;abs_y&quot;:10001}">Arrange a counseling session to evaluate your motivation and study strategy.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:9833,&quot;w&quot;:1031,&quot;h&quot;:740,&quot;abs_x&quot;:364,&quot;abs_y&quot;:10115}" class="tpk-section">
+<h2 bis_size="{&quot;x&quot;:66,&quot;y&quot;:9833,&quot;w&quot;:1031,&quot;h&quot;:27,&quot;abs_x&quot;:364,&quot;abs_y&quot;:10115}"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:9835,&quot;w&quot;:451,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:10117}" style="color:#16a085;"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:9835,&quot;w&quot;:451,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:10117}">Parent Action Checklist - What to Do This Week</span></span></h2>
+
+<p bis_size="{&quot;x&quot;:66,&quot;y&quot;:9872,&quot;w&quot;:1031,&quot;h&quot;:49,&quot;abs_x&quot;:364,&quot;abs_y&quot;:10154}">NRI parents expect answers quickly. Even if NEET is now your family&#39;s backup option, the checklist below is made to be completed in a week and provides you with an instant working plan.</p>
+
+<ul bis_size="{&quot;x&quot;:66,&quot;y&quot;:9934,&quot;w&quot;:1031,&quot;h&quot;:257,&quot;abs_x&quot;:364,&quot;abs_y&quot;:10216}" class="tpk-list">
+	<li bis_size="{&quot;x&quot;:88,&quot;y&quot;:9934,&quot;w&quot;:969,&quot;h&quot;:21,&quot;abs_x&quot;:386,&quot;abs_y&quot;:10216}">Decide: Is NEET a primary plan or a backup plan for the next 6 months? Write it down.</li>
+	<li bis_size="{&quot;x&quot;:88,&quot;y&quot;:9963,&quot;w&quot;:969,&quot;h&quot;:21,&quot;abs_x&quot;:386,&quot;abs_y&quot;:10245}">Schedule a NEET diagnostic test in timed conditions -&nbsp;do not start coaching before this step</li>
+	<li bis_size="{&quot;x&quot;:88,&quot;y&quot;:9993,&quot;w&quot;:969,&quot;h&quot;:21,&quot;abs_x&quot;:386,&quot;abs_y&quot;:10275}">Mark the U.S. school calendar: finals, AP/IB exam weeks, breaks -&nbsp;identify all NEET acceleration windows</li>
+	<li bis_size="{&quot;x&quot;:88,&quot;y&quot;:10022,&quot;w&quot;:969,&quot;h&quot;:21,&quot;abs_x&quot;:386,&quot;abs_y&quot;:10304}">Confirm NRI / OCI / passport status and eligibility (see Stage 2)</li>
+	<li bis_size="{&quot;x&quot;:88,&quot;y&quot;:10052,&quot;w&quot;:969,&quot;h&quot;:21,&quot;abs_x&quot;:386,&quot;abs_y&quot;:10334}">Fix 3-5 protected weekly NEET blocks -&nbsp;treat them as non-negotiable class periods</li>
+	<li bis_size="{&quot;x&quot;:88,&quot;y&quot;:10081,&quot;w&quot;:969,&quot;h&quot;:21,&quot;abs_x&quot;:386,&quot;abs_y&quot;:10363}">Start 20-minute daily NCERT Biology reading -&nbsp;today, not after the current exam</li>
+	<li bis_size="{&quot;x&quot;:88,&quot;y&quot;:10110,&quot;w&quot;:969,&quot;h&quot;:21,&quot;abs_x&quot;:386,&quot;abs_y&quot;:10392}">Begin a simple tracking sheet: MCQs per week, accuracy %, test dates, error patterns</li>
+	<li bis_size="{&quot;x&quot;:88,&quot;y&quot;:10140,&quot;w&quot;:969,&quot;h&quot;:21,&quot;abs_x&quot;:386,&quot;abs_y&quot;:10422}">Download the NRI Quota eBook to understand counseling and seat options early</li>
+	<li bis_size="{&quot;x&quot;:88,&quot;y&quot;:10169,&quot;w&quot;:969,&quot;h&quot;:21,&quot;abs_x&quot;:386,&quot;abs_y&quot;:10451}">Book a free trial session with TestPrepKart to get a gap map and personalised plan</li>
+</ul>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:10207,&quot;w&quot;:1031,&quot;h&quot;:367,&quot;abs_x&quot;:364,&quot;abs_y&quot;:10489}" class="tpk-table-wrap">
+<table bis_size="{&quot;x&quot;:67,&quot;y&quot;:10224,&quot;w&quot;:1029,&quot;h&quot;:333,&quot;abs_x&quot;:365,&quot;abs_y&quot;:10506}" class="tpk-table">
+	<thead bis_size="{&quot;x&quot;:68,&quot;y&quot;:10224,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:10506}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:10224,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:10506}">
+			<th bis_size="{&quot;x&quot;:68,&quot;y&quot;:10224,&quot;w&quot;:171,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:10506}"><span bis_size="{&quot;x&quot;:80,&quot;y&quot;:10238,&quot;w&quot;:43,&quot;h&quot;:16,&quot;abs_x&quot;:378,&quot;abs_y&quot;:10520}" style="color:#d35400;">Action</span></th>
+			<th bis_size="{&quot;x&quot;:239,&quot;y&quot;:10224,&quot;w&quot;:428,&quot;h&quot;:43,&quot;abs_x&quot;:537,&quot;abs_y&quot;:10506}"><span bis_size="{&quot;x&quot;:252,&quot;y&quot;:10238,&quot;w&quot;:95,&quot;h&quot;:16,&quot;abs_x&quot;:550,&quot;abs_y&quot;:10520}" style="color:#d35400;">Why It Matters</span></th>
+			<th bis_size="{&quot;x&quot;:668,&quot;y&quot;:10224,&quot;w&quot;:428,&quot;h&quot;:43,&quot;abs_x&quot;:966,&quot;abs_y&quot;:10506}"><span bis_size="{&quot;x&quot;:680,&quot;y&quot;:10238,&quot;w&quot;:83,&quot;h&quot;:16,&quot;abs_x&quot;:978,&quot;abs_y&quot;:10520}" style="color:#d35400;">If You Skip It</span></th>
+		</tr>
+	</thead>
+	<tbody bis_size="{&quot;x&quot;:68,&quot;y&quot;:10268,&quot;w&quot;:1028,&quot;h&quot;:288,&quot;abs_x&quot;:366,&quot;abs_y&quot;:10550}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:10268,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:10550}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:10268,&quot;w&quot;:171,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:10550}">NEET Diagnostic</td>
+			<td bis_size="{&quot;x&quot;:239,&quot;y&quot;:10268,&quot;w&quot;:428,&quot;h&quot;:43,&quot;abs_x&quot;:537,&quot;abs_y&quot;:10550}">eliminates speculation and identifies actual gaps in 90 minutes</td>
+			<td bis_size="{&quot;x&quot;:668,&quot;y&quot;:10268,&quot;w&quot;:428,&quot;h&quot;:43,&quot;abs_x&quot;:966,&quot;abs_y&quot;:10550}">Months of misdirected preparation on the wrong topics</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:10312,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:10594}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:10312,&quot;w&quot;:171,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:10594}">Calendar mapping</td>
+			<td bis_size="{&quot;x&quot;:239,&quot;y&quot;:10312,&quot;w&quot;:428,&quot;h&quot;:43,&quot;abs_x&quot;:537,&quot;abs_y&quot;:10594}">identifies each of the year&#39;s actual NEET preparation windows</td>
+			<td bis_size="{&quot;x&quot;:668,&quot;y&quot;:10312,&quot;w&quot;:428,&quot;h&quot;:43,&quot;abs_x&quot;:966,&quot;abs_y&quot;:10594}">Collapsing routines during busy school periods</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:10356,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:10638}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:10356,&quot;w&quot;:171,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:10638}">Primary/Backup decision</td>
+			<td bis_size="{&quot;x&quot;:239,&quot;y&quot;:10356,&quot;w&quot;:428,&quot;h&quot;:67,&quot;abs_x&quot;:537,&quot;abs_y&quot;:10638}">establishes a consistent preparation schedule for the following six months.</td>
+			<td bis_size="{&quot;x&quot;:668,&quot;y&quot;:10356,&quot;w&quot;:428,&quot;h&quot;:67,&quot;abs_x&quot;:966,&quot;abs_y&quot;:10638}">Stop-start cycles that destroy momentum and confidence</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:10423,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:10705}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:10423,&quot;w&quot;:171,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:10705}">NCERT habit start</td>
+			<td bis_size="{&quot;x&quot;:239,&quot;y&quot;:10423,&quot;w&quot;:428,&quot;h&quot;:67,&quot;abs_x&quot;:537,&quot;abs_y&quot;:10705}">closes the largest NRI curriculum gap before it becomes essential.</td>
+			<td bis_size="{&quot;x&quot;:668,&quot;y&quot;:10423,&quot;w&quot;:428,&quot;h&quot;:67,&quot;abs_x&quot;:966,&quot;abs_y&quot;:10705}">Grade 12 overload and NEET score loss on direct NCERT questions</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:10490,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:10772}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:10490,&quot;w&quot;:171,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:10772}">Weekly tracking</td>
+			<td bis_size="{&quot;x&quot;:239,&quot;y&quot;:10490,&quot;w&quot;:428,&quot;h&quot;:67,&quot;abs_x&quot;:537,&quot;abs_y&quot;:10772}">lowers student excuses and parental concern by making progress evident</td>
+			<td bis_size="{&quot;x&quot;:668,&quot;y&quot;:10490,&quot;w&quot;:428,&quot;h&quot;:67,&quot;abs_x&quot;:966,&quot;abs_y&quot;:10772}">Invisible preparation that cannot be measured or corrected</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:10604,&quot;w&quot;:1031,&quot;h&quot;:995,&quot;abs_x&quot;:364,&quot;abs_y&quot;:10886}" class="tpk-section">
+<h2 bis_size="{&quot;x&quot;:66,&quot;y&quot;:10604,&quot;w&quot;:1031,&quot;h&quot;:27,&quot;abs_x&quot;:364,&quot;abs_y&quot;:10886}"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:10606,&quot;w&quot;:671,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:10888}" style="color:#2980b9;">Common Stage 1 Mistakes NRI Parents Make - and How to Avoid Them</span></h2>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:10647,&quot;w&quot;:1031,&quot;h&quot;:145,&quot;abs_x&quot;:364,&quot;abs_y&quot;:10929}" class="tpk-warning">
+<h3 bis_size="{&quot;x&quot;:87,&quot;y&quot;:10677,&quot;w&quot;:993,&quot;h&quot;:24,&quot;abs_x&quot;:385,&quot;abs_y&quot;:10959}">⚠ Mistake 1: Starting Without a Diagnostic</h3>
+
+<p bis_size="{&quot;x&quot;:87,&quot;y&quot;:10714,&quot;w&quot;:993,&quot;h&quot;:49,&quot;abs_x&quot;:385,&quot;abs_y&quot;:10996}">Prior to conducting a diagnostic, selecting coaches, textbooks, and a schedule wastes the first two to three months of preparation. The diagnostic saves three months and takes ninety minutes.</p>
+</div>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:10808,&quot;w&quot;:1031,&quot;h&quot;:145,&quot;abs_x&quot;:364,&quot;abs_y&quot;:11090}" class="tpk-warning">
+<h3 bis_size="{&quot;x&quot;:87,&quot;y&quot;:10839,&quot;w&quot;:993,&quot;h&quot;:24,&quot;abs_x&quot;:385,&quot;abs_y&quot;:11121}">⚠ Mistake 2: Delaying NCERT</h3>
+
+<p bis_size="{&quot;x&quot;:87,&quot;y&quot;:10875,&quot;w&quot;:993,&quot;h&quot;:49,&quot;abs_x&quot;:385,&quot;abs_y&quot;:11157}">&quot;We will add NCERT once school settles&quot; is a statement that degrades kids&#39; NEET scores by thirty to fifty points. NCERT alignment needs to begin right away, even if it&#39;s just for 20 minutes a day.</p>
+</div>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:10970,&quot;w&quot;:1031,&quot;h&quot;:145,&quot;abs_x&quot;:364,&quot;abs_y&quot;:11252}" class="tpk-warning">
+<h3 bis_size="{&quot;x&quot;:87,&quot;y&quot;:11000,&quot;w&quot;:993,&quot;h&quot;:24,&quot;abs_x&quot;:385,&quot;abs_y&quot;:11282}">⚠ Mistake 3: Allowing Zero Months</h3>
+
+<p bis_size="{&quot;x&quot;:87,&quot;y&quot;:11037,&quot;w&quot;:993,&quot;h&quot;:49,&quot;abs_x&quot;:385,&quot;abs_y&quot;:11319}">The student loses six to eight weeks if they don&#39;t prepare for the NEET in any given month. This is due to both the month and the time needed to regain rhythm and speed after the break.</p>
+</div>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:11131,&quot;w&quot;:1031,&quot;h&quot;:145,&quot;abs_x&quot;:364,&quot;abs_y&quot;:11413}" class="tpk-warning">
+<h3 bis_size="{&quot;x&quot;:87,&quot;y&quot;:11161,&quot;w&quot;:993,&quot;h&quot;:24,&quot;abs_x&quot;:385,&quot;abs_y&quot;:11443}">⚠ Mistake 4: Too Many Resources, Too Little Consistency</h3>
+
+<p bis_size="{&quot;x&quot;:87,&quot;y&quot;:11198,&quot;w&quot;:993,&quot;h&quot;:49,&quot;abs_x&quot;:385,&quot;abs_y&quot;:11480}">It is more detrimental to switch between coaching apps, YouTube channels, and textbooks on a monthly basis than to regularly use one mediocre resource. NEET rewards depth rather than breadth of resources.</p>
+</div>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:11292,&quot;w&quot;:1031,&quot;h&quot;:145,&quot;abs_x&quot;:364,&quot;abs_y&quot;:11574}" class="tpk-warning">
+<h3 bis_size="{&quot;x&quot;:87,&quot;y&quot;:11323,&quot;w&quot;:993,&quot;h&quot;:24,&quot;abs_x&quot;:385,&quot;abs_y&quot;:11605}">⚠ Mistake 5: Skipping Mock Tests Because &quot;Not Ready&quot;</h3>
+
+<p bis_size="{&quot;x&quot;:87,&quot;y&quot;:11359,&quot;w&quot;:993,&quot;h&quot;:49,&quot;abs_x&quot;:385,&quot;abs_y&quot;:11641}">Pupils who are &quot;not ready for full tests&quot; put off taking exams indefinitely. Mock tests are a tool that fosters readiness, not evidence of it. Start with topic-specific assessments right away and gradually go to entire mocks.</p>
+</div>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:11454,&quot;w&quot;:1031,&quot;h&quot;:145,&quot;abs_x&quot;:364,&quot;abs_y&quot;:11736}" class="tpk-warning">
+<h3 bis_size="{&quot;x&quot;:87,&quot;y&quot;:11484,&quot;w&quot;:993,&quot;h&quot;:24,&quot;abs_x&quot;:385,&quot;abs_y&quot;:11766}">⚠ Mistake 6: Treating NEET Like a U.S. School Subject</h3>
+
+<p bis_size="{&quot;x&quot;:87,&quot;y&quot;:11521,&quot;w&quot;:993,&quot;h&quot;:49,&quot;abs_x&quot;:385,&quot;abs_y&quot;:11803}">Participation and effort are not taken into account while grading NEET. There are more than 1.8 million applicants for this rank-based competitive exam. This fact must be reflected in the preparation system, which must be test-driven, output-based, and weekly tracked.</p>
+</div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:11629,&quot;w&quot;:1031,&quot;h&quot;:494,&quot;abs_x&quot;:364,&quot;abs_y&quot;:11911}" class="tpk-section">
+<h2 bis_size="{&quot;x&quot;:66,&quot;y&quot;:11629,&quot;w&quot;:1031,&quot;h&quot;:27,&quot;abs_x&quot;:364,&quot;abs_y&quot;:11911}"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:11631,&quot;w&quot;:484,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:11913}" style="color:#330066;">How TestPrepKart Supports NRI Parents at Stage 1</span></h2>
+
+<p bis_size="{&quot;x&quot;:66,&quot;y&quot;:11668,&quot;w&quot;:1031,&quot;h&quot;:49,&quot;abs_x&quot;:364,&quot;abs_y&quot;:11950}">Most NRI families do not need more information - the internet is full of information. What they need is a working system that fits U.S. time zones, aligns with the school calendar, and makes progress visible to parents.</p>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:11733,&quot;w&quot;:1031,&quot;h&quot;:390,&quot;abs_x&quot;:364,&quot;abs_y&quot;:12015}" class="tpk-table-wrap">
+<table bis_size="{&quot;x&quot;:67,&quot;y&quot;:11750,&quot;w&quot;:1029,&quot;h&quot;:356,&quot;abs_x&quot;:365,&quot;abs_y&quot;:12032}" class="tpk-table">
+	<thead bis_size="{&quot;x&quot;:68,&quot;y&quot;:11751,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:12033}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:11751,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:12033}">
+			<th bis_size="{&quot;x&quot;:68,&quot;y&quot;:11751,&quot;w&quot;:389,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:12033}"><span bis_size="{&quot;x&quot;:80,&quot;y&quot;:11764,&quot;w&quot;:168,&quot;h&quot;:16,&quot;abs_x&quot;:378,&quot;abs_y&quot;:12046}" style="color:#d35400;">What NRI Parents Ask Us</span></th>
+			<th bis_size="{&quot;x&quot;:457,&quot;y&quot;:11751,&quot;w&quot;:639,&quot;h&quot;:43,&quot;abs_x&quot;:755,&quot;abs_y&quot;:12033}"><span bis_size="{&quot;x&quot;:470,&quot;y&quot;:11764,&quot;w&quot;:188,&quot;h&quot;:16,&quot;abs_x&quot;:768,&quot;abs_y&quot;:12046}" style="color:#d35400;">What TestPrepKart Provides</span></th>
+		</tr>
+	</thead>
+	<tbody bis_size="{&quot;x&quot;:68,&quot;y&quot;:11795,&quot;w&quot;:1028,&quot;h&quot;:311,&quot;abs_x&quot;:366,&quot;abs_y&quot;:12077}">
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:11795,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:12077}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:11795,&quot;w&quot;:389,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:12077}">&quot;Is NEET realistic for my child studying in the USA?&quot;</td>
+			<td bis_size="{&quot;x&quot;:457,&quot;y&quot;:11795,&quot;w&quot;:639,&quot;h&quot;:67,&quot;abs_x&quot;:755,&quot;abs_y&quot;:12077}">Free diagnostic + gap map session that answers this question with data, not opinion. Schedule here &rarr;</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:11862,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:12144}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:11862,&quot;w&quot;:389,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:12144}">&quot;How will NEET preparation fit with the U.S. school system?&quot;</td>
+			<td bis_size="{&quot;x&quot;:457,&quot;y&quot;:11862,&quot;w&quot;:639,&quot;h&quot;:67,&quot;abs_x&quot;:755,&quot;abs_y&quot;:12144}">Personalised schedule built around EST/CST/PST time zones and the U.S. academic calendar</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:11929,&quot;w&quot;:1028,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:12211}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:11929,&quot;w&quot;:389,&quot;h&quot;:43,&quot;abs_x&quot;:366,&quot;abs_y&quot;:12211}">&quot;How do we track our child&#39;s NEET progress from here?&quot;</td>
+			<td bis_size="{&quot;x&quot;:457,&quot;y&quot;:11929,&quot;w&quot;:639,&quot;h&quot;:43,&quot;abs_x&quot;:755,&quot;abs_y&quot;:12211}">Weekly and monthly progress reports; parent dashboard; accuracy and test score tracking</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:11972,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:12254}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:11972,&quot;w&quot;:389,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:12254}">&quot;Where are the NCERT gaps for NRI students specifically?&quot;</td>
+			<td bis_size="{&quot;x&quot;:457,&quot;y&quot;:11972,&quot;w&quot;:639,&quot;h&quot;:67,&quot;abs_x&quot;:755,&quot;abs_y&quot;:12254}">Subject-wise NCERT alignment framework with a bridging plan specific to U.S. curriculum students</td>
+		</tr>
+		<tr bis_size="{&quot;x&quot;:68,&quot;y&quot;:12039,&quot;w&quot;:1028,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:12321}">
+			<td bis_size="{&quot;x&quot;:68,&quot;y&quot;:12039,&quot;w&quot;:389,&quot;h&quot;:67,&quot;abs_x&quot;:366,&quot;abs_y&quot;:12321}">&quot;Which medical colleges should we target under NRI quota?&quot;</td>
+			<td bis_size="{&quot;x&quot;:457,&quot;y&quot;:12039,&quot;w&quot;:639,&quot;h&quot;:67,&quot;abs_x&quot;:755,&quot;abs_y&quot;:12321}">NRI quota counseling package covering college shortlisting, fee comparison, and documentation</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:12154,&quot;w&quot;:1031,&quot;h&quot;:187,&quot;abs_x&quot;:364,&quot;abs_y&quot;:12436}" class="tpk-cta-final">
+<h2 bis_size="{&quot;x&quot;:90,&quot;y&quot;:12194,&quot;w&quot;:983,&quot;h&quot;:27,&quot;abs_x&quot;:388,&quot;abs_y&quot;:12476}">Ready to Start? Talk to a TestPrepKart NRI NEET Counselor</h2>
+
+<p bis_size="{&quot;x&quot;:90,&quot;y&quot;:12233,&quot;w&quot;:983,&quot;h&quot;:21,&quot;abs_x&quot;:388,&quot;abs_y&quot;:12515}">Get a personalised gap-map, a 6-month plan, and clarity on NRI quota options - all in one session. Trusted by 5,000+ NRI students across USA, Canada, UK, and Gulf.</p>
+
+<div bis_size="{&quot;x&quot;:90,&quot;y&quot;:12268,&quot;w&quot;:983,&quot;h&quot;:48,&quot;abs_x&quot;:388,&quot;abs_y&quot;:12550}" class="tpk-btn-row"><a bis_size="{&quot;x&quot;:90,&quot;y&quot;:12268,&quot;w&quot;:237,&quot;h&quot;:48,&quot;abs_x&quot;:388,&quot;abs_y&quot;:12550}" class="tpk-btn tpk-btn-white" href="https://www.testprepkart.com/self-study/neet/pages/schedule-neet-demo-session" rel="noopener" target="_blank">&rarr; Book Free Trial Session</a> <a bis_size="{&quot;x&quot;:340,&quot;y&quot;:12268,&quot;w&quot;:319,&quot;h&quot;:48,&quot;abs_x&quot;:638,&quot;abs_y&quot;:12550}" class="tpk-btn tpk-btn-white" href="https://www.testprepkart.com/self-study/neet/pages/buy-neet-counseling-package" rel="noopener" target="_blank">&rarr; Get Full Counseling Package ($99)</a> <a bis_size="{&quot;x&quot;:671,&quot;y&quot;:12268,&quot;w&quot;:314,&quot;h&quot;:48,&quot;abs_x&quot;:969,&quot;abs_y&quot;:12550}" class="tpk-btn tpk-btn-white" href="https://wa.me/15107069331" rel="noopener" target="_blank">💬 WhatsApp Us - +1 (510) 706-9331</a></div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:12371,&quot;w&quot;:1031,&quot;h&quot;:478,&quot;abs_x&quot;:364,&quot;abs_y&quot;:12653}" class="tpk-section">
+<h2 bis_size="{&quot;x&quot;:66,&quot;y&quot;:12371,&quot;w&quot;:1031,&quot;h&quot;:27,&quot;abs_x&quot;:364,&quot;abs_y&quot;:12653}"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:12372,&quot;w&quot;:368,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:12654}" style="color:#16a085;">Continue Your NEET Planning Journey</span></h2>
+
+<p bis_size="{&quot;x&quot;:66,&quot;y&quot;:12410,&quot;w&quot;:1031,&quot;h&quot;:24,&quot;abs_x&quot;:364,&quot;abs_y&quot;:12692}">Stage 1 is the foundation. Each stage below builds on what you have understood here.</p>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:12449,&quot;w&quot;:1031,&quot;h&quot;:400,&quot;abs_x&quot;:364,&quot;abs_y&quot;:12731}" class="tpk-link-grid"><a bis_size="{&quot;x&quot;:66,&quot;y&quot;:12449,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:12731}" class="tpk-link-card" href="/self-study/neet/neet-planning/stage-2-nri-oci-passport-status">Stage 2: NRI / OCI / Passport Status&rarr;</a> <a bis_size="{&quot;x&quot;:589,&quot;y&quot;:12449,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:887,&quot;abs_y&quot;:12731}" class="tpk-link-card" href="/self-study/neet/neet-planning/stage-3-usa-curriculum-vs-neet">Stage 3: USA Curriculum Vs NEET&rarr;</a> <a bis_size="{&quot;x&quot;:66,&quot;y&quot;:12518,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:12800}" class="tpk-link-card" href="/self-study/neet/neet-planning/stage-4-managing-neet-from-usa">Stage 4: Managing NEET From USA&rarr;</a> <a bis_size="{&quot;x&quot;:589,&quot;y&quot;:12518,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:887,&quot;abs_y&quot;:12800}" class="tpk-link-card" href="/self-study/neet/neet-planning/stage-5-neet-preparation-plan">Stage 5: NEET Preparation Plan&rarr;</a> <a bis_size="{&quot;x&quot;:66,&quot;y&quot;:12587,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:12869}" class="tpk-link-card" href="/self-study/neet/neet-planning/stage-6-neet-coaching-providers">Stage 6: NEET Coaching Providers&rarr;</a> <a bis_size="{&quot;x&quot;:589,&quot;y&quot;:12587,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:887,&quot;abs_y&quot;:12869}" class="tpk-link-card" href="/self-study/neet/neet-planning/stage-7-balancing-school-and-neet">Stage 7: Balancing School &amp; NEET&rarr;</a> <a bis_size="{&quot;x&quot;:66,&quot;y&quot;:12656,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:12938}" class="tpk-link-card" href="/self-study/neet/neet-planning/stage-8-neet-nri-quota-details">Stage 8: NEET NRI Quota Details&rarr;</a> <a bis_size="{&quot;x&quot;:589,&quot;y&quot;:12656,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:887,&quot;abs_y&quot;:12938}" class="tpk-link-card" href="/self-study/neet/neet-planning/stage-9-neet-exam-details">Stage 9: NEET Exam Details&rarr;</a> <a bis_size="{&quot;x&quot;:66,&quot;y&quot;:12725,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13007}" class="tpk-link-card" href="/self-study/neet/neet-planning/stage-10-neet-result-and-cut-off">Stage 10: NEET Result &amp; Cut Off&rarr;</a> <a bis_size="{&quot;x&quot;:589,&quot;y&quot;:12725,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:887,&quot;abs_y&quot;:13007}" class="tpk-link-card" href="/self-study/neet/neet-planning/stage-11-neet-counseling-details">Stage 11: NEET Counseling Details&rarr;</a> <a bis_size="{&quot;x&quot;:66,&quot;y&quot;:12794,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13076}" class="tpk-link-card" href="/self-study/neet/neet-planning/stage-12-medical-admissions">Stage 12: Medical Admissions&rarr;</a> <a bis_size="{&quot;x&quot;:589,&quot;y&quot;:12794,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:887,&quot;abs_y&quot;:13076}" class="tpk-link-card" href="/self-study/neet/neet-planning/stage-13-nri-options-after-mbbs">Stage 13: NRI Options After MBBS&rarr;</a></div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:12879,&quot;w&quot;:1031,&quot;h&quot;:303,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13161}" class="tpk-section">
+<h2 bis_size="{&quot;x&quot;:66,&quot;y&quot;:12879,&quot;w&quot;:1031,&quot;h&quot;:27,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13161}"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:12880,&quot;w&quot;:257,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13162}" style="color:#16a085;">Related Subject Resources</span></h2>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:12920,&quot;w&quot;:1031,&quot;h&quot;:262,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13202}" class="tpk-link-grid"><a bis_size="{&quot;x&quot;:66,&quot;y&quot;:12920,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13202}" class="tpk-link-card" href="/self-study/neet">NEET Biology Syllabus Tracker&rarr;</a> <a bis_size="{&quot;x&quot;:589,&quot;y&quot;:12920,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:887,&quot;abs_y&quot;:13202}" class="tpk-link-card" href="/self-study/neet">Biology: Diversity in Living World&rarr;</a> <a bis_size="{&quot;x&quot;:66,&quot;y&quot;:12989,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13271}" class="tpk-link-card" href="/self-study/neet">NEET Chemistry Syllabus Tracker&rarr;</a> <a bis_size="{&quot;x&quot;:589,&quot;y&quot;:12989,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:887,&quot;abs_y&quot;:13271}" class="tpk-link-card" href="/self-study/neet">NEET Physics Syllabus Tracker&rarr;</a> <a bis_size="{&quot;x&quot;:66,&quot;y&quot;:13058,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13340}" class="tpk-link-card" href="/self-study/neet">NEET Video Library&rarr;</a> <a bis_size="{&quot;x&quot;:589,&quot;y&quot;:13058,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:887,&quot;abs_y&quot;:13340}" class="tpk-link-card" href="/self-study/neet">MBBS India vs USA Cost Guide&rarr;</a> <a bis_size="{&quot;x&quot;:66,&quot;y&quot;:13127,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13409}" class="tpk-link-card" href="/self-study/neet">MBBS vs Pre-Med Timelines for NRIs&rarr;</a> <a bis_size="{&quot;x&quot;:589,&quot;y&quot;:13127,&quot;w&quot;:508,&quot;h&quot;:55,&quot;abs_x&quot;:887,&quot;abs_y&quot;:13409}" class="tpk-link-card" href="/self-study/neet">India MBBS vs USA MD (Full Chapter)&rarr;</a></div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:13212,&quot;w&quot;:1031,&quot;h&quot;:701,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13494}" class="tpk-section">
+<h2 bis_size="{&quot;x&quot;:66,&quot;y&quot;:13212,&quot;w&quot;:1031,&quot;h&quot;:27,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13494}"><span bis_size="{&quot;x&quot;:66,&quot;y&quot;:13214,&quot;w&quot;:476,&quot;h&quot;:22,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13496}" style="color:#16a085;">FAQs - NRI USA Parents Ask Us These Most Often</span></h2>
+
+<div bis_size="{&quot;x&quot;:66,&quot;y&quot;:13255,&quot;w&quot;:1031,&quot;h&quot;:658,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13537}" class="tpk-faq-list">
+<details bis_size="{&quot;x&quot;:66,&quot;y&quot;:13255,&quot;w&quot;:1031,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13537}" class="tpk-faq-item" open=""><summary bis_size="{&quot;x&quot;:67,&quot;y&quot;:13256,&quot;w&quot;:1029,&quot;h&quot;:53,&quot;abs_x&quot;:365,&quot;abs_y&quot;:13538}">Can my child appear for NEET while studying in a U.S. high school?</summary>
+
+<p bis_size="{&quot;x&quot;:67,&quot;y&quot;:13321,&quot;w&quot;:1029,&quot;h&quot;:65,&quot;abs_x&quot;:365,&quot;abs_y&quot;:13603}">Yes. U.S.-based students can appear for NEET if they meet the eligibility requirements and obtain AIU equivalency for their Class 12 qualifications when required.</p>
+</details>
+
+<details bis_size="{&quot;x&quot;:66,&quot;y&quot;:13322,&quot;w&quot;:1031,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13604}" class="tpk-faq-item" open=""><summary bis_size="{&quot;x&quot;:67,&quot;y&quot;:13323,&quot;w&quot;:1029,&quot;h&quot;:53,&quot;abs_x&quot;:365,&quot;abs_y&quot;:13605}">My child is in Grade 10. Is it too early to start NEET preparation?</summary>
+
+<p bis_size="{&quot;x&quot;:67,&quot;y&quot;:13388,&quot;w&quot;:1029,&quot;h&quot;:65,&quot;abs_x&quot;:365,&quot;abs_y&quot;:13670}">No. Grade 10 is actually a good time to build strong Physics, Chemistry, and Biology fundamentals before starting serious NEET preparation in Grades 11 and 12.</p>
+</details>
+
+<details bis_size="{&quot;x&quot;:66,&quot;y&quot;:13389,&quot;w&quot;:1031,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13671}" class="tpk-faq-item" open=""><summary bis_size="{&quot;x&quot;:67,&quot;y&quot;:13390,&quot;w&quot;:1029,&quot;h&quot;:53,&quot;abs_x&quot;:365,&quot;abs_y&quot;:13672}">My child is in Grade 12 right now. Have we missed the window for NEET?</summary>
+
+<p bis_size="{&quot;x&quot;:67,&quot;y&quot;:13455,&quot;w&quot;:1029,&quot;h&quot;:65,&quot;abs_x&quot;:365,&quot;abs_y&quot;:13737}">Not at all. Many students begin focused NEET preparation in Grade 12. A structured study plan and consistent practice can still lead to a competitive score.</p>
+</details>
+
+<details bis_size="{&quot;x&quot;:66,&quot;y&quot;:13456,&quot;w&quot;:1031,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13738}" class="tpk-faq-item" open=""><summary bis_size="{&quot;x&quot;:67,&quot;y&quot;:13457,&quot;w&quot;:1029,&quot;h&quot;:53,&quot;abs_x&quot;:365,&quot;abs_y&quot;:13739}">What is the NRI quota in NEET? How is it different from the General category?</summary>
+
+<p bis_size="{&quot;x&quot;:67,&quot;y&quot;:13522,&quot;w&quot;:1029,&quot;h&quot;:65,&quot;abs_x&quot;:365,&quot;abs_y&quot;:13804}">The NRI quota reserves seats for eligible NRI candidates in certain medical colleges. Admission is based on NEET scores, but eligibility rules, seat availability, and fee structures differ from the General category.</p>
+</details>
+
+<details bis_size="{&quot;x&quot;:66,&quot;y&quot;:13523,&quot;w&quot;:1031,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13805}" class="tpk-faq-item" open=""><summary bis_size="{&quot;x&quot;:67,&quot;y&quot;:13524,&quot;w&quot;:1029,&quot;h&quot;:53,&quot;abs_x&quot;:365,&quot;abs_y&quot;:13806}">How many hours per week should my child study for NEET while in a U.S. school?</summary>
+
+<p bis_size="{&quot;x&quot;:67,&quot;y&quot;:13590,&quot;w&quot;:1029,&quot;h&quot;:65,&quot;abs_x&quot;:365,&quot;abs_y&quot;:13872}">Typically, 10-15 hours per week in Grades 9-10 and 15-25 hours per week in Grades 11-12 is sufficient, depending on the student&#39;s academic background and target score.</p>
+</details>
+
+<details bis_size="{&quot;x&quot;:66,&quot;y&quot;:13590,&quot;w&quot;:1031,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13872}" class="tpk-faq-item" open=""><summary bis_size="{&quot;x&quot;:67,&quot;y&quot;:13591,&quot;w&quot;:1029,&quot;h&quot;:53,&quot;abs_x&quot;:365,&quot;abs_y&quot;:13873}">Will NEET preparation hurt my child&#39;s U.S. school GPA and college admissions chances?</summary>
+
+<p bis_size="{&quot;x&quot;:67,&quot;y&quot;:13657,&quot;w&quot;:1029,&quot;h&quot;:65,&quot;abs_x&quot;:365,&quot;abs_y&quot;:13939}">Not necessarily. With proper time management, students can balance NEET preparation and school academics. Strong science performance often benefits both goals.</p>
+</details>
+
+<details bis_size="{&quot;x&quot;:66,&quot;y&quot;:13657,&quot;w&quot;:1031,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:13939}" class="tpk-faq-item" open=""><summary bis_size="{&quot;x&quot;:67,&quot;y&quot;:13658,&quot;w&quot;:1029,&quot;h&quot;:53,&quot;abs_x&quot;:365,&quot;abs_y&quot;:13940}">My child&#39;s U.S. school doesn&#39;t follow NCERT. Does this put them at a big disadvantage for NEET?</summary>
+
+<p bis_size="{&quot;x&quot;:67,&quot;y&quot;:13724,&quot;w&quot;:1029,&quot;h&quot;:65,&quot;abs_x&quot;:365,&quot;abs_y&quot;:14006}">Not if they start NCERT-based preparation early. NEET is heavily based on NCERT, so supplementing U.S. school studies with NCERT resources is essential.</p>
+</details>
+
+<details bis_size="{&quot;x&quot;:66,&quot;y&quot;:13724,&quot;w&quot;:1031,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:14006}" class="tpk-faq-item" open=""><summary bis_size="{&quot;x&quot;:67,&quot;y&quot;:13725,&quot;w&quot;:1029,&quot;h&quot;:53,&quot;abs_x&quot;:365,&quot;abs_y&quot;:14007}">After MBBS in India, can my child come back to the USA to practise medicine?</summary>
+
+<p bis_size="{&quot;x&quot;:67,&quot;y&quot;:13791,&quot;w&quot;:1029,&quot;h&quot;:65,&quot;abs_x&quot;:365,&quot;abs_y&quot;:14073}">Yes. After completing MBBS, students must clear the required U.S. licensing exams and residency requirements before practising medicine in the USA.</p>
+</details>
+
+<details bis_size="{&quot;x&quot;:66,&quot;y&quot;:13791,&quot;w&quot;:1031,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:14073}" class="tpk-faq-item"><summary bis_size="{&quot;x&quot;:67,&quot;y&quot;:13792,&quot;w&quot;:1029,&quot;h&quot;:53,&quot;abs_x&quot;:365,&quot;abs_y&quot;:14074}">How is NEET different from AP Biology or IB Biology that my child already studies?</summary>
+
+<p bis_size="{&quot;x&quot;:67,&quot;y&quot;:13858,&quot;w&quot;:1029,&quot;h&quot;:65,&quot;abs_x&quot;:365,&quot;abs_y&quot;:14140}">NEET is an entrance exam focused on NCERT-based Biology, Physics, and Chemistry with objective questions. AP and IB Biology cover concepts differently and do not fully match the NEET syllabus.</p>
+</details>
+
+<details bis_size="{&quot;x&quot;:66,&quot;y&quot;:13859,&quot;w&quot;:1031,&quot;h&quot;:55,&quot;abs_x&quot;:364,&quot;abs_y&quot;:14141}" class="tpk-faq-item" open=""><summary bis_size="{&quot;x&quot;:67,&quot;y&quot;:13859,&quot;w&quot;:1029,&quot;h&quot;:53,&quot;abs_x&quot;:365,&quot;abs_y&quot;:14141}">How much does NEET NRI quota coaching with TestPrepKart cost?</summary>
+
+<p bis_size="{&quot;x&quot;:67,&quot;y&quot;:13925,&quot;w&quot;:1029,&quot;h&quot;:65,&quot;abs_x&quot;:365,&quot;abs_y&quot;:14207}">TestPrepKart offers multiple plans based on the student&#39;s grade and preparation stage. Contact our counselors for the latest fees, scholarships, and personalized study options.</p>
+</details>
+</div>
+</section>
+
+<section bis_size="{&quot;x&quot;:66,&quot;y&quot;:13944,&quot;w&quot;:1031,&quot;h&quot;:184,&quot;abs_x&quot;:364,&quot;abs_y&quot;:14226}" class="tpk-next-box">
+<p bis_size="{&quot;x&quot;:91,&quot;y&quot;:13980,&quot;w&quot;:981,&quot;h&quot;:21,&quot;abs_x&quot;:389,&quot;abs_y&quot;:14262}"><strong bis_size="{&quot;x&quot;:465,&quot;y&quot;:13984,&quot;w&quot;:234,&quot;h&quot;:14,&quot;abs_x&quot;:763,&quot;abs_y&quot;:14266}">You have completed Stage 1. Next up:</strong></p>
+
+<h2 bis_size="{&quot;x&quot;:91,&quot;y&quot;:14018,&quot;w&quot;:981,&quot;h&quot;:27,&quot;abs_x&quot;:389,&quot;abs_y&quot;:14300}">Stage 2 - NRI / OCI / Passport Status &amp; NEET Eligibility</h2>
+<a bis_size="{&quot;x&quot;:478,&quot;y&quot;:14054,&quot;w&quot;:208,&quot;h&quot;:48,&quot;abs_x&quot;:776,&quot;abs_y&quot;:14336}" class="tpk-btn tpk-btn-purple" href="/self-study/neet/neet-planning/stage-2-nri-oci-passport-status">Continue to Stage 2 &rarr;</a></section>
+</div>
+</div>
+</div>
+<a bis_size="{&quot;x&quot;:1082,&quot;y&quot;:2094,&quot;w&quot;:58,&quot;h&quot;:58,&quot;abs_x&quot;:1380,&quot;abs_y&quot;:2376}" class="tpk-whatsapp-float" href="https://wa.me/15107069331" rel="noopener" target="_blank">☏</a></div>

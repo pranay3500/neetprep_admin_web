@@ -1,0 +1,1533 @@
+<div class="tpk-stage-blue-theme">
+<style type="text/css">.tpk-stage-blue-theme {
+    --tpk-bg: #f6f8ff;
+    --tpk-card: #ffffff;
+    --tpk-soft-blue: #eef5ff;
+    --tpk-soft-lavender: #f4f3ff;
+    --tpk-purple: #6257f5;
+    --tpk-purple-dark: #30258f;
+    --tpk-green: #009f83;
+    --tpk-text: #111827;
+    --tpk-muted: #4b5563;
+    --tpk-border: #e6e9f5;
+    --tpk-shadow: 0 8px 28px rgba(37, 45, 94, 0.08);
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--tpk-text);
+    line-height: 1.65;
+    background: #fff;
+  }
+
+  .tpk-stage-blue-theme * {
+    box-sizing: border-box;
+  }
+
+  .tpk-stage-blue-theme a {
+    text-decoration: none;
+  }
+
+  .tpk-stage-wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 16px;
+  }
+
+  .tpk-top-card {
+    background: #fff;
+    border: 1px solid var(--tpk-border);
+    border-radius: 10px;
+    box-shadow: var(--tpk-shadow);
+    padding: 18px 18px;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .tpk-top-card h1 {
+    margin: 0;
+    color: var(--tpk-purple-dark);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: .2px;
+  }
+
+  .tpk-breadcrumb {
+    margin-top: 4px;
+    color: #475569;
+    font-size: 13px;
+  }
+
+  .tpk-progress-box {
+    min-width: 180px;
+    text-align: right;
+    color: #111827;
+    font-size: 13px;
+  }
+
+  .tpk-progress-label {
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .tpk-progress-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+    color: #4b5563;
+    font-weight: 700;
+  }
+
+  .tpk-progress-track {
+    width: 132px;
+    height: 7px;
+    background: #d9dce5;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  .tpk-progress-fill {
+    width: 0%;
+    height: 100%;
+    background: var(--tpk-purple);
+    border-radius: 999px;
+  }
+
+  .tpk-main-card {
+    background: #fff;
+    border: 1px solid var(--tpk-border);
+    border-radius: 10px;
+    box-shadow: var(--tpk-shadow);
+    overflow: hidden;
+  }
+
+  .tpk-tabs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: linear-gradient(90deg, #ffffff, #fbfbff);
+    border-bottom: 1px solid var(--tpk-border);
+  }
+
+  .tpk-tab {
+    padding: 14px 10px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    color: #667085;
+    border-bottom: 2px solid transparent;
+  }
+
+  .tpk-tab.active {
+    color: var(--tpk-purple);
+    background: #fff;
+    border-bottom-color: var(--tpk-purple);
+  }
+
+  .tpk-tab.performance {
+    color: var(--tpk-green);
+  }
+
+  .tpk-content {
+    padding: 16px;
+  }
+
+  .tpk-hero {
+    background: linear-gradient(110deg, #f2f4ff 0%, #edf8fb 100%);
+    padding: 26px 16px;
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: 28px;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+
+  .tpk-pill {
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #dfe5f6;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 13px;
+    color: #111827;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
+
+  .tpk-hero h2 {
+    margin: 0 0 10px;
+    color: #111827;
+    font-size: 25px;
+    line-height: 1.25;
+    font-weight: 800;
+  }
+
+  .tpk-hero p {
+    margin: 0 0 10px;
+    color: #374151;
+    font-size: 15px;
+  }
+
+  .tpk-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 16px 0 18px;
+  }
+
+  .tpk-chip {
+    background: #fff;
+    border: 1px solid #e8ecf7;
+    border-radius: 999px;
+    padding: 8px 12px;
+    color: #111827;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .tpk-btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  .tpk-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 14px;
+    transition: all .2s ease;
+    border: 1px solid transparent;
+  }
+
+  .tpk-btn-purple {
+    background: var(--tpk-purple);
+    color: #fff !important;
+    box-shadow: 0 8px 18px rgba(98, 87, 245, .22);
+  }
+
+  .tpk-btn-purple:hover {
+    background: #5146df;
+    color: #fff !important;
+    transform: translateY(-1px);
+  }
+
+  .tpk-btn-white {
+    background: #fff;
+    color: #111827 !important;
+    border-color: #d7dce9;
+    box-shadow: 0 7px 16px rgba(31, 41, 55, .08);
+  }
+
+  .tpk-btn-white:hover {
+    border-color: var(--tpk-purple);
+    color: var(--tpk-purple) !important;
+    transform: translateY(-1px);
+  }
+
+  .tpk-video-box {
+    background: #fff;
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, .12);
+  }
+
+  .tpk-video-thumb {
+    position: relative;
+    min-height: 285px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #111827 0%, #2b2b86 48%, #030712 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 28px;
+    color: #fff;
+  }
+
+  .tpk-video-thumb:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,.16), transparent 25%),
+      radial-gradient(circle at 80% 80%, rgba(16,185,129,.22), transparent 28%);
+  }
+
+  .tpk-video-thumb h3 {
+    position: relative;
+    margin: 0;
+    font-size: 26px;
+    line-height: 1.25;
+    color: #fff;
+    max-width: 420px;
+  }
+
+  .tpk-play {
+    position: absolute;
+    width: 76px;
+    height: 52px;
+    background: #ff0000;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 10px 25px rgba(0,0,0,.25);
+  }
+
+  .tpk-play span {
+    width: 0;
+    height: 0;
+    border-top: 13px solid transparent;
+    border-bottom: 13px solid transparent;
+    border-left: 21px solid #fff;
+    margin-left: 5px;
+  }
+
+  .tpk-section {
+    margin: 30px 0;
+  }
+
+  .tpk-section h2 {
+    margin: 0 0 16px;
+    color: var(--tpk-green);
+    font-size: 22px;
+    line-height: 1.3;
+    font-weight: 800;
+  }
+
+  .tpk-section h3 {
+    margin: 20px 0 10px;
+    color: var(--tpk-purple-dark);
+    font-size: 19px;
+    line-height: 1.35;
+    font-weight: 800;
+  }
+
+  .tpk-section p {
+    margin: 0 0 12px;
+    color: #374151;
+    font-size: 15px;
+  }
+
+  .tpk-card {
+    background: #fff;
+    border: 1px solid var(--tpk-border);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(37, 45, 94, .06);
+    margin-bottom: 18px;
+  }
+
+  .tpk-soft-card {
+    background: #f8faff;
+    border: 1px solid #e5e9f8;
+    border-radius: 14px;
+    padding: 18px;
+    margin: 18px 0;
+  }
+
+  .tpk-takeaway {
+    background: #fffef2;
+    border: 1px solid #f6e7a6;
+    border-left: 5px solid #f1c40f;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 18px 0;
+    color: #374151;
+  }
+
+  .tpk-warning {
+    background: #fff7f0;
+    border: 1px solid #ffd8b3;
+    border-left: 5px solid #ff7a00;
+    border-radius: 12px;
+    padding: 16px;
+    margin: 16px 0;
+  }
+
+  .tpk-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--tpk-border);
+    border-radius: 12px;
+    margin: 16px 0;
+  }
+
+  .tpk-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 760px;
+    background: #fff;
+  }
+
+  .tpk-table th {
+    background: #f3f5ff;
+    color: var(--tpk-purple-dark);
+    font-weight: 800;
+    padding: 13px 14px;
+    text-align: left;
+    border: 1px solid var(--tpk-border);
+    font-size: 14px;
+  }
+
+  .tpk-table td {
+    padding: 13px 14px;
+    border: 1px solid var(--tpk-border);
+    color: #374151;
+    font-size: 14px;
+    vertical-align: top;
+  }
+
+  .tpk-table tr:nth-child(even) td {
+    background: #fbfcff;
+  }
+
+  .tpk-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin: 20px 0;
+  }
+
+  .tpk-stat {
+    background: #fff;
+    border: 1px solid var(--tpk-border);
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 5px 16px rgba(37, 45, 94, .05);
+  }
+
+  .tpk-stat strong {
+    display: block;
+    color: var(--tpk-purple);
+    font-size: 25px;
+    margin-bottom: 6px;
+  }
+
+  .tpk-stat span {
+    display: block;
+    color: #475569;
+    font-size: 13px;
+  }
+
+  .tpk-roadmap {
+    display: grid;
+    gap: 14px;
+  }
+
+  .tpk-step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 14px;
+    background: #fff;
+    border: 1px solid var(--tpk-border);
+    border-radius: 14px;
+    padding: 16px;
+  }
+
+  .tpk-step-no {
+    width: 40px;
+    height: 40px;
+    background: var(--tpk-purple);
+    color: #fff;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+  }
+
+  .tpk-step h3 {
+    margin: 0 0 7px;
+    color: var(--tpk-purple-dark);
+    font-size: 17px;
+  }
+
+  .tpk-step p {
+    margin: 0;
+  }
+
+  .tpk-video-grid,
+  .tpk-link-grid,
+  .tpk-two-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 14px;
+  }
+
+  .tpk-mini-card,
+  .tpk-link-card {
+    background: #fff;
+    border: 1px solid var(--tpk-border);
+    border-radius: 14px;
+    padding: 16px;
+    color: #111827 !important;
+    box-shadow: 0 5px 16px rgba(37, 45, 94, .05);
+  }
+
+  .tpk-mini-card:hover,
+  .tpk-link-card:hover {
+    border-color: var(--tpk-purple);
+    color: var(--tpk-purple) !important;
+  }
+
+  .tpk-tag {
+    display: inline-block;
+    background: #eff3ff;
+    color: var(--tpk-purple);
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .tpk-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-top: 12px;
+  }
+
+  .tpk-badge-row span {
+    background: #fff;
+    border: 1px solid #dfe5f6;
+    border-radius: 999px;
+    padding: 7px 11px;
+    color: #111827;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .tpk-list {
+    margin: 12px 0 0;
+    padding-left: 22px;
+  }
+
+  .tpk-list li {
+    margin-bottom: 8px;
+    color: #374151;
+  }
+
+  .tpk-ebook {
+    background: linear-gradient(110deg, #f2f4ff 0%, #edf8fb 100%);
+    border: 1px solid var(--tpk-border);
+    border-radius: 16px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    gap: 16px;
+    align-items: center;
+    margin: 24px 0;
+  }
+
+  .tpk-ebook-icon {
+    width: 62px;
+    height: 62px;
+    background: var(--tpk-purple);
+    border-radius: 18px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+  }
+
+  .tpk-cta-final {
+    background: linear-gradient(135deg, #30258f, #6257f5);
+    color: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    margin: 26px 0;
+    box-shadow: 0 12px 28px rgba(98, 87, 245, .2);
+  }
+
+  .tpk-cta-final h2,
+  .tpk-cta-final p {
+    color: #fff;
+  }
+
+  .tpk-next-box {
+    background: #f3f5ff;
+    border: 1px solid var(--tpk-border);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    margin: 28px 0 10px;
+  }
+
+  .tpk-faq-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 16px;
+  }
+
+  .tpk-faq-item {
+    background: #fff;
+    border: 1px solid var(--tpk-border);
+    border-radius: 14px;
+    box-shadow: 0 5px 16px rgba(37, 45, 94, .05);
+    overflow: hidden;
+  }
+
+  .tpk-faq-item summary {
+    cursor: pointer;
+    padding: 16px 18px;
+    font-weight: 800;
+    color: var(--tpk-purple-dark);
+    list-style: none;
+    position: relative;
+    padding-right: 45px;
+  }
+
+  .tpk-faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .tpk-faq-item summary:after {
+    content: "+";
+    position: absolute;
+    right: 18px;
+    top: 14px;
+    width: 24px;
+    height: 24px;
+    background: #f3f5ff;
+    color: var(--tpk-purple);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tpk-faq-item[open] summary:after {
+    content: "-";
+  }
+
+  .tpk-faq-item p {
+    padding: 0 18px 16px;
+    margin: 0;
+    color: #374151;
+    font-size: 15px;
+  }
+
+  .tpk-whatsapp-float {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    width: 58px;
+    height: 58px;
+    background: #03c45b;
+    border-radius: 999px;
+    color: #fff !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    box-shadow: 0 12px 28px rgba(3,196,91,.35);
+    z-index: 50;
+  }
+
+  @media (max-width: 900px) {
+    .tpk-top-card,
+    .tpk-hero {
+      grid-template-columns: 1fr;
+      display: block;
+    }
+
+    .tpk-progress-box {
+      text-align: left;
+      margin-top: 14px;
+    }
+
+    .tpk-progress-row {
+      justify-content: flex-start;
+    }
+
+    .tpk-tabs {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tpk-stats,
+    .tpk-video-grid,
+    .tpk-link-grid,
+    .tpk-two-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .tpk-hero {
+      padding: 20px 14px;
+    }
+
+    .tpk-video-box {
+      margin-top: 18px;
+    }
+
+    .tpk-step {
+      grid-template-columns: 1fr;
+    }
+
+    .tpk-ebook {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+<div class="tpk-stage-wrap">
+
+
+<div class="tpk-main-card">
+
+
+<div class="tpk-content">
+<section class="tpk-hero">
+<div><span style="color:#330099;"><span class="tpk-pill">NEET Planning &middot; Stage 1 of 13</span></span>
+
+<h2><span style="color:#330099;">Planning NEET in USA - The NRI Parent&#39;s Complete Starting Guide</span></h2>
+
+<p>In the United States, your youngster aspires to become a doctor in India. This is all the information you need to make a clear decision, make an accurate plan, and get started without wasting a single month.</p>
+
+<div class="tpk-chip-row"><span class="tpk-chip">USA Student Scenarios</span> <span class="tpk-chip">NRI Eligibility</span> <span class="tpk-chip">3 Science Subject Issue</span> <span class="tpk-chip">Medical Fee &amp; Seats</span> <span class="tpk-chip">Admission Process &amp; Application</span></div>
+
+<div class="tpk-btn-row"><a class="tpk-btn tpk-btn-purple" href="https://www.testprepkart.com/self-study/neet/pages/buy-neet-counseling-package" rel="noopener" target="_blank">&rarr; Get Counseling Package $99</a> <a class="tpk-btn tpk-btn-white" href="https://www.testprepkart.com/self-study/neet/download/ebooks-pdfs/nri-quota-ebook" rel="noopener" target="_blank">&rarr; Download NRI Quota eBook</a> <a class="tpk-btn tpk-btn-white" href="https://www.testprepkart.com/self-study/neet/pages/schedule-neet-demo-session" rel="noopener" target="_blank">&rarr; Book Free Trial Session</a></div>
+</div>
+
+<div class="tpk-video-box">
+<div class="video-popup-wrapper" style="text-align:left"><a class="popup-youtube position-relative d-inline-block" href="https://www.youtube.com/watch?v=3DYdUQ1IdW8" rel="noopener noreferrer" target="_blank"><img alt="NEET Planning in USA" class="video-thumbnail rbt-radius" decoding="async" src="http://blog.testprepkart.com/neet/wp-content/uploads/sites/5/2026/06/MBBS-NEET-preparation-in-USA-thumbnail.webp" style="max-width:100%;height:auto;border-radius:15px" /> </a></div>
+</div>
+</section>
+
+<section class="tpk-section">
+<div class="tpk-card">
+<p><strong>Who this stage is for:</strong> You live in the United States and are a parent. Currently enrolled in a U.S. high school (Grades 8&ndash;12), your child is thinking of studying medicine in India through the NEET admission exam. You&#39;ve heard about NEET from relatives or friends in India, but no one has provided you with a clear, honest route map that takes into consideration your situation, including NRI quota regulations, curriculum gaps, time-zone coaching, and U.S. school calendars.<br />
+<br />
+That route map is this page. Before investing a single dollar in tutoring, Stage 1 addresses the fundamental issues that every NRI parent needs to address.</p>
+
+<div class="tpk-stats">
+<div class="tpk-stat"><strong>5,000+</strong><span>NRI students trained by TestPrepKart worldwide</span></div>
+
+<div class="tpk-stat"><strong>13</strong><span>Structured stages to MBBS admission from USA</span></div>
+
+<div class="tpk-stat"><strong>720</strong><span>Max NEET score (Biology + Physics + Chemistry)</span></div>
+
+<div class="tpk-stat"><strong>NRI Quota</strong><span>Separate seats reserved in most Indian medical colleges</span></div>
+</div>
+</div>
+</section>
+
+<section class="tpk-section">
+<h2><span style="color:#16a085;"><span>Key Topics Being Covered in this Stage 1</span></span></h2>
+
+<p>Before jumping into preparation, every NRI parent needs clarity on the 14 questions below. Stage 1 is designed to answer all of them in one place.</p>
+
+<div class="tpk-table-wrap">
+<table class="tpk-table">
+	<thead>
+		<tr>
+			<th><span style="color:#d35400;">Decision Topic</span></th>
+			<th><span style="color:#d35400;">What You Will Understand</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>India MBBS vs USA MD</td>
+			<td>How do preparation, timeliness and reality. Not on paper. Differ between the two medical approaches?</td>
+		</tr>
+		<tr>
+			<td>Is MBBS in India worth it for a US student?</td>
+			<td>Depending on your childs profile you need to figure out when it makes sense to choose one over the other and when it doesn&#39;t.</td>
+		</tr>
+		<tr>
+			<td>Indian MBBS degree validity in USA</td>
+			<td>Lets talk about what you can do after getting an MBBS degree from India and what you can&#39;t.</td>
+		</tr>
+		<tr>
+			<td>Career outcomes after MBBS India for NRIs</td>
+			<td>If you choose the USMLE route you need to know about residency obstacles, alternatives for specialization and how to prepare for returning to the United States.</td>
+		</tr>
+		<tr>
+			<td>Full cost breakdown (MBBS India vs MD USA)</td>
+			<td>You have to consider all expenses, including hidden fees, lodging, transit and how exchange rates will affect you.</td>
+		</tr>
+		<tr>
+			<td>Medical admission timeline comparison</td>
+			<td>It&#39;s also important to know how long it usually takes to become a practicing physician through each route.</td>
+		</tr>
+		<tr>
+			<td>NEET risk vs NRI success certainty</td>
+			<td>Some things you can control some things are variable. Some things are predictable.</td>
+		</tr>
+		<tr>
+			<td>Primary plan vs backup plan structure</td>
+			<td>To organize your training with professors you need to avoid getting burned out.</td>
+		</tr>
+		<tr>
+			<td>Living-in-India factors</td>
+			<td>Plan for family support, hostel life, safety and the adjustment phase.</td>
+		</tr>
+		<tr>
+			<td>Is my child &quot;NEET type&quot; or &quot;MCAT type&quot;?</td>
+			<td>Certain student characteristics and learning preferences work better with the U.S. -Med path while others are better suited for NEET.</td>
+		</tr>
+		<tr>
+			<td>Optimal grade to start NEET coaching</td>
+			<td>Grade-wise preparation start plan for U.S. students -&nbsp;what to do in Grade 9, 10, 11, 12</td>
+		</tr>
+		<tr>
+			<td>What happens if my child changes their mind?</td>
+			<td>If you change your mind in the middle you need to know what you can recover.</td>
+		</tr>
+		<tr>
+			<td>NRI quota fee and seat concepts</td>
+			<td>Before going for counseling parents should know about the seats, cost and state-specific regulations.</td>
+		</tr>
+		<tr>
+			<td>Student academic diagnostics</td>
+			<td>To assess your preparedness, for exams you need to determine your next steps.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</section>
+
+<section class="tpk-section">
+<h2><span style="color:#16a085;"><span>Stage 1 NEET Preparation Roadmap (For NRI Parents in USA)</span></span></h2>
+
+<p>This roadmap is designed for a U.S.-based parent whose child is anywhere between Grade 8 and Grade 12. Follow these steps in order - each one unlocks the next.</p>
+
+<div class="tpk-roadmap">
+<div class="tpk-step">
+<div class="tpk-step-no">1</div>
+
+<div>
+<h3>Confirm Eligibility and NRI / OCI / Passport Status</h3>
+
+<p>Check the prerequisites for a passport, comprehend the consequences of an OCI card, and confirm if your child is eligible as an NRI candidate for NEET. Families lose out on a whole admissions cycle if they miss this crucial first step. For complete information, see Stage 2-NRI/OCI/Passport Status.</p>
+</div>
+</div>
+
+<div class="tpk-step">
+<div class="tpk-step-no">2</div>
+
+<div>
+<h3>Run the India MBBS vs USA MD Decision Filter</h3>
+
+<p>Sincerely compare the two options in terms of expense, schedule, career outcome, and your child&#39;s preferred method of learning. This choice cannot be postponed until Grade 12; it must be made at Stage 1. Families who put off making this decision regularly squander 12 to 18 months of planning time.</p>
+</div>
+</div>
+
+<div class="tpk-step">
+<div class="tpk-step-no">3</div>
+
+<div>
+<h3>Decide: Primary Plan or Backup Plan for the Next 6 Months</h3>
+
+<p>Planning for the next five years is not necessary right now. However, you have to determine NEET&#39;s role during the next six months. Five to six NEET study blocks a week are part of the primary plan. A backup plan involves at least three to four regular blocks per week. Costly stop-start preparation results from an unclear plan.</p>
+</div>
+</div>
+
+<div class="tpk-step">
+<div class="tpk-step-no">4</div>
+
+<div>
+<h3>Take a Diagnostic Test - Before Choosing Any Coaching</h3>
+
+<p>Subject-wise gaps, accuracy percentage, speed, and error patterns are all revealed via a structured NEET diagnostic test. Months of speculation are replaced by this one step. Make an appointment with TestPrepKart for a free diagnostic session.</p>
+</div>
+</div>
+
+<div class="tpk-step">
+<div class="tpk-step-no">5</div>
+
+<div>
+<h3>Map the U.S.- NCERT Curriculum Gap</h3>
+
+<p>While intellectually sound, U.S. curriculum (AP Biology, Honors Chemistry, IB) differ structurally from NCERT, which is directly tested by NEET. You can determine how many &quot;bridge months&quot; your child needs before the start of regular NEET preparation by mapping this gap early. For a thorough subject-by-subject comparison, see Stage 3: USA Curriculum vs. NEET.</p>
+</div>
+</div>
+
+<div class="tpk-step">
+<div class="tpk-step-no">6</div>
+
+<div>
+<h3>Build a 3-Layer Weekly Routine Around the U.S. School Calendar</h3>
+
+<p>Layer 1: Base routine (during busy school weeks): at least two to three NEET blocks each week, never zero. Layer 2: Acceleration (long weekends, winter break, and summers): thorough syllabus review and practice exams. Layer 3: Recovery (after finals): timed multiple-choice questions during a brief ramp-back week.</p>
+</div>
+</div>
+
+<div class="tpk-step">
+<div class="tpk-step-no">7</div>
+
+<div>
+<h3>Start NCERT Habit - Immediately, Not Later</h3>
+
+<p>Exact NCERT wording is rewarded by NEET, especially in Biology and Inorganic Chemistry. Students in the United States who put off reading the NCERT until Grade 12 nearly invariably become anxious. One of the most beneficial things a parent can do today is to start a 20-minute daily NCERT micro-reading habit in Grade 9 or 10.</p>
+</div>
+</div>
+
+<div class="tpk-step">
+<div class="tpk-step-no">8</div>
+
+<div>
+<h3>Choose a Structured Coaching Provider That Fits U.S. Time Zones</h3>
+
+<p>Not every coaching program is made with NRI students in mind. Look for NCERT-first instruction, weekly assessment, parent visibility, EST/CST/PST-aligned session schedules, and bridging the U.S. curriculum gap. For a comprehensive evaluation guide, see Stage 6: NEET Coaching Providers.</p>
+</div>
+</div>
+
+<div class="tpk-step">
+<div class="tpk-step-no">9</div>
+
+<div>
+<h3>Understand NRI Quota, Fee Structure, and College Options</h3>
+
+<p>Both public and private medical schools have NRI quota seats. States and NRI quota categories have quite different fee schedules. It is necessary to comprehend this at the planning stage; it is not something to investigate during counseling week. For a detailed explanation, see Stage 8-NEET NRI Quota Details.</p>
+</div>
+</div>
+
+<div class="tpk-step">
+<div class="tpk-step-no">10</div>
+
+<div>
+<h3>Set Up a Tracking System and Parent Visibility Dashboard</h3>
+
+<p>Track: weekly MCQ attempts, accuracy percentage, exam dates and results, completion by subject, and error trends. Parental worry is significantly reduced when progress is measured. Additionally, it allows for data-driven coaching modifications rather than emotional responses to a single poor exam.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="tpk-section">
+<div style="text-align:center; margin:20px 0;"><a href="https://testprepkart.com/self-study/neet/pages/testprepkart-neet-nris-prep-app" rel="noopener noreferrer" target="_blank"><img alt="NEET App Banner" src="https://testprepkart.com/self-study/api/uploads/media/neet/NEET_Banner_1_1782118042474.webp" style="max-width:100%; height:auto;" /> </a>
+
+<div style="text-align: left;"><a class="tpk-btn tpk-btn-purple" href="https://testprepkart.com/self-study/neet/pages/testprepkart-neet-nris-prep-app" rel="noopener" target="_blank">&rarr; Download the NEET App</a></div>
+
+<h2 style="text-align: left;">&nbsp;</h2>
+
+<h2 style="text-align: left;"><span style="color:#16a085;"><span>India MBBS vs USA MD - The Honest Comparison NRI Parents Need</span></span></h2>
+
+<p style="text-align: left;">The majority of NRI families see this as a straightforward nation comparison: &quot;India vs USA.&quot; Exam-driven entry and profile-driven entry are the true comparison, and this difference completely alters your planning.</p>
+
+<h3 style="text-align: left;">A) High-Level Admission and Preparation Comparison</h3>
+
+<div class="tpk-table-wrap">
+<table class="tpk-table">
+	<thead>
+		<tr>
+			<th><span style="color:#d35400;">Factor</span></th>
+			<th><span style="color:#d35400;">MBBS in India (via NEET)</span></th>
+			<th><span style="color:#d35400;">USA MD (via Pre-Med + MCAT)</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Entry gate</td>
+			<td>One good score in an exam and a good national rank is very important.</td>
+			<td>Multi-year academic record plus MCAT score plus applications</td>
+		</tr>
+		<tr>
+			<td>Predictability</td>
+			<td>If you study and take tests regularly for two or three years your score can be really high.</td>
+			<td>Lower. Lots of factors across university, applications and admission cycles</td>
+		</tr>
+		<tr>
+			<td>Time to enter medical school</td>
+			<td>You can even get a score right after Grade 12.</td>
+			<td>Later. After completing a four-year undergraduate degree to become a doctor</td>
+		</tr>
+		<tr>
+			<td>Learning style required</td>
+			<td>To do well you need to be very good at NCERT you need to be fast you need to know how to answer choice questions and you need to remember things well.</td>
+			<td>Long-term critical thinking reading stamina, profile and extracurricular building</td>
+		</tr>
+		<tr>
+			<td>Parent involvement window</td>
+			<td>
+			<p>You have to work hard during&nbsp;high school years,&nbsp;make plans, make a schedule and keep a track</p>
+			</td>
+			<td>High across several years from high school to college applications</td>
+		</tr>
+		<tr>
+			<td>Curriculum alignment for U.S. student</td>
+			<td>Gap exists -&nbsp;NCERT bridging required (see Stage 3)</td>
+			<td>Closer to what U.S. Schools teach</td>
+		</tr>
+		<tr>
+			<td>Cost certainty</td>
+			<td>Clearer upfront (varies by college type and NRI quota category)</td>
+			<td>Spread across several years and multiple college application cycles</td>
+		</tr>
+		<tr>
+			<td>Option to return to USA later</td>
+			<td>Possible via USMLE after MBBS, but competitive and takes time</td>
+			<td>Stays within the U.S. Education system, throughout medical school applications</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<div class="tpk-takeaway" style="text-align: left;"><strong>💡 Key Takeaway for NRI Parents -&nbsp;</strong>Testing consistency and organized preparation are rewarded by NEET. Long-term profile development is rewarded by the U.S. route. Making a realistic total-cost and total-timeline sheet for both options before committing results in the best family decision.</div>
+
+<h3 style="text-align: left;"><span style="color:#16a085;">B) Cost Comparison - Planning Level (Not Final Figures)</span></h3>
+
+<div class="tpk-table-wrap">
+<table class="tpk-table">
+	<thead>
+		<tr>
+			<th><span style="color:#d35400;">Cost Dimension</span></th>
+			<th><span style="color:#d35400;">India MBBS (NRI Quota)</span></th>
+			<th><span style="color:#d35400;">USA Pre-Med + MD</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Medical college fee</td>
+			<td>Varies a lot. Government seats are less. Private NRI quota is more.</td>
+			<td>The cost of going to a U.S. School is really high. It is one of the expensive in the world.</td>
+		</tr>
+		<tr>
+			<td>Coaching and preparation cost</td>
+			<td>NEET coaching takes 1 to 3 years. It is easy if you start early.</td>
+			<td>Pre-med advising, MCAT prep, application costs over many years</td>
+		</tr>
+		<tr>
+			<td>Hidden costs</td>
+			<td>You also need to think about hostel and travel costs from India to the USA. The exchange rate can change.</td>
+			<td>Application fees (multiple cycles), gap year expenses, living costs</td>
+		</tr>
+		<tr>
+			<td>Financial surprise risk</td>
+			<td>There are also fee changes and different counseling rules, for each state. The NRI quota category can also change.</td>
+			<td>Sometimes you have to apply to school more, than once. This can take longer than you think.</td>
+		</tr>
+		<tr>
+			<td>Timeline cost</td>
+			<td>If you start training earlier you can finish 1 to 2 years earlier.</td>
+			<td>You usually go to school after you finish your 4-year undergraduate degree</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section class="tpk-section">
+<h2>🎥 Watch: MBBS in India vs USA - Which Path Makes Sense for NRI Students</h2>
+
+<div class="tpk-soft-card">
+<div class="video-grid-container" data-video-align="center" data-video-height="360" data-video-width="640" style="display: flex; justify-content: center; margin: 20px 0; width: 100%; box-sizing: border-box;">
+<div class="video-grid-inner video-grid-cols-2" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; width: 100%; max-width: 100%; margin: 0; align-items: start; box-sizing: border-box;">
+<div class="video-parent-container" style="width: 100%; min-width: 0; max-width: 640px; box-sizing: border-box;"><span class="video-container" data-video-type="youtube" data-video-url="https://www.youtube.com/embed/NJ8FsxNU9t4" style="display: block; position: relative; width: 100%; height: 0; padding-bottom: 56.25%; max-width: 100%; cursor: pointer; border-radius: 8px; overflow: hidden; background: #000; box-sizing: border-box;"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" bis_chainid="36" bis_depth="1" bis_id="fr_9jpq30dcd1k4ed571d4t0o" frameborder="0" src="https://www.youtube.com/embed/NJ8FsxNU9t4?controls=0&amp;showinfo=0&amp;rel=0&amp;modestbranding=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background: #000; pointer-events: none; display: block; border: none;" title="YouTube"></iframe></span></div>
+
+<div class="video-parent-container" style="width: 100%; min-width: 0; max-width: 640px; box-sizing: border-box;"><span class="video-container" data-video-type="youtube" data-video-url="https://www.youtube.com/embed/xznRutIsLzw" style="display: block; position: relative; width: 100%; height: 0; padding-bottom: 56.25%; max-width: 100%; cursor: pointer; border-radius: 8px; overflow: hidden; background: #000; box-sizing: border-box;"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" bis_chainid="36" bis_depth="1" bis_id="fr_ug9jxcuyerfec9zme6ncbb" frameborder="0" src="https://www.youtube.com/embed/xznRutIsLzw?controls=0&amp;showinfo=0&amp;rel=0&amp;modestbranding=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background: #000; pointer-events: none; display: block; border: none;" title="YouTube"></iframe></span></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="tpk-section">
+<h2><span style="color:#16a085;"><span>Is My Child a &quot;NEET Type&quot; or &quot;MCAT Type&quot;?</span></span></h2>
+
+<div class="tpk-card">
+<p>Whether NEET or MCAT may be more comfortable for a child depends on their innate learning pattern. Pupils who do well in NCERT-based study, systematic coaching, frequent testing, and repetition frequently adjust to NEET more easily. MCAT is frequently more in line with the interests of students who value independent study, critical thinking, in-depth reading, and concept-based learning.<br />
+<br />
+But this is really a recommendation, not a definitive choice. With constant practice, regular mock exams, and dedicated coaching, many students with an MCAT-oriented learning approach pass NEET. The idea is to identify your child&#39;s strengths early on and adjust your preparation plan accordingly.</p>
+</div>
+</section>
+
+<section class="tpk-section">
+<h2><span style="color:#16a085;"><span>The U.S. School Reality - How NEET Must Fit Around It</span></span></h2>
+
+<p>Calendar mismatch is the main cause of NRI students&#39; failure to prepare for the NEET from the USA, not hard work. AP season, IB deadlines, SAT preparation, finals, sports seasons, and college application periods are all part of the U.S. academic calendar. On a fixed weekly timetable, NEET is unable to compete with all of these concurrently.<br />
+<br />
+The answer is a three-layer planning method that automatically adjusts to the academic year so your child doesn&#39;t have to start over every time school becomes busy.</p>
+
+<h3><span style="color:#330066;">The 3-Layer NEET Planning System for U.S. Students</span></h3>
+
+<div class="tpk-table-wrap">
+<table class="tpk-table">
+	<thead>
+		<tr>
+			<th><span style="color:#d35400;">Layer</span></th>
+			<th><span style="color:#d35400;">When to Use</span></th>
+			<th><span style="color:#d35400;">NEET Activity</span></th>
+			<th><span style="color:#d35400;">Minimum Hours/Week</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Base Layer</td>
+			<td>Regular school weeks, mid-term periods</td>
+			<td>NCERT micro-reading, two to three brief NEET blocks (30 to 45 minutes each), and never zero</td>
+			<td>3-5 hours</td>
+		</tr>
+		<tr>
+			<td>Acceleration Layer</td>
+			<td>Summer break, winter break, spring break, long weekends</td>
+			<td>thorough review of the material, extensive practice exams, and an analysis of the error logs</td>
+			<td>20-30 hours</td>
+		</tr>
+		<tr>
+			<td>Recovery Layer</td>
+			<td>The week immediately after finals or AP exams</td>
+			<td>Ramp-back week: rebuild procedure, timed multiple-choice questions, and review of prior test errors</td>
+			<td>8-12 hours</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<h3><span style="color:#330066;">U.S. Calendar Action Plan - What to Do Each Period</span></h3>
+
+<div class="tpk-table-wrap">
+<table class="tpk-table">
+	<thead>
+		<tr>
+			<th><span style="color:#d35400;">U.S. School Period</span></th>
+			<th><span style="color:#d35400;">NEET Strategy</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Regular school week (Sep&ndash;Nov, Jan&ndash;Mar)</td>
+			<td>Base layer -&nbsp;daily blocks of study time reading from NCERT books and doing one session of multiple choice questions on the weekend.</td>
+		</tr>
+		<tr>
+			<td>Finals / AP peak weeks (May&ndash;Jun)</td>
+			<td>Don&#39;t stop reducing to the minimum base. To keep the pace going, one or two biology reading sessions are sufficient.</td>
+		</tr>
+		<tr>
+			<td>Summer break (Jun&ndash;Aug)</td>
+			<td>Acceleration layer: extensive NCERT revision, two to three full mock exams per week, and comprehensive curriculum covering</td>
+		</tr>
+		<tr>
+			<td>Winter break (Dec&ndash;Jan)</td>
+			<td>Acceleration layer: gap chapter completion, topic-wise exam series, and chapter revision</td>
+		</tr>
+		<tr>
+			<td>Post-finals recovery week</td>
+			<td>Recovery layer: quickly resume timed practice and examine the error log from the prior month.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<div class="tpk-warning"><strong>⚠ Most Common Mistake NRI Parents Make -&nbsp;</strong>allowing &quot;zero months&quot; - months in which there is absolutely no NEET preparation. It usually takes a another 4-6 weeks for a pupil to regain rhythm, confidence, and MCQ speed after stopping for 4-6 weeks. Maintaining a minimum foundation layer completely stops this loss, even during the busiest school period.</div>
+</section>
+
+<section class="tpk-section">
+<h2><span style="color:#330066;">Grade-Wise NEET Planning Framework for NRI USA Students</span></h2>
+
+<p>The right NEET plan is not the same intensity every year. It should match the grade&#39;s real-world school load and the student&#39;s developmental readiness.</p>
+
+<div class="tpk-table-wrap">
+<table class="tpk-table">
+	<thead>
+		<tr>
+			<th><span style="color:#d35400;">Grade</span></th>
+			<th><span style="color:#d35400;">Parent Goal for the Year</span></th>
+			<th><span style="color:#d35400;">What Success Looks Like</span></th>
+			<th><span style="color:#d35400;">Key Action</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Grade 8&ndash;9</td>
+			<td>Build NEET awareness + early foundation habits</td>
+			<td>NCERT Biology reading began,&nbsp;a regular weekly schedule&nbsp;set.</td>
+			<td>NCERT habit, foundation course, and no pressure to complete the entire curriculum</td>
+		</tr>
+		<tr>
+			<td>Grade 10</td>
+			<td>Strengthen NCERT fundamentals, begin chapter-wise practice</td>
+			<td>Chapter-by-chapter MCQ practice began, and accuracy increased steadily every quarter.</td>
+			<td>NCERT Chem + Bio, diagnostic evaluation, and chapter tests</td>
+		</tr>
+		<tr>
+			<td>Grade 11</td>
+			<td>Serious NEET alignment with regular weekly testing</td>
+			<td>Even during school exams, weekly tests are conducted; the syllabus rhythm endures despite the workload.</td>
+			<td>Frequent practice exams, comprehensive NEET syllabus coverage, and an error log</td>
+		</tr>
+		<tr>
+			<td>Grade 12</td>
+			<td>Peak performance through revision cycles + full mock tests</td>
+			<td>Complete mocks including cycles of error correction; consistent accuracy in timed situations</td>
+			<td>Complete simulations, study on NRI quotas, college shortlisting, and counseling preparation</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</section>
+
+<section class="tpk-section">
+<h2>🎥 Watch: NEET Preparation Strategy for NRI Students in USA - Grade-Wise Plan</h2>
+
+<div class="video-grid-container" data-video-align="center" data-video-height="360" data-video-width="640" style="display: flex; justify-content: center; margin: 20px 0; width: 100%; box-sizing: border-box;">
+<div class="video-grid-inner video-grid-cols-3" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; width: 100%; max-width: 100%; margin: 0; align-items: start; box-sizing: border-box;">
+<div class="video-parent-container" style="width: 100%; min-width: 0; max-width: 640px; box-sizing: border-box;"><span class="video-container" data-video-type="youtube" data-video-url="https://www.youtube.com/embed/W99xcaVDCkM" style="display: block; position: relative; width: 100%; height: 0; padding-bottom: 56.25%; max-width: 100%; cursor: pointer; border-radius: 8px; overflow: hidden; background: #000; box-sizing: border-box;"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" bis_chainid="36" bis_depth="1" bis_id="fr_nfy7emqpwlfi87fib89vcn" frameborder="0" src="https://www.youtube.com/embed/W99xcaVDCkM?controls=0&amp;showinfo=0&amp;rel=0&amp;modestbranding=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background: #000; pointer-events: none; display: block; border: none;" title="YouTube"></iframe></span></div>
+
+<div class="video-parent-container" style="width: 100%; min-width: 0; max-width: 640px; box-sizing: border-box;"><span class="video-container" data-video-type="youtube" data-video-url="https://www.youtube.com/embed/KzqS_LUX6UQ" style="display: block; position: relative; width: 100%; height: 0; padding-bottom: 56.25%; max-width: 100%; cursor: pointer; border-radius: 8px; overflow: hidden; background: #000; box-sizing: border-box;"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" bis_chainid="36" bis_depth="1" bis_id="fr_fpxsxj30rkchmbbme08ytm" frameborder="0" src="https://www.youtube.com/embed/KzqS_LUX6UQ?controls=0&amp;showinfo=0&amp;rel=0&amp;modestbranding=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background: #000; pointer-events: none; display: block; border: none;" title="YouTube"></iframe></span></div>
+
+<div class="video-parent-container" style="width: 100%; min-width: 0; max-width: 640px; box-sizing: border-box;"><span class="video-container" data-video-type="youtube" data-video-url="https://www.youtube.com/embed/3DYdUQ1IdW8" style="display: block; position: relative; width: 100%; height: 0; padding-bottom: 56.25%; max-width: 100%; cursor: pointer; border-radius: 8px; overflow: hidden; background: #000; box-sizing: border-box;"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" bis_chainid="36" bis_depth="1" bis_id="fr_fmtpwvhuyql70u0i3acojt" frameborder="0" src="https://www.youtube.com/embed/3DYdUQ1IdW8?controls=0&amp;showinfo=0&amp;rel=0&amp;modestbranding=1" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; background: #000; pointer-events: none; display: block; border: none;" title="YouTube"></iframe></span></div>
+</div>
+</div>
+</section>
+
+<section class="tpk-section">
+<h2><span style="color:#16a085;"><span>The NCERT Alignment Gap - The Silent Trap for U.S. Students</span></span></h2>
+
+<p>Most NRI families learn about this issue too late. Students in the United States often have a strong understanding of science subjects; IB, Honors Chemistry, and AP Biology courses offer strong intellectual foundations. Nevertheless, NEET does not evaluate conceptual comprehension, in contrast to U.S. exams. NEET evaluates specific NCERT memory, specific vocabulary, and multiple-choice questions directly from Indian textbooks.<br />
+<br />
+A U.S. student may fail a NEET question on DNA replication even if they have a thorough understanding of the topic since it asks about a specific NCERT diagram label or a one-line explanation that they have never seen.</p>
+
+<h3><span style="color:#330066;">Subject-Wise NCERT Gap for U.S. Students</span></h3>
+
+<div class="tpk-table-wrap">
+<table class="tpk-table">
+	<thead>
+		<tr>
+			<th><span style="color:#d35400;">Subject</span></th>
+			<th><span style="color:#d35400;">U.S. Curriculum Strength</span></th>
+			<th><span style="color:#d35400;">NEET-Specific Gap</span></th>
+			<th><span style="color:#d35400;">Fix Strategy</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Biology</td>
+			<td>strong intellectual grasp of various processes, including genetics, cell division, and photosynthesis</td>
+			<td>Exact NCERT one-liners, concrete examples, and statement-trap multiple-choice questions are absent.</td>
+			<td>Daily NCERT micro-reading (20 min) + weekly NCERT based quiz</td>
+		</tr>
+		<tr>
+			<td>Inorganic Chemistry</td>
+			<td>Reasonable coverage of the periodic table, fundamental reactions, and bonds</td>
+			<td>Poor recollection of exceptions, certain characteristics, and classification in Indian textbooks</td>
+			<td>One-liner notebook + spaced repetition revision every 10 days</td>
+		</tr>
+		<tr>
+			<td>Organic Chemistry</td>
+			<td>Reaction mechanisms in AP/IB are comparatively robust.</td>
+			<td>Reaction classification gaps and a lack of NEET&#39;s pattern-based MCQ style</td>
+			<td>Reaction pattern revision + mixed MCQ practice weekly</td>
+		</tr>
+		<tr>
+			<td>Physics</td>
+			<td>solid conceptual foundation, particularly in the areas of electricity and mechanics</td>
+			<td>Reduced formula-based recall and slower numerical application under time constraints</td>
+			<td>Formula sheet + timed numerical drills 3x per week</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<div class="tpk-takeaway"><strong>💡 NCERT Habit Rule for NRI Parents -&nbsp;</strong>NCERT reading becomes second nature by Grade 12 if it is started in Grades 9 or 10. In addition to academic deadlines, starting it in Grade 12 causes anxiety and cognitive stress. In Grade 9, 20 minutes of daily NCERT Biology reading is more beneficial than three hours of cramming in Grade 12.</div>
+</section>
+
+<section class="tpk-section">
+<div class="tpk-ebook">
+<div class="tpk-ebook-icon">📘</div>
+
+<div>
+<h2>Free Download: NRI Quota NEET Admission eBook</h2>
+
+<p>covers all aspect of the NRI quota admissions procedure, including eligibility, state-specific seats, cost, document checklist, sponsor regulations, avoiding counseling traps, and college comparison. Written especially for NRI families in the Gulf, the United States, the United Kingdom, and Canada. Over 10,000 NRI parents downloaded it.</p>
+
+<div class="tpk-btn-row"><a class="tpk-btn tpk-btn-purple" href="https://www.testprepkart.com/self-study/neet/download/ebooks-pdfs/nri-quota-ebook" rel="noopener" target="_blank">&darr; Download Free PDF</a> <a class="tpk-btn tpk-btn-white" href="https://www.testprepkart.com/self-study/neet/download/ebooks-pdfs/nri-quota-ebook" rel="noopener" target="_blank">&rarr; See What&#39;s Inside</a></div>
+</div>
+</div>
+</section>
+
+<section class="tpk-section">
+<h2><span style="color:#16a085;"><span>Student Academic Diagnostic - Measure Before You Plan</span></span></h2>
+
+<p>Selecting a coaching provider or beginning a study plan before determining the student&#39;s actual position is the most frequent Stage 1 error. You may replace months of speculation with facts from a real NEET diagnostic test, which is administered under timed, NEET-like conditions.</p>
+
+<h3><span style="color:#330066;">What a NEET Diagnostic Should Measure</span></h3>
+
+<ul class="tpk-list">
+	<li>Subject-wise and chapter-wise gap size relative to NEET standard</li>
+	<li>Overall accuracy percentage under timed MCQ conditions</li>
+	<li>Average time per question (speed gap assessment)</li>
+	<li>Mistake classification: conceptual gap / calculation error / misread / time pressure</li>
+	<li>NCERT alignment score (can the student answer direct NCERT-line questions?)</li>
+	<li>Coachability indicator: does the student improve accuracy after reviewing corrections?</li>
+</ul>
+
+<h3><span style="color:#330066;">How to Interpret Your Child&#39;s Diagnostic Results</span></h3>
+
+<div class="tpk-table-wrap">
+<table class="tpk-table">
+	<thead>
+		<tr>
+			<th><span style="color:#d35400;">Diagnostic Outcome</span></th>
+			<th><span style="color:#d35400;">What It Usually Means</span></th>
+			<th><span style="color:#d35400;">Recommended Next Step</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Good accuracy, slow speed</td>
+			<td>Knows the material but doesn&#39;t practice timed multiple-choice questions</td>
+			<td>Include timed drills every day (20&ndash;30 questions, 15-minute sessions).</td>
+		</tr>
+		<tr>
+			<td>Low accuracy, normal speed</td>
+			<td>Conceptual gaps or NCERT mismatch -&nbsp;rushing without understanding</td>
+			<td>Before assessing speed, go back to NCERT fundamentals, slow down, and correct concepts.</td>
+		</tr>
+		<tr>
+			<td>Low accuracy, slow speed</td>
+			<td>A longer runway is required because the foundation is weak and the routine is absent.</td>
+			<td>Take a foundation course right away and budget more than eighteen months for preparation.</td>
+		</tr>
+		<tr>
+			<td>Strong improvement after correction</td>
+			<td>The student is coachable and picks up mistakes fast.</td>
+			<td>Boost test frequency and give error log review sessions a lot of attention.</td>
+		</tr>
+		<tr>
+			<td>No improvement after correction</td>
+			<td>calls for altering the motivational element or teaching strategy.</td>
+			<td>Arrange a counseling session to evaluate your motivation and study strategy.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</section>
+
+<section class="tpk-section">
+<h2><span style="color:#16a085;"><span>Parent Action Checklist - What to Do This Week</span></span></h2>
+
+<p>NRI parents expect answers quickly. Even if NEET is now your family&#39;s backup option, the checklist below is made to be completed in a week and provides you with an instant working plan.</p>
+
+<ul class="tpk-list">
+	<li>Decide: Is NEET a primary plan or a backup plan for the next 6 months? Write it down.</li>
+	<li>Schedule a NEET diagnostic test in timed conditions -&nbsp;do not start coaching before this step</li>
+	<li>Mark the U.S. school calendar: finals, AP/IB exam weeks, breaks -&nbsp;identify all NEET acceleration windows</li>
+	<li>Confirm NRI / OCI / passport status and eligibility (see Stage 2)</li>
+	<li>Fix 3-5 protected weekly NEET blocks -&nbsp;treat them as non-negotiable class periods</li>
+	<li>Start 20-minute daily NCERT Biology reading -&nbsp;today, not after the current exam</li>
+	<li>Begin a simple tracking sheet: MCQs per week, accuracy %, test dates, error patterns</li>
+	<li>Download the NRI Quota eBook to understand counseling and seat options early</li>
+	<li>Book a free trial session with TestPrepKart to get a gap map and personalised plan</li>
+</ul>
+
+<div class="tpk-table-wrap">
+<table class="tpk-table">
+	<thead>
+		<tr>
+			<th><span style="color:#d35400;">Action</span></th>
+			<th><span style="color:#d35400;">Why It Matters</span></th>
+			<th><span style="color:#d35400;">If You Skip It</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>NEET Diagnostic</td>
+			<td>eliminates speculation and identifies actual gaps in 90 minutes</td>
+			<td>Months of misdirected preparation on the wrong topics</td>
+		</tr>
+		<tr>
+			<td>Calendar mapping</td>
+			<td>identifies each of the year&#39;s actual NEET preparation windows</td>
+			<td>Collapsing routines during busy school periods</td>
+		</tr>
+		<tr>
+			<td>Primary/Backup decision</td>
+			<td>establishes a consistent preparation schedule for the following six months.</td>
+			<td>Stop-start cycles that destroy momentum and confidence</td>
+		</tr>
+		<tr>
+			<td>NCERT habit start</td>
+			<td>closes the largest NRI curriculum gap before it becomes essential.</td>
+			<td>Grade 12 overload and NEET score loss on direct NCERT questions</td>
+		</tr>
+		<tr>
+			<td>Weekly tracking</td>
+			<td>lowers student excuses and parental concern by making progress evident</td>
+			<td>Invisible preparation that cannot be measured or corrected</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</section>
+
+<section class="tpk-section">
+<h2><span style="color:#2980b9;">Common Stage 1 Mistakes NRI Parents Make - and How to Avoid Them</span></h2>
+
+<div class="tpk-warning">
+<h3>⚠ Mistake 1: Starting Without a Diagnostic</h3>
+
+<p>Prior to conducting a diagnostic, selecting coaches, textbooks, and a schedule wastes the first two to three months of preparation. The diagnostic saves three months and takes ninety minutes.</p>
+</div>
+
+<div class="tpk-warning">
+<h3>⚠ Mistake 2: Delaying NCERT</h3>
+
+<p>&quot;We will add NCERT once school settles&quot; is a statement that degrades kids&#39; NEET scores by thirty to fifty points. NCERT alignment needs to begin right away, even if it&#39;s just for 20 minutes a day.</p>
+</div>
+
+<div class="tpk-warning">
+<h3>⚠ Mistake 3: Allowing Zero Months</h3>
+
+<p>The student loses six to eight weeks if they don&#39;t prepare for the NEET in any given month. This is due to both the month and the time needed to regain rhythm and speed after the break.</p>
+</div>
+
+<div class="tpk-warning">
+<h3>⚠ Mistake 4: Too Many Resources, Too Little Consistency</h3>
+
+<p>It is more detrimental to switch between coaching apps, YouTube channels, and textbooks on a monthly basis than to regularly use one mediocre resource. NEET rewards depth rather than breadth of resources.</p>
+</div>
+
+<div class="tpk-warning">
+<h3>⚠ Mistake 5: Skipping Mock Tests Because &quot;Not Ready&quot;</h3>
+
+<p>Pupils who are &quot;not ready for full tests&quot; put off taking exams indefinitely. Mock tests are a tool that fosters readiness, not evidence of it. Start with topic-specific assessments right away and gradually go to entire mocks.</p>
+</div>
+
+<div class="tpk-warning">
+<h3>⚠ Mistake 6: Treating NEET Like a U.S. School Subject</h3>
+
+<p>Participation and effort are not taken into account while grading NEET. There are more than 1.8 million applicants for this rank-based competitive exam. This fact must be reflected in the preparation system, which must be test-driven, output-based, and weekly tracked.</p>
+</div>
+</section>
+
+<section class="tpk-section">
+<h2><span style="color:#330066;">How TestPrepKart Supports NRI Parents at Stage 1</span></h2>
+
+<p>Most NRI families do not need more information - the internet is full of information. What they need is a working system that fits U.S. time zones, aligns with the school calendar, and makes progress visible to parents.</p>
+
+<div class="tpk-table-wrap">
+<table class="tpk-table">
+	<thead>
+		<tr>
+			<th><span style="color:#d35400;">What NRI Parents Ask Us</span></th>
+			<th><span style="color:#d35400;">What TestPrepKart Provides</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>&quot;Is NEET realistic for my child studying in the USA?&quot;</td>
+			<td>Free diagnostic + gap map session that answers this question with data, not opinion. Schedule here &rarr;</td>
+		</tr>
+		<tr>
+			<td>&quot;How will NEET preparation fit with the U.S. school system?&quot;</td>
+			<td>Personalised schedule built around EST/CST/PST time zones and the U.S. academic calendar</td>
+		</tr>
+		<tr>
+			<td>&quot;How do we track our child&#39;s NEET progress from here?&quot;</td>
+			<td>Weekly and monthly progress reports; parent dashboard; accuracy and test score tracking</td>
+		</tr>
+		<tr>
+			<td>&quot;Where are the NCERT gaps for NRI students specifically?&quot;</td>
+			<td>Subject-wise NCERT alignment framework with a bridging plan specific to U.S. curriculum students</td>
+		</tr>
+		<tr>
+			<td>&quot;Which medical colleges should we target under NRI quota?&quot;</td>
+			<td>NRI quota counseling package covering college shortlisting, fee comparison, and documentation</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</section>
+
+<section class="tpk-cta-final">
+<h2>Ready to Start? Talk to a TestPrepKart NRI NEET Counselor</h2>
+
+<p>Get a personalised gap-map, a 6-month plan, and clarity on NRI quota options - all in one session. Trusted by 5,000+ NRI students across USA, Canada, UK, and Gulf.</p>
+
+<div class="tpk-btn-row"><a class="tpk-btn tpk-btn-white" href="https://www.testprepkart.com/self-study/neet/pages/schedule-neet-demo-session" rel="noopener" target="_blank">&rarr; Book Free Trial Session</a> <a class="tpk-btn tpk-btn-white" href="https://www.testprepkart.com/self-study/neet/pages/buy-neet-counseling-package" rel="noopener" target="_blank">&rarr; Get Full Counseling Package ($99)</a> <a class="tpk-btn tpk-btn-white" href="https://wa.me/15107069331" rel="noopener" target="_blank">💬 WhatsApp Us - +1 (510) 706-9331</a></div>
+</section>
+
+<section class="tpk-section">
+<h2><span style="color:#16a085;">Continue Your NEET Planning Journey</span></h2>
+
+<p>Stage 1 is the foundation. Each stage below builds on what you have understood here.</p>
+
+<div class="tpk-link-grid"><a class="tpk-link-card" href="/self-study/neet/neet-planning/stage-2-nri-oci-passport-status">Stage 2: NRI / OCI / Passport Status&rarr;</a> <a class="tpk-link-card" href="/self-study/neet/neet-planning/stage-3-usa-curriculum-vs-neet">Stage 3: USA Curriculum Vs NEET&rarr;</a> <a class="tpk-link-card" href="/self-study/neet/neet-planning/stage-4-managing-neet-from-usa">Stage 4: Managing NEET From USA&rarr;</a> <a class="tpk-link-card" href="/self-study/neet/neet-planning/stage-5-neet-preparation-plan">Stage 5: NEET Preparation Plan&rarr;</a> <a class="tpk-link-card" href="/self-study/neet/neet-planning/stage-6-neet-coaching-providers">Stage 6: NEET Coaching Providers&rarr;</a> <a class="tpk-link-card" href="/self-study/neet/neet-planning/stage-7-balancing-school-and-neet">Stage 7: Balancing School &amp; NEET&rarr;</a> <a class="tpk-link-card" href="/self-study/neet/neet-planning/stage-8-neet-nri-quota-details">Stage 8: NEET NRI Quota Details&rarr;</a> <a class="tpk-link-card" href="/self-study/neet/neet-planning/stage-9-neet-exam-details">Stage 9: NEET Exam Details&rarr;</a> <a class="tpk-link-card" href="/self-study/neet/neet-planning/stage-10-neet-result-and-cut-off">Stage 10: NEET Result &amp; Cut Off&rarr;</a> <a class="tpk-link-card" href="/self-study/neet/neet-planning/stage-11-neet-counseling-details">Stage 11: NEET Counseling Details&rarr;</a> <a class="tpk-link-card" href="/self-study/neet/neet-planning/stage-12-medical-admissions">Stage 12: Medical Admissions&rarr;</a> <a class="tpk-link-card" href="/self-study/neet/neet-planning/stage-13-nri-options-after-mbbs">Stage 13: NRI Options After MBBS&rarr;</a></div>
+</section>
+
+<section class="tpk-section">
+<h2><span style="color:#16a085;">Related Subject Resources</span></h2>
+
+<div class="tpk-link-grid"><a class="tpk-link-card" href="/self-study/neet">NEET Biology Syllabus Tracker&rarr;</a> <a class="tpk-link-card" href="/self-study/neet">Biology: Diversity in Living World&rarr;</a> <a class="tpk-link-card" href="/self-study/neet">NEET Chemistry Syllabus Tracker&rarr;</a> <a class="tpk-link-card" href="/self-study/neet">NEET Physics Syllabus Tracker&rarr;</a> <a class="tpk-link-card" href="/self-study/neet">NEET Video Library&rarr;</a> <a class="tpk-link-card" href="/self-study/neet">MBBS India vs USA Cost Guide&rarr;</a> <a class="tpk-link-card" href="/self-study/neet">MBBS vs Pre-Med Timelines for NRIs&rarr;</a> <a class="tpk-link-card" href="/self-study/neet">India MBBS vs USA MD (Full Chapter)&rarr;</a></div>
+</section>
+
+<section class="tpk-section">
+<h2><span style="color:#16a085;">FAQs - NRI USA Parents Ask Us These Most Often</span></h2>
+
+<div class="tpk-faq-list">
+<details class="tpk-faq-item" open=""><summary>Can my child appear for NEET while studying in a U.S. high school?</summary>
+
+<p>Yes. U.S.-based students can appear for NEET if they meet the eligibility requirements and obtain AIU equivalency for their Class 12 qualifications when required.</p>
+</details>
+
+<details class="tpk-faq-item" open=""><summary>My child is in Grade 10. Is it too early to start NEET preparation?</summary>
+
+<p>No. Grade 10 is actually a good time to build strong Physics, Chemistry, and Biology fundamentals before starting serious NEET preparation in Grades 11 and 12.</p>
+</details>
+
+<details class="tpk-faq-item" open=""><summary>My child is in Grade 12 right now. Have we missed the window for NEET?</summary>
+
+<p>Not at all. Many students begin focused NEET preparation in Grade 12. A structured study plan and consistent practice can still lead to a competitive score.</p>
+</details>
+
+<details class="tpk-faq-item" open=""><summary>What is the NRI quota in NEET? How is it different from the General category?</summary>
+
+<p>The NRI quota reserves seats for eligible NRI candidates in certain medical colleges. Admission is based on NEET scores, but eligibility rules, seat availability, and fee structures differ from the General category.</p>
+</details>
+
+<details class="tpk-faq-item" open=""><summary>How many hours per week should my child study for NEET while in a U.S. school?</summary>
+
+<p>Typically, 10-15 hours per week in Grades 9-10 and 15-25 hours per week in Grades 11-12 is sufficient, depending on the student&#39;s academic background and target score.</p>
+</details>
+
+<details class="tpk-faq-item" open=""><summary>Will NEET preparation hurt my child&#39;s U.S. school GPA and college admissions chances?</summary>
+
+<p>Not necessarily. With proper time management, students can balance NEET preparation and school academics. Strong science performance often benefits both goals.</p>
+</details>
+
+<details class="tpk-faq-item" open=""><summary>My child&#39;s U.S. school doesn&#39;t follow NCERT. Does this put them at a big disadvantage for NEET?</summary>
+
+<p>Not if they start NCERT-based preparation early. NEET is heavily based on NCERT, so supplementing U.S. school studies with NCERT resources is essential.</p>
+</details>
+
+<details class="tpk-faq-item" open=""><summary>After MBBS in India, can my child come back to the USA to practise medicine?</summary>
+
+<p>Yes. After completing MBBS, students must clear the required U.S. licensing exams and residency requirements before practising medicine in the USA.</p>
+</details>
+
+<details class="tpk-faq-item"><summary>How is NEET different from AP Biology or IB Biology that my child already studies?</summary>
+
+<p>NEET is an entrance exam focused on NCERT-based Biology, Physics, and Chemistry with objective questions. AP and IB Biology cover concepts differently and do not fully match the NEET syllabus.</p>
+</details>
+
+<details class="tpk-faq-item" open=""><summary>How much does NEET NRI quota coaching with TestPrepKart cost?</summary>
+
+<p>TestPrepKart offers multiple plans based on the student&#39;s grade and preparation stage. Contact our counselors for the latest fees, scholarships, and personalized study options.</p>
+</details>
+</div>
+</section>
+
+<section class="tpk-next-box">
+<p><strong>You have completed Stage 1. Next up:</strong></p>
+
+<h2>Stage 2 - NRI / OCI / Passport Status &amp; NEET Eligibility</h2>
+<a class="tpk-btn tpk-btn-purple" href="/self-study/neet/neet-planning/stage-2-nri-oci-passport-status">Continue to Stage 2 &rarr;</a></section>
+</div>
+</div>
+</div>
+<a class="tpk-whatsapp-float" href="https://wa.me/15107069331" rel="noopener" target="_blank">☏</a></div>

@@ -150,12 +150,22 @@ Mobile read order for section HTML: **published Firestore** → cache → **API 
 ## Admin web email (no Blaze) — May 21, 2026
 
 - [x] **Architecture:** Firestore → admin web listeners (while signed in) → HTTP **email relay** on Satlas → Hostinger SMTP.
-- [x] **Relay:** `deploy/email_relay/server.js` — deploy beside admin static site; URL in Settings → **Email Relay URL**.
+- [x] **Relay (PHP — primary):** `web/email-api/*.php` + `.htaccess` routes `/api/health` and `/api/send-email` (deploys with `build/web/`).
+- [x] **Relay (Node — optional):** `deploy/email_relay/server.js` if reverse proxy + PM2 available.
+- [x] **Settings UI:** setup checklist, **Check relay**, **Send test email** (`admin_email_relay_health.dart`).
 - [x] **Triggers:** All Settings toggles + `userRegistered` welcome email; dedupe in `admin_email_sent/{key}`; logs in `email_dispatch_logs`.
 - [x] **Confirm demo:** Sends immediately from admin via `AdminEmailDispatcher` (not Cloud Functions).
-- **Deploy relay on Satlas** (required once): see `deploy/email_relay/README.md`
+- **Deploy:** rebuild admin web and upload full `build/web/` (must include `email-api/` + `.htaccess`).
 - **Deploy rules:** `firebase deploy --only firestore:rules` from `neetprep_flutter`
 - **Note:** Admin tab must stay open for automatic Firestore-triggered emails (new user, message, inquiry, etc.).
+
+## Update — 2026-06-15 (Email relay PHP + settings diagnostics)
+
+- **Root cause:** `/api/health` on live site returned Flutter `index.html` — relay was never deployed; all sends failed silently.
+- [x] Added PHP SMTP relay under `web/email-api/` (Hostinger-compatible, no Node required).
+- [x] `.htaccess` routes `/api/send-email` and `/api/health` before SPA fallback.
+- [x] Settings → Email Config: status card, relay health check, test email button.
+- **Files:** `web/email-api/*`, `web/.htaccess`, `lib/src/services/admin_email/admin_email_relay_health.dart`, `settings_page.dart`, `admin_email_dispatcher.dart`
 
 ---
 

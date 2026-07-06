@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 
 import '../firestore_db.dart';
 import 'admin_email_config.dart';
+import 'admin_email_relay_health.dart';
 import 'admin_email_sender.dart';
 import 'admin_email_templates.dart';
 
@@ -47,6 +48,43 @@ class AdminEmailDispatcher {
   }
 
   void invalidateSettingsCache() => _cachedSettings = null;
+
+  /// Sends a test message using current Firestore email settings.
+  Future<String?> sendTestEmail({required String to}) async {
+    final settings = await loadSettings(force: true);
+    final check = AdminEmailConfigCheck.fromSettings(settings);
+    if (!check.ready && settings['masterEnabled'] != true) {
+      return 'Enable email in Settings first.';
+    }
+
+    final relayUrl = _text(
+      settings['relayUrl'],
+      AdminEmailConfig.defaultRelayUrl,
+    );
+    final health = await AdminEmailRelayHealth.check(relayUrl);
+    if (!health.reachable) {
+      return health.message;
+    }
+
+    final result = await AdminEmailSender.send(
+      settings: settings,
+      to: to.trim(),
+      subject: 'TestprepKart NEET — test email',
+      html:
+          '<p>This is a test email from the admin panel. If you received this, SMTP and the relay are working.</p>',
+    );
+
+    await AdminEmailSender.logDispatch(
+      triggerKey: 'testEmail',
+      sourcePath: 'settings/test',
+      audience: 'admin',
+      to: to.trim(),
+      status: result.ok ? 'sent' : 'failed',
+      error: result.error,
+    );
+
+    return result.ok ? null : (result.error ?? 'Test send failed');
+  }
 
   Future<bool> _alreadySent(String dedupeKey) async {
     final snap = await FirestoreDb.instance

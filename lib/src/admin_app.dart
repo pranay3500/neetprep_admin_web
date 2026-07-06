@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -24,7 +23,7 @@ import 'pages/subscription_cms_page.dart';
 import 'admin_auth_constants.dart';
 import 'services/admin_auth_eligibility.dart';
 import 'services/admin_email/admin_email_listener.dart';
-import 'services/firestore_db.dart';
+import 'widgets/admin_nav_badge_host.dart';
 import 'widgets/responsive_layout.dart';
 import 'widgets/testprepkart_logo.dart';
 
@@ -372,65 +371,69 @@ class _AdminHomeShellState extends State<AdminHomeShell> {
 
   @override
   Widget build(BuildContext context) {
-    final compact = isAdminCompactLayout(context);
+    return AdminNavBadgeHost(
+      builder: (context, badges) {
+        final compact = isAdminCompactLayout(context);
 
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        automaticallyImplyLeading: compact,
-        leadingWidth: compact ? 56 : 188,
-        leading: compact
-            ? null
-            : const Padding(
-                padding: EdgeInsets.fromLTRB(14, 10, 8, 10),
-                child: TestprepKartLogo(height: 34, maxWidth: 160),
-              ),
-        centerTitle: false,
-        title: Text(
-          _titles[_tab],
-          overflow: TextOverflow.ellipsis,
-        ),
-        iconTheme: IconThemeData(
-          color: Theme.of(context).colorScheme.onSurface,
-        ),
-        actions: [
-          IconButton(
-            tooltip: 'Sign out',
-            onPressed: () => FirebaseAuth.instance.signOut(),
-            icon: const Icon(Icons.logout_rounded),
-          ),
-        ],
-      ),
-      drawer: compact
-          ? Drawer(
-              child: _AdminNavigationRail(
-                selectedIndex: _tab,
-                onDestinationSelected: _selectTab,
-                expanded: true,
-              ),
-            )
-          : null,
-      body: compact
-          ? ColoredBox(
-              color: Theme.of(context).colorScheme.surface,
-              child: _pages[_tab],
-            )
-          : Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _AdminNavigationRail(
-                  selectedIndex: _tab,
-                  onDestinationSelected: _selectTab,
-                ),
-                const VerticalDivider(width: 1),
-                Expanded(
-                  child: ColoredBox(
-                    color: Theme.of(context).colorScheme.surface,
-                    child: _pages[_tab],
+        return Scaffold(
+          key: _scaffoldKey,
+          appBar: AppBar(
+            automaticallyImplyLeading: compact,
+            leadingWidth: compact ? 56 : 188,
+            leading: compact
+                ? null
+                : const Padding(
+                    padding: EdgeInsets.fromLTRB(14, 10, 8, 10),
+                    child: TestprepKartLogo(height: 34, maxWidth: 160),
                   ),
-                ),
-              ],
+            centerTitle: false,
+            title: Text(
+              _titles[_tab],
+              overflow: TextOverflow.ellipsis,
             ),
+            iconTheme: IconThemeData(
+              color: Theme.of(context).colorScheme.onSurface,
+            ),
+            actions: [
+              IconButton(
+                tooltip: 'Sign out',
+                onPressed: () => FirebaseAuth.instance.signOut(),
+                icon: const Icon(Icons.logout_rounded),
+              ),
+            ],
+          ),
+          drawer: compact
+              ? Drawer(
+                  child: _AdminNavigationRail(
+                    selectedIndex: _tab,
+                    onDestinationSelected: _selectTab,
+                    expanded: true,
+                  ),
+                )
+              : null,
+          body: compact
+              ? ColoredBox(
+                  color: Theme.of(context).colorScheme.surface,
+                  child: _pages[_tab],
+                )
+              : Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    _AdminNavigationRail(
+                      selectedIndex: _tab,
+                      onDestinationSelected: _selectTab,
+                    ),
+                    const VerticalDivider(width: 1),
+                    Expanded(
+                      child: ColoredBox(
+                        color: Theme.of(context).colorScheme.surface,
+                        child: _pages[_tab],
+                      ),
+                    ),
+                  ],
+                ),
+        );
+      },
     );
   }
 }
@@ -562,16 +565,7 @@ class _AdminNavigationRail extends StatelessWidget {
     ),
   ];
 
-  List<_AdminNavDestination> _withBadges({
-    required bool hasPendingDemoRequests,
-    required bool hasPendingMessages,
-    required bool hasPendingCourses,
-    required bool hasPendingSubscriptionRequests,
-    required bool hasPendingUnsubscribeRequests,
-    required bool hasNewUserRegistrations,
-  }) {
-    final hasUsersMenuAttention =
-        hasPendingSubscriptionRequests || hasNewUserRegistrations;
+  List<_AdminNavDestination> _withBadges(AdminNavBadgeState badges) {
     return _destinations
         .map(
           (d) => _AdminNavDestination(
@@ -579,11 +573,12 @@ class _AdminNavigationRail extends StatelessWidget {
             icon: d.icon,
             selectedIcon: d.selectedIcon,
             label: d.label,
-            showBadge: (d.index == 0 && hasPendingDemoRequests) ||
-                (d.index == 3 && hasPendingMessages) ||
-                (d.index == 11 && hasPendingCourses) ||
-                (d.index == 14 && hasPendingUnsubscribeRequests) ||
-                (d.index == 15 && hasUsersMenuAttention),
+            showBadge: (d.index == 0 && badges.hasPendingDemoRequests) ||
+                (d.index == 3 && badges.hasPendingMessages) ||
+                (d.index == 11 && badges.hasPendingCourses) ||
+                (d.index == 12 && badges.hasPendingWebinarInterest) ||
+                (d.index == 14 && badges.hasPendingUnsubscribeRequests) ||
+                (d.index == 15 && badges.hasUsersMenuAttention),
           ),
         )
         .toList();
@@ -592,167 +587,53 @@ class _AdminNavigationRail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-      stream: FirestoreDb.instance
-          .collection('threads')
-          .where('adminUnread', isEqualTo: true)
-          .limit(1)
-          .snapshots(),
-      builder: (context, messageSnapshot) {
-        final hasPendingMessages =
-            (messageSnapshot.data?.docs ?? const []).isNotEmpty;
-        return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-          stream: FirestoreDb.instance
-              .collection('analysis_session_requests')
-              .where('status', isEqualTo: 'pending_confirmation')
-              .limit(1)
-              .snapshots(),
-          builder: (context, demoRequestSnapshot) {
-            final hasPendingDemoRequests =
-                (demoRequestSnapshot.data?.docs ?? const []).isNotEmpty;
-            return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-              stream: FirestoreDb.instance
-                  .collection('course_inquiries')
-                  .where('isRead', isEqualTo: false)
-                  .limit(1)
-                  .snapshots(),
-              builder: (context, inquirySnapshot) {
-                return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-                  stream: FirestoreDb.instance
-                      .collection('course_demo_bookings')
-                      .where('isRead', isEqualTo: false)
-                      .limit(1)
-                      .snapshots(),
-                  builder: (context, courseDemoSnapshot) {
-                    final hasPendingCourses =
-                        (inquirySnapshot.data?.docs ?? const []).isNotEmpty ||
-                            (courseDemoSnapshot.data?.docs ?? const [])
-                                .isNotEmpty;
-                    return StreamBuilder<
-                        QuerySnapshot<Map<String, dynamic>>>(
-                      stream: FirestoreDb.instance
-                          .collection('account_deletion_requests')
-                          .where('isRead', isEqualTo: false)
-                          .limit(1)
-                          .snapshots(),
-                      builder: (context, unsubscribeSnapshot) {
-                        final hasPendingUnsubscribeRequests =
-                            (unsubscribeSnapshot.data?.docs ?? const [])
-                                .isNotEmpty;
-                        return StreamBuilder<
-                            QuerySnapshot<Map<String, dynamic>>>(
-                          stream: FirestoreDb.instance
-                              .collection('users')
-                              .where('subscriptionRequestPending',
-                                  isEqualTo: true)
-                              .limit(1)
-                              .snapshots(),
-                          builder: (context, subscriptionSnapshot) {
-                            final hasPendingSubscriptionRequests =
-                                (subscriptionSnapshot.data?.docs ?? const [])
-                                    .isNotEmpty;
-                            return StreamBuilder<
-                                QuerySnapshot<Map<String, dynamic>>>(
-                              stream: FirestoreDb.instance
-                                  .collection('users')
-                                  .where('adminRegistrationUnread',
-                                      isEqualTo: true)
-                                  .limit(1)
-                                  .snapshots(),
-                              builder: (context, registrationSnapshot) {
-                                final hasNewUserRegistrations =
-                                    (registrationSnapshot.data?.docs ??
-                                            const [])
-                                        .isNotEmpty;
-                                final items = _withBadges(
-                                  hasPendingDemoRequests:
-                                      hasPendingDemoRequests,
-                                  hasPendingMessages: hasPendingMessages,
-                                  hasPendingCourses: hasPendingCourses,
-                                  hasPendingSubscriptionRequests:
-                                      hasPendingSubscriptionRequests,
-                                  hasPendingUnsubscribeRequests:
-                                      hasPendingUnsubscribeRequests,
-                                  hasNewUserRegistrations:
-                                      hasNewUserRegistrations,
-                                );
-                                final navList = Material(
-                                  color: colorScheme.surfaceContainerHighest
-                                      .withValues(alpha: 0.35),
-                                  child: ListView.builder(
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: expanded ? 0 : 8,
-                                    ),
-                                    itemCount: items.length,
-                                    itemBuilder: (context, i) {
-                                      final item = items[i];
-                                      final selected =
-                                          selectedIndex == item.index;
-                                      return ListTile(
-                                        dense: true,
-                                        selected: selected,
-                                        leading: _PendingBadgeIcon(
-                                          icon: selected
-                                              ? item.selectedIcon
-                                              : item.icon,
-                                          showBadge: item.showBadge,
-                                        ),
-                                        title: Text(
-                                          item.label,
-                                          style: TextStyle(
-                                            fontSize: 13,
-                                            fontWeight: selected
-                                                ? FontWeight.w600
-                                                : FontWeight.w400,
-                                          ),
-                                        ),
-                                        onTap: () =>
-                                            onDestinationSelected(item.index),
-                                      );
-                                    },
-                                  ),
-                                );
-
-                                if (expanded) {
-                                  return SafeArea(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                            16,
-                                            16,
-                                            16,
-                                            8,
-                                          ),
-                                          child: const TestprepKartLogo(
-                                            height: 36,
-                                            maxWidth: 180,
-                                          ),
-                                        ),
-                                        const Divider(height: 1),
-                                        Expanded(child: navList),
-                                      ],
-                                    ),
-                                  );
-                                }
-
-                                return SizedBox(width: 220, child: navList);
-                              },
-                            );
-                          },
-                        );
-                      },
-                    );
-                  },
-                );
-              },
-            );
-          },
-        );
-      },
+    final badges = AdminNavBadgeHost.of(context);
+    final items = _withBadges(badges);
+    final navList = Material(
+      color: colorScheme.surfaceContainerHighest.withValues(alpha: 0.35),
+      child: ListView.builder(
+        padding: EdgeInsets.symmetric(vertical: expanded ? 0 : 8),
+        itemCount: items.length,
+        itemBuilder: (context, i) {
+          final item = items[i];
+          final selected = selectedIndex == item.index;
+          return ListTile(
+            dense: true,
+            selected: selected,
+            leading: _PendingBadgeIcon(
+              icon: selected ? item.selectedIcon : item.icon,
+              showBadge: item.showBadge,
+            ),
+            title: Text(
+              item.label,
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
+              ),
+            ),
+            onTap: () => onDestinationSelected(item.index),
+          );
+        },
+      ),
     );
+
+    if (expanded) {
+      return SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Padding(
+              padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
+              child: TestprepKartLogo(height: 36, maxWidth: 180),
+            ),
+            const Divider(height: 1),
+            Expanded(child: navList),
+          ],
+        ),
+      );
+    }
+
+    return SizedBox(width: 220, child: navList);
   }
 }
 
