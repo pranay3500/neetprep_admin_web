@@ -113,8 +113,8 @@ class _AdminRoleGate extends StatelessWidget {
     if (email == kOwnerAdminEmail) {
       return const AdminHomeShell();
     }
-    return FutureBuilder<bool>(
-      future: AdminAuthEligibility.hasActiveAdminAccess(
+    return FutureBuilder<AdminAccessCheckResult>(
+      future: AdminAuthEligibility.checkActiveAdminAccess(
         email: email,
         uid: user.uid,
       ),
@@ -127,16 +127,18 @@ class _AdminRoleGate extends StatelessWidget {
             '[TPK][ADMIN] Admin access check failed: ${snapshot.error}',
           );
         }
-        if (snapshot.data == true) {
+        final result = snapshot.data;
+        if (result?.allowed == true) {
           return const AdminHomeShell();
         }
         return _UnauthorizedPage(
           email: user.email ?? 'unknown',
           uid: user.uid,
-          reason:
+          reason: result?.denyReason ??
               'Signed in to Firebase, but this account is not an active admin or moderator on '
               'Firestore users/${user.uid}. On App Users, grant moderator for this email again, '
               'then sign in with that email (not the UID).',
+          detail: result?.detail,
         );
       },
     );
@@ -181,11 +183,13 @@ class _UnauthorizedPage extends StatelessWidget {
     required this.email,
     required this.uid,
     required this.reason,
+    this.detail,
   });
 
   final String email;
   final String uid;
   final String reason;
+  final String? detail;
 
   @override
   Widget build(BuildContext context) {
@@ -226,6 +230,16 @@ class _UnauthorizedPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(reason),
+                  if (detail != null && detail!.trim().isNotEmpty) ...[
+                    const SizedBox(height: 8),
+                    SelectableText(
+                      detail!,
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: Colors.grey.shade600,
+                      ),
+                    ),
+                  ],
                   const SizedBox(height: 14),
                   FilledButton.icon(
                     onPressed: () => FirebaseAuth.instance.signOut(),

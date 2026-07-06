@@ -1,7 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 import '../admin_auth_constants.dart';
+import 'admin_session.dart';
 import 'firestore_db.dart';
+
+/// Result of the post-sign-in admin panel gate.
+class AdminAccessCheckResult {
+  const AdminAccessCheckResult._({
+    required this.allowed,
+    this.denyReason,
+    this.detail,
+  });
+
+  final bool allowed;
+  final String? denyReason;
+  final String? detail;
+
+  static const allowedResult = AdminAccessCheckResult._(allowed: true);
+}
 
 /// Whether [email] may use admin sign-in / password recovery.
 abstract final class AdminAuthEligibility {
@@ -30,19 +48,105 @@ abstract final class AdminAuthEligibility {
     required String email,
     required String uid,
   }) async {
+    final result = await checkActiveAdminAccess(email: email, uid: uid);
+    return result.allowed;
+  }
+
+  /// Detailed post-sign-in gate — used for admin shell routing and diagnostics.
+  static Future<AdminAccessCheckResult> checkActiveAdminAccess({
+    required String email,
+    required String uid,
+  }) async {
     try {
       final normalized = normalizeEmail(email);
-      if (normalized == AdminAuthConstants.ownerAdminEmail) return true;
+      if (normalized == AdminAuthConstants.ownerAdminEmail) {
+        return AdminAccessCheckResult.allowedResult;
+      }
+
+      final authUser = FirebaseAuth.instance.currentUser;
+      if (authUser != null && authUser.uid == uid) {
+        try {
+          // Firestore rules need a fresh auth token right after sign-in.
+          await authUser.getIdToken(true);
+        } catch (e) {
+          debugPrint('[TPK][ADMIN] Auth token refresh before panel check: $e');
+        }
+      }
 
       final uidDoc =
           await FirestoreDb.instance.collection('users').doc(uid).get();
-      if (uidDoc.exists && _docAllowed(uidDoc.data() ?? const {})) {
-        return true;
+
+      if (!uidDoc.exists) {
+        return AdminAccessCheckResult._(
+          allowed: false,
+          denyReason:
+              'No Firestore profile at users/$uid.\n\n'
+              'Ask the owner to open App Users, find this email, and tap '
+              'Grant moderator (the person must register on the mobile app first).',
+        );
       }
 
-      return hasActiveAdminRole(normalized);
-    } catch (_) {
-      return false;
+      final data = uidDoc.data() ?? const <String, dynamic>{};
+      if (_docAllowed(data)) {
+        return AdminAccessCheckResult.allowedResult;
+      }
+
+      final role = (data['role'] ?? 'user').toString().toLowerCase();
+      final isActive = data['isActive'] != false;
+      final storedEmail = normalizeEmail(data['email']?.toString() ?? '');
+
+      if (!AdminSession.roleIsStaff(role)) {
+        return AdminAccessCheckResult._(
+          allowed: false,
+          denyReason:
+              'Firestore users/$uid has role "$role" (needs admin or moderator).\n\n'
+              'On App Users, the owner must tap Grant moderator for $normalized '
+              '(sign in with email + password, not the UID).',
+        );
+      }
+
+      if (!isActive) {
+        return AdminAccessCheckResult._(
+          allowed: false,
+          denyReason:
+              'Panel login is disabled (Active = off) on users/$uid.\n\n'
+              'Ask the owner to turn Active on in App Users for $normalized.',
+        );
+      }
+
+      if (storedEmail.isNotEmpty && storedEmail != normalized) {
+        return AdminAccessCheckResult._(
+          allowed: false,
+          denyReason:
+              'Signed-in email ($normalized) does not match Firestore profile '
+              'email ($storedEmail) on users/$uid.\n\n'
+              'Use the same email as the mobile app, or ask the owner to fix the profile.',
+        );
+      }
+
+      return AdminAccessCheckResult._(
+        allowed: false,
+        denyReason: 'Could not verify admin access for users/$uid.',
+      );
+    } on FirebaseException catch (e) {
+      debugPrint('[TPK][ADMIN] Admin access Firestore error: ${e.code} ${e.message}');
+      final hint = e.code == 'permission-denied'
+          ? 'Firestore denied reading users/$uid. Deploy the latest '
+              'firestore.rules (firebase deploy --only firestore:default:rules).'
+          : 'Firestore error (${e.code}). Try again in a moment.';
+      return AdminAccessCheckResult._(
+        allowed: false,
+        denyReason: hint,
+        detail: e.message,
+      );
+    } catch (e, st) {
+      debugPrint('[TPK][ADMIN] Admin access check failed: $e\n$st');
+      return AdminAccessCheckResult._(
+        allowed: false,
+        denyReason:
+            'Could not verify admin access. Check your connection and try again.',
+        detail: e.toString(),
+      );
     }
   }
 

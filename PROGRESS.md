@@ -2,7 +2,25 @@
 
 Tracks admin-only work so sessions do not re-debug the same issues. Pair with mobile app `neetprep_flutter/PROGRESS.md` for end-to-end Content Library flow.
 
-## Content architecture (do not confuse APIs)
+## Update — 2026-07-06 (Admin panel login — moderator access fixes)
+
+- **Report:** Some users marked admin/moderator on App Users could not sign in to the admin website.
+- **Root causes (no recent auth rewrite; gate logic + ops):**
+  1. Post-login check read `users/{uid}` immediately after Firebase sign-in — **stale auth token** could cause `permission-denied` and a false “access denied”.
+  2. **Active = off** on App Users blocks panel login even when role is admin/moderator.
+  3. Role set via dropdown did not re-enable **Active** when promoting to staff.
+  4. Owner **Grant moderator** could fail silently when `users/{uid}` did not exist yet (Firestore `create` was user-only).
+- **Fixes:**
+  - [x] `AdminAuthEligibility.checkActiveAdminAccess` — refresh ID token before Firestore read; explicit deny reasons (missing profile, wrong role, inactive, email mismatch, permission-denied).
+  - [x] `_UnauthorizedPage` shows the specific reason for support.
+  - [x] `_setRole` → staff roles also set `isActive: true`.
+  - [x] `firestore.rules` — owner may `create` `users/{uid}` when granting panel access.
+- **Deploy:** `firebase deploy --only firestore:default:rules --project neet-prep-app-fc7fa` then rebuild/upload admin web.
+- **Owner workaround for blocked admins:** App Users → find email → ensure **Active** on → **Grant moderator** again → user signs in with **mobile app email + password** (not UID).
+- **Files:** `lib/src/services/admin_auth_eligibility.dart`, `lib/src/admin_app.dart`, `lib/src/pages/users_page.dart`, `neetprep_flutter/firestore.rules`
+
+---
+
 
 | Layer | Source | Used by |
 |--------|--------|---------|

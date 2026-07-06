@@ -102,10 +102,16 @@ class _UsersPageState extends State<UsersPage> {
   }
 
   Future<void> _setRole(String userId, String role) async {
+    final fields = <String, dynamic>{'role': role};
+    if (AdminSession.roleIsStaff(role)) {
+      fields['isActive'] = true;
+    }
     await _patchUser(
       userId,
-      fields: {'role': role},
-      successMessage: 'Role updated to $role',
+      fields: fields,
+      successMessage: AdminSession.roleIsStaff(role)
+          ? 'Role updated to $role (panel login enabled)'
+          : 'Role updated to $role',
     );
   }
 
