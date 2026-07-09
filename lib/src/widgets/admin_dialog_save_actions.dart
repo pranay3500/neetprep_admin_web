@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 /// Standard dialog footer: Cancel, Save (keep open), Save & Close.
@@ -26,13 +29,32 @@ class AdminDialogSaveActions extends StatefulWidget {
 class _AdminDialogSaveActionsState extends State<AdminDialogSaveActions> {
   bool _saving = false;
 
+  void _finishSaving() {
+    if (mounted) setState(() => _saving = false);
+  }
+
+  String _formatError(Object e) {
+    if (e is FirebaseException) {
+      if (e.code == 'permission-denied') {
+        return 'Save failed: permission denied. Sign in as owner/moderator '
+            'and ensure Firestore rules are deployed.';
+      }
+      return 'Save failed (${e.code}): ${e.message ?? 'unknown error'}';
+    }
+    if (e is TimeoutException) {
+      return e.message ?? 'Save timed out. Check your connection and try again.';
+    }
+    return 'Save failed: $e';
+  }
+
   Future<void> _run({required bool closeAfter}) async {
     if (_saving) return;
     setState(() => _saving = true);
     try {
       final ok = await widget.onSave();
-      if (!widget.dialogContext.mounted) return;
+      if (!mounted) return;
       if (!ok) return;
+      if (!widget.dialogContext.mounted) return;
       if (closeAfter) {
         Navigator.of(widget.dialogContext).pop();
       } else {
@@ -43,11 +65,15 @@ class _AdminDialogSaveActionsState extends State<AdminDialogSaveActions> {
     } catch (e) {
       if (widget.dialogContext.mounted) {
         ScaffoldMessenger.of(widget.dialogContext).showSnackBar(
-          SnackBar(content: Text('Save failed: $e')),
+          SnackBar(
+            content: Text(_formatError(e)),
+            backgroundColor: const Color(0xFFC62828),
+            duration: const Duration(seconds: 8),
+          ),
         );
       }
     } finally {
-      if (mounted) setState(() => _saving = false);
+      _finishSaving();
     }
   }
 

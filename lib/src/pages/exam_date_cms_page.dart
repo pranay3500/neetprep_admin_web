@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../services/firestore_db.dart';
+import '../utils/firestore_payload.dart';
 
 class ExamDateCmsPage extends StatefulWidget {
   const ExamDateCmsPage({super.key});
@@ -422,14 +423,12 @@ class _ExamDateCmsPageState extends State<ExamDateCmsPage> {
             .toList(),
         'updatedAt': FieldValue.serverTimestamp(),
       };
-      await _doc
-          .set(payload, SetOptions(merge: true))
-          .timeout(
-            const Duration(seconds: 12),
-            onTimeout: () {
-              throw TimeoutException('Save request timed out after 12s.');
-            },
-          );
+      await FirestorePayload.set(
+        _doc,
+        payload,
+        options: SetOptions(merge: true),
+        timeout: const Duration(seconds: 12),
+      );
       // Best-effort verification only; don't fail save UX on transient server read delays.
       try {
         await _doc

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../services/firestore_db.dart';
+import '../utils/firestore_payload.dart';
 
 class SubscriptionCmsPage extends StatefulWidget {
   const SubscriptionCmsPage({super.key});
@@ -132,7 +133,7 @@ class _SubscriptionCmsPageState extends State<SubscriptionCmsPage> {
             .toList(),
         'updatedAt': FieldValue.serverTimestamp(),
       };
-      await _doc.set(payload, SetOptions(merge: true));
+      await FirestorePayload.set(_doc, payload, options: SetOptions(merge: true));
       setState(() => _status = 'Saved');
     } catch (e) {
       setState(() => _status = 'Save failed: $e');

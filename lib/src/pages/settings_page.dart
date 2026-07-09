@@ -8,6 +8,7 @@ import '../services/admin_email/admin_email_config.dart';
 import '../services/admin_email/admin_email_dispatcher.dart';
 import '../services/admin_email/admin_email_relay_health.dart';
 import '../services/firestore_db.dart';
+import '../utils/firestore_payload.dart';
 import '../widgets/admin_dialog_save_actions.dart';
 import 'dashboard_banners_settings_tab.dart';
 
@@ -1010,7 +1011,7 @@ class _SettingsPageState extends State<SettingsPage> {
       'updatedBy': user?.email ?? user?.uid ?? 'unknown',
     };
     try {
-      await _doc.set(payload, SetOptions(merge: true));
+      await FirestorePayload.set(_doc, payload, options: SetOptions(merge: true));
       AdminEmailDispatcher.instance.invalidateSettingsCache();
       if (mounted && !silent) {
         ScaffoldMessenger.of(context).showSnackBar(

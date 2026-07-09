@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../services/exchange_rate_service.dart';
 import '../services/firestore_db.dart';
+import '../utils/firestore_payload.dart';
 import '../widgets/admin_dialog_save_actions.dart';
 import '../widgets/admin_nav_badge_host.dart';
 
@@ -328,7 +329,7 @@ class _AllCoursesTabState extends State<_AllCoursesTab> {
           if (!doc.exists) {
             var data = Map<String, dynamic>.from(entry.value)..remove('id');
             try {
-              data = _stripNullValuesFromMap(data);
+              data = FirestorePayload.stripNulls(data);
             } catch (e) {
               failures.add('$id (strip nulls) → $e');
               continue;
@@ -717,7 +718,11 @@ class _AllCoursesTabState extends State<_AllCoursesTab> {
                   curriculum: curriculum.text,
                   reviews: reviews.text,
                 );
-                await widget.courses.doc(id).set(payload, SetOptions(merge: true));
+                await FirestorePayload.set(
+                  widget.courses.doc(id),
+                  payload,
+                  options: SetOptions(merge: true),
+                );
                 return true;
               },
             ),
@@ -1583,37 +1588,6 @@ Map<String, dynamic> _defaultSettingsPayload() => {
         'height': 170,
       },
     };
-
-/// Removes null leaves so Firestore web SDK never receives `null` (JS interop:
-/// `null` is not an [Object] in some paths). Keeps [FieldValue] and [Timestamp].
-/// Uses [Map<dynamic, dynamic>.from] so JS-backed maps from web iterate safely.
-Map<String, dynamic> _stripNullValuesFromMap(Map<String, dynamic> input) {
-  final out = <String, dynamic>{};
-  Map<dynamic, dynamic>.from(input).forEach((k, v) {
-    if (k == null || v == null) return;
-    final stripped = _stripNullDeep(v);
-    if (stripped != null) out[k.toString()] = stripped;
-  });
-  return out;
-}
-
-dynamic _stripNullDeep(dynamic v) {
-  if (v == null) return null;
-  if (v is FieldValue || v is Timestamp) return v;
-  if (v is Map) {
-    final m = <String, dynamic>{};
-    Map<dynamic, dynamic>.from(v).forEach((key, val) {
-      if (key == null || val == null) return;
-      final s = _stripNullDeep(val);
-      if (s != null) m[key.toString()] = s;
-    });
-    return m;
-  }
-  if (v is List) {
-    return v.map(_stripNullDeep).where((e) => e != null).toList();
-  }
-  return v;
-}
 
 Object? _read(Map<String, dynamic> data, String path) {
   Object? current = data;

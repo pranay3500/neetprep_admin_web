@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../services/firestore_db.dart';
 import '../utils/analysis_slot_template.dart';
+import '../utils/firestore_payload.dart';
 import '../widgets/admin_dialog_save_actions.dart';
 
 /// Recurring IST demo times (`analysis_slot_templates`) — same slots every bookable day on the app.
@@ -43,7 +44,7 @@ class _SlotsManagementPageState extends State<SlotsManagementPage> {
   Future<bool> _createTemplate() async {
     setState(() => _creating = true);
     try {
-      await _col.add({
+      await FirestorePayload.add(_col, {
         ...AnalysisSlotTemplate(
           id: '',
           istHour: _startHour,

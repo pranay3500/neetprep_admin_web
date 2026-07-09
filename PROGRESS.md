@@ -2,7 +2,20 @@
 
 Tracks admin-only work so sessions do not re-debug the same issues. Pair with mobile app `neetprep_flutter/PROGRESS.md` for end-to-end Content Library flow.
 
-## Update — 2026-07-06 (Admin panel login — moderator access fixes)
+## Update — 2026-07-07 (CMS Save stuck on “Saving…” — Firestore null fix)
+
+- **Report:** NEET Pulse Updates (and potentially other CMS dialogs) hung on **Saving…** and never wrote to Firestore.
+- **Root cause:** Firestore **web** SDK breaks on `null` in nested maps (`publishConfig.publishAt`, `publishedAt`, etc.). Updates CMS sent many nulls; Courses CMS already stripped nulls locally.
+- **Fix:**
+  - [x] Shared `lib/src/utils/firestore_payload.dart` — `stripNulls`, `add`, `set` with 30s timeout.
+  - [x] `AdminDialogSaveActions` — always clears saving state; shows permission/timeout errors in red snackbar.
+  - [x] Wired into: Updates, Timeline, Webinars, Courses, Medical Colleges, How It Works, Exam Date, Subscription, Settings, Slots.
+  - [x] Tests: `test/firestore_payload_test.dart`
+- **Deploy:** Rebuild + upload admin `build/web/` (`tool/build_admin_web.ps1`).
+- **Verify after deploy:** Updates → Add Update → Save & Close (dialog closes, row appears); edit existing update; repeat on Timeline / Webinars / Courses save dialogs.
+
+---
+
 
 - **Report:** Some users marked admin/moderator on App Users could not sign in to the admin website.
 - **Root causes (no recent auth rewrite; gate logic + ops):**
@@ -157,6 +170,7 @@ Mobile read order for section HTML: **published Firestore** → cache → **API 
 - [x] **App Users** (`users_page.dart`): owner grants **Grant moderator** / **Revoke**; filters for panel vs app users; instructions card.
 - [x] **Subscription requests (May 29, 2026):** Red dot on user row when `subscriptionRequestPending`; filter chip **Subscription requests**; owner tap request icon to approve paid user (`isPremium: true`) and clear pending, with secondary action to mark handled-only. Users nav badge when pending requests exist. Mobile writes flag via `subscription_requests` + user merge (deploy `firestore:default:rules`).
 - [x] **New user registrations (Jun 2026):** Mobile signup sets `adminRegistrationUnread: true` on `users/{uid}`. Admin **Users** nav red dot when any unread registration (or pending subscription request). Users table: pink row highlight + red dot; filter **New registrations**; **Mark new registrations seen** batch clear. Deploy `firestore:default:rules` (`userAdminRegistrationFlagUnchanged`). Files: `neetprep_flutter/lib/core/services/auth_service.dart`, `neetprep_admin_web/lib/src/admin_app.dart`, `users_page.dart`, `firestore.rules`.
+- [x] **New registration ack fix (Jul 9, 2026):** Opening **Users** auto-clears `adminRegistrationUnread` (batch + optimistic UI) so nav red dot and pink rows return to normal after review; manual **Mark seen** / per-row dot use same path with timeout + error snackbar. File: `users_page.dart`.
 - [x] **Reset subscription (May 29, 2026):** Owner **Reset** on Users table — clears `isPremium`, `subscriptionExpiry`, pending request flags; user returns to free on next app sync.
 - [x] **Users table UX (May 29, 2026):** **Date** first column; **Class** column (`grade` / `currentGrade`); subscription + admin actions as compact icons (request / premium / free + reset, grant/revoke); **From/To** date filters; **Export CSV** for filtered rows. Files: `users_page.dart`, `utils/csv_download_web.dart`.
 - [x] **Sign-in:** Moderators use the **same email/password** as the mobile app after owner grants `role: moderator` on their `users/{uid}` doc.
@@ -208,6 +222,7 @@ Mobile read order for section HTML: **published Firestore** → cache → **API 
 - [x] Fields: duration, highlights, HTML, join URL (premium in app), recordings, assets, session recording.
 - [x] **Empty Firestore:** `Publish default webinar` seeds `webinars/default_featured_webinar` (same content mobile preview used). App no longer shows placeholder without Firestore.
 - [x] **Disable / enable (May 29, 2026):** List row **Disable** / **Enable** buttons set `isPublished: false` / `true` (confirm before disable). **Visible in app** chip vs session status chip (Upcoming/Live/Past). Mobile `WebinarRepository.watchPublished()` already filters unpublished docs.
+- [x] **Notify Me status fix (Jul 9, 2026):** **Notify Me** tab status dropdown no longer snaps back to **New** — Firestore rules now allow admin update on `webinar_notify_interest`; table uses optimistic UI + `FirestorePayload` + error snackbar. Deploy `firestore:default:rules` from mobile repo.
 - **Files:** `lib/src/pages/webinars_cms_page.dart`, `lib/src/utils/webinar_schedule_timezone.dart`, `lib/main.dart`, `lib/src/admin_app.dart`
 
 ---

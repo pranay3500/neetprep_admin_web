@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../services/firestore_db.dart';
+import '../utils/firestore_payload.dart';
 import '../widgets/admin_dialog_save_actions.dart';
 
 /// CRUD for `medical_colleges` (same collection as the NEET Prep Flutter app).
@@ -197,12 +198,16 @@ class MedicalCollegesCmsPage extends StatelessWidget {
                 }
 
                 if (doc == null) {
-                  await _col.add({
+                  await FirestorePayload.add(_col, {
                     ...payload,
                     'createdAt': FieldValue.serverTimestamp(),
                   });
                 } else {
-                  await _col.doc(doc.id).set(payload, SetOptions(merge: true));
+                  await FirestorePayload.set(
+                    _col.doc(doc.id),
+                    payload,
+                    options: SetOptions(merge: true),
+                  );
                 }
                 return true;
               },

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +27,8 @@ class _UsersPageState extends State<UsersPage> {
   _UserFilter _filter = _UserFilter.all;
   DateTime? _dateFrom;
   DateTime? _dateTo;
+  bool _autoAcknowledgedThisVisit = false;
+  final Set<String> _optimisticallyClearedRegistrationIds = {};
 
   CollectionReference<Map<String, dynamic>> get _users =>
       FirestoreDb.instance.collection('users');
@@ -35,6 +39,86 @@ class _UsersPageState extends State<UsersPage> {
     minWidth: 32,
     minHeight: 32,
   );
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      unawaited(_autoAcknowledgeAllNewRegistrationsOnOpen());
+    });
+  }
+
+  bool _isNewRegistration(String docId, Map<String, dynamic> u) {
+    if (_optimisticallyClearedRegistrationIds.contains(docId)) return false;
+    return u['adminRegistrationUnread'] == true;
+  }
+
+  Future<void> _autoAcknowledgeAllNewRegistrationsOnOpen() async {
+    if (_autoAcknowledgedThisVisit) return;
+    _autoAcknowledgedThisVisit = true;
+    try {
+      final snap = await _users
+          .where('adminRegistrationUnread', isEqualTo: true)
+          .limit(200)
+          .get()
+          .timeout(const Duration(seconds: 30));
+      final ids = snap.docs.map((doc) => doc.id).toList();
+      await _acknowledgeRegistrationIds(ids, silent: true);
+    } catch (e) {
+      _autoAcknowledgedThisVisit = false;
+      debugPrint('[UsersPage] auto-ack registrations: $e');
+    }
+  }
+
+  Future<void> _acknowledgeRegistrationIds(
+    List<String> ids, {
+    bool silent = false,
+  }) async {
+    if (ids.isEmpty) {
+      if (!silent && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('No new registrations to mark.')),
+        );
+      }
+      return;
+    }
+
+    setState(() => _optimisticallyClearedRegistrationIds.addAll(ids));
+
+    try {
+      final admin = FirebaseAuth.instance.currentUser;
+      final batch = FirestoreDb.instance.batch();
+      for (final id in ids) {
+        batch.update(_users.doc(id), {
+          'adminRegistrationUnread': false,
+          'adminRegistrationSeenAt': FieldValue.serverTimestamp(),
+          'updatedAt': FieldValue.serverTimestamp(),
+          if (admin != null) 'updatedBy': admin.uid,
+        });
+      }
+      await batch.commit().timeout(const Duration(seconds: 30));
+      if (!silent && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              'Marked ${ids.length} new registration(s) as seen.',
+            ),
+          ),
+        );
+      }
+    } catch (e) {
+      debugPrint('[UsersPage] acknowledge registrations: $e');
+      if (!mounted) return;
+      setState(() {
+        _optimisticallyClearedRegistrationIds.removeAll(ids);
+      });
+      if (!silent) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Could not update registrations: $e')),
+        );
+      }
+    }
+  }
 
   Future<void> _patchUser(
     String userId, {
@@ -127,14 +211,7 @@ class _UsersPageState extends State<UsersPage> {
   }
 
   Future<void> _clearRegistrationUnread(String userId) async {
-    await _patchUser(
-      userId,
-      fields: {
-        'adminRegistrationUnread': false,
-        'adminRegistrationSeenAt': FieldValue.serverTimestamp(),
-      },
-      successMessage: 'New registration marked as seen.',
-    );
+    await _acknowledgeRegistrationIds([userId]);
   }
 
   Future<void> _markAllNewRegistrationsSeen() async {
@@ -142,29 +219,10 @@ class _UsersPageState extends State<UsersPage> {
       final snap = await _users
           .where('adminRegistrationUnread', isEqualTo: true)
           .limit(200)
-          .get();
-      if (snap.docs.isEmpty) {
-        if (!mounted) return;
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No new registrations to mark.')),
-        );
-        return;
-      }
-      final batch = FirestoreDb.instance.batch();
-      for (final doc in snap.docs) {
-        batch.update(doc.reference, {
-          'adminRegistrationUnread': false,
-          'adminRegistrationSeenAt': FieldValue.serverTimestamp(),
-        });
-      }
-      await batch.commit();
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            'Marked ${snap.docs.length} new registration(s) as seen.',
-          ),
-        ),
+          .get()
+          .timeout(const Duration(seconds: 30));
+      await _acknowledgeRegistrationIds(
+        snap.docs.map((doc) => doc.id).toList(),
       );
     } catch (e) {
       debugPrint('[UsersPage] mark new registrations seen: $e');
@@ -472,7 +530,7 @@ class _UsersPageState extends State<UsersPage> {
     return values.any((v) => v.contains(q));
   }
 
-  bool _matchesFilter(Map<String, dynamic> u) {
+  bool _matchesFilter(String docId, Map<String, dynamic> u) {
     final role = (u['role'] ?? 'user').toString().toLowerCase();
     final panelActive = u['isActive'] != false && AdminSession.roleIsStaff(role);
     switch (_filter) {
@@ -485,7 +543,7 @@ class _UsersPageState extends State<UsersPage> {
       case _UserFilter.subscriptionRequests:
         return u['subscriptionRequestPending'] == true;
       case _UserFilter.newRegistrations:
-        return u['adminRegistrationUnread'] == true;
+        return _isNewRegistration(docId, u);
     }
   }
 
@@ -506,7 +564,7 @@ class _UsersPageState extends State<UsersPage> {
         .where(
           (d) =>
               _matchesSearch(d.data()) &&
-              _matchesFilter(d.data()) &&
+              _matchesFilter(d.id, d.data()) &&
               _matchesDateRange(d.data()),
         )
         .toList();
@@ -704,7 +762,7 @@ class _UsersPageState extends State<UsersPage> {
     final flag = _flagEmojiFromIso2(iso2);
     final role = (u['role'] ?? 'user').toString();
     final email = (u['email'] ?? '-').toString();
-    final isNewRegistration = u['adminRegistrationUnread'] == true;
+    final isNewRegistration = _isNewRegistration(doc.id, u);
 
     return _copyableUserRow(
       user: u,
@@ -859,8 +917,7 @@ class _UsersPageState extends State<UsersPage> {
                   final flag = _flagEmojiFromIso2(iso2);
                   final role = (u['role'] ?? 'user').toString();
                   final email = (u['email'] ?? '-').toString();
-                  final isNewRegistration =
-                      u['adminRegistrationUnread'] == true;
+                  final isNewRegistration = _isNewRegistration(doc.id, u);
                   return DataRow(
                     color: isNewRegistration
                         ? WidgetStateProperty.all(const Color(0x14E53935))

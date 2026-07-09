@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../services/firestore_db.dart';
+import '../utils/firestore_payload.dart';
 import '../utils/webinar_schedule_timezone.dart';
 import '../widgets/admin_dialog_save_actions.dart';
 import '../widgets/admin_nav_badge_host.dart';
@@ -499,13 +502,17 @@ class WebinarsCmsPage extends StatelessWidget {
                   'updatedAt': FieldValue.serverTimestamp(),
                 };
                 if (saveDocId == null) {
-                  final ref = await _col.add({
+                  final ref = await FirestorePayload.add(_col, {
                     ...payload,
                     'createdAt': FieldValue.serverTimestamp(),
                   });
                   saveDocId = ref.id;
                 } else {
-                  await _col.doc(saveDocId).set(payload, SetOptions(merge: true));
+                  await FirestorePayload.set(
+                    _col.doc(saveDocId),
+                    payload,
+                    options: SetOptions(merge: true),
+                  );
                 }
                 return true;
               },
@@ -795,9 +802,15 @@ class _WebinarInterestTabLabel extends StatelessWidget {
   }
 }
 
-class _WebinarNotifyInterestTable extends StatelessWidget {
+class _WebinarNotifyInterestTable extends StatefulWidget {
   const _WebinarNotifyInterestTable();
 
+  @override
+  State<_WebinarNotifyInterestTable> createState() =>
+      _WebinarNotifyInterestTableState();
+}
+
+class _WebinarNotifyInterestTableState extends State<_WebinarNotifyInterestTable> {
   static const _statuses = [
     'New',
     'Contacted',
@@ -805,6 +818,65 @@ class _WebinarNotifyInterestTable extends StatelessWidget {
     'Not Interested',
     'No Response',
   ];
+
+  final Map<String, String> _optimisticStatusByDocId = {};
+  final Set<String> _optimisticallyReadDocIds = {};
+
+  Future<void> _updateInterestStatus(
+    DocumentReference<Map<String, dynamic>> ref,
+    String docId,
+    String status,
+  ) async {
+    setState(() {
+      _optimisticStatusByDocId[docId] = status;
+      _optimisticallyReadDocIds.add(docId);
+    });
+    try {
+      await FirestorePayload.set(
+        ref,
+        {
+          'status': status,
+          'isRead': true,
+          'updatedAt': FieldValue.serverTimestamp(),
+        },
+        options: SetOptions(merge: true),
+      );
+    } catch (e) {
+      debugPrint('[WebinarsCms] notify interest status update: $e');
+      if (!mounted) return;
+      setState(() {
+        _optimisticStatusByDocId.remove(docId);
+        _optimisticallyReadDocIds.remove(docId);
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Could not update status: $e')),
+      );
+    }
+  }
+
+  Future<void> _markInterestSeen(
+    DocumentReference<Map<String, dynamic>> ref,
+    String docId,
+  ) async {
+    setState(() => _optimisticallyReadDocIds.add(docId));
+    try {
+      await FirestorePayload.set(
+        ref,
+        {
+          'isRead': true,
+          'updatedAt': FieldValue.serverTimestamp(),
+        },
+        options: SetOptions(merge: true),
+      );
+    } catch (e) {
+      debugPrint('[WebinarsCms] notify interest mark seen: $e');
+      if (!mounted) return;
+      setState(() => _optimisticallyReadDocIds.remove(docId));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Could not mark as seen: $e')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -856,22 +928,20 @@ class _WebinarNotifyInterestTable extends StatelessWidget {
                   ],
                   rows: rawDocs.map((doc) {
                     final data = doc.data();
-                    final status = _text(data['status'], 'New');
+                    final storedStatus = _text(data['status'], 'New');
+                    final optimisticStatus = _optimisticStatusByDocId[doc.id];
+                    final status = optimisticStatus ?? storedStatus;
                     final selectedStatus =
                         _statuses.contains(status) ? status : 'New';
-                    final unread = data['isRead'] != true;
-                    void markSeen() {
-                      doc.reference.set({
-                        'isRead': true,
-                        'updatedAt': FieldValue.serverTimestamp(),
-                      }, SetOptions(merge: true));
-                    }
+                    final unread =
+                        !_optimisticallyReadDocIds.contains(doc.id) &&
+                            data['isRead'] != true;
 
                     return DataRow(
                       cells: [
                         DataCell(
                           InkWell(
-                            onTap: markSeen,
+                            onTap: () => _markInterestSeen(doc.reference, doc.id),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 4),
                               child: Row(
@@ -924,11 +994,13 @@ class _WebinarNotifyInterestTable extends StatelessWidget {
                                     .toList(),
                                 onChanged: (v) {
                                   if (v == null) return;
-                                  doc.reference.set({
-                                    'status': v,
-                                    'isRead': true,
-                                    'updatedAt': FieldValue.serverTimestamp(),
-                                  }, SetOptions(merge: true));
+                                  unawaited(
+                                    _updateInterestStatus(
+                                      doc.reference,
+                                      doc.id,
+                                      v,
+                                    ),
+                                  );
                                 },
                               ),
                             ),
