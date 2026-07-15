@@ -12,6 +12,7 @@ import '../services/admin_session.dart';
 import '../services/firestore_db.dart';
 import '../utils/country_iso_resolver.dart';
 import '../utils/csv_download_web.dart';
+import '../widgets/admin_compose_user_message.dart';
 import '../widgets/responsive_layout.dart';
 
 class UsersPage extends StatefulWidget {
@@ -351,6 +352,14 @@ class _UsersPageState extends State<UsersPage> {
       mainAxisSize: MainAxisSize.min,
       children: [
         IconButton(
+          icon: const Icon(Icons.mail_outline_rounded, size: 22),
+          tooltip: 'Send message to this user',
+          visualDensity: VisualDensity.compact,
+          padding: EdgeInsets.zero,
+          constraints: _compactIconConstraints,
+          onPressed: () => _messageUser(userId, u),
+        ),
+        IconButton(
           icon: Icon(statusIcon, color: statusColor, size: 22),
           tooltip: statusTooltip,
           visualDensity: VisualDensity.compact,
@@ -388,6 +397,22 @@ class _UsersPageState extends State<UsersPage> {
           ),
       ],
     );
+  }
+
+  Future<void> _messageUser(String userId, Map<String, dynamic> u) async {
+    final sent = await showAdminComposeUserMessageDialog(
+      context,
+      preselectedUserId: userId,
+      preselectedUserName: _userDisplayName(u),
+      preselectedUserEmail: (u['email'] ?? '').toString(),
+      preselectedCountry: (u['country'] ?? '').toString(),
+      preselectedIsPremium: u['isPremium'] == true,
+    );
+    if (sent && mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Message sent to user.')),
+      );
+    }
   }
 
   Future<void> _confirmGrant(BuildContext context, String userId, String email) async {

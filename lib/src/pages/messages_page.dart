@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 
 import '../services/firestore_db.dart';
 import '../utils/country_iso_resolver.dart';
+import '../widgets/admin_compose_user_message.dart';
 
 class MessagesPage extends StatelessWidget {
   const MessagesPage({super.key});
@@ -14,6 +15,15 @@ class MessagesPage extends StatelessWidget {
 
   CollectionReference<Map<String, dynamic>> get _users =>
       FirestoreDb.instance.collection('users');
+
+  Future<void> _openNewMessage(BuildContext context) async {
+    final sent = await showAdminComposeUserMessageDialog(context);
+    if (sent && context.mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Message sent to user.')),
+      );
+    }
+  }
 
   String _formatDate(dynamic raw) {
     DateTime? date;
@@ -135,6 +145,7 @@ class MessagesPage extends StatelessWidget {
         'color': '#5E35B1',
         'timestamp': FieldValue.serverTimestamp(),
         'createdAt': FieldValue.serverTimestamp(),
+        'threadId': doc.id,
       });
     }
 
@@ -522,15 +533,6 @@ class MessagesPage extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
         final threadDocs = _sorted(threadSnapshot.data?.docs ?? const []);
-        if (threadDocs.isEmpty) {
-          return const Align(
-            alignment: Alignment.topLeft,
-            child: Padding(
-              padding: EdgeInsets.all(24),
-              child: Text('No user messages found.'),
-            ),
-          );
-        }
 
         return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
           stream: _users.snapshots(),
@@ -553,6 +555,27 @@ class MessagesPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+                    child: Row(
+                      children: [
+                        const Expanded(
+                          child: Text(
+                            'User conversations',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        FilledButton.icon(
+                          onPressed: () => _openNewMessage(context),
+                          icon: const Icon(Icons.mail_outline_rounded),
+                          label: const Text('New message'),
+                        ),
+                      ],
+                    ),
+                  ),
                   const Material(
                     child: TabBar(
                       tabs: [
@@ -562,18 +585,39 @@ class MessagesPage extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: TabBarView(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: _table(context, free, users),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: _table(context, paid, users),
-                        ),
-                      ],
-                    ),
+                    child: threadDocs.isEmpty
+                        ? Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(24),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text(
+                                    'No conversations yet. Send the first message to a registered user.',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 16),
+                                  FilledButton.icon(
+                                    onPressed: () => _openNewMessage(context),
+                                    icon: const Icon(Icons.mail_outline_rounded),
+                                    label: const Text('New message'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        : TabBarView(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: _table(context, free, users),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(16),
+                                child: _table(context, paid, users),
+                              ),
+                            ],
+                          ),
                   ),
                 ],
               ),

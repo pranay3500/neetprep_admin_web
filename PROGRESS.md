@@ -2,6 +2,14 @@
 
 Tracks admin-only work so sessions do not re-debug the same issues. Pair with mobile app `neetprep_flutter/PROGRESS.md` for end-to-end Content Library flow.
 
+## Update — 2026-07-15 (Admin → user messaging)
+
+- **Current status:** Messages page **New message** + Users table mail action compose to any registered user; batch-creates thread (`startedByAdmin`), admin message, and user in-app notification.
+- **Files:** `lib/src/pages/messages_page.dart`, `lib/src/pages/users_page.dart`, `lib/src/widgets/admin_compose_user_message.dart`.
+- **Deploy:** Rebuild/upload admin `build/web/` for live panel. Mobile rules + FCM function shipped from `neetprep_flutter`.
+
+---
+
 ## Update — 2026-07-07 (CMS Save stuck on “Saving…” — Firestore null fix)
 
 - **Report:** NEET Pulse Updates (and potentially other CMS dialogs) hung on **Saving…** and never wrote to Firestore.
