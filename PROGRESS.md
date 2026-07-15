@@ -2,11 +2,21 @@
 
 Tracks admin-only work so sessions do not re-debug the same issues. Pair with mobile app `neetprep_flutter/PROGRESS.md` for end-to-end Content Library flow.
 
+> **Living log:** After every meaningful admin change, add/update a dated section (status, files, deploy/pending). Keep pending rebuild/upload items visible until done.
+
 ## Update — 2026-07-15 (Admin → user messaging)
 
-- **Current status:** Messages page **New message** + Users table mail action compose to any registered user; batch-creates thread (`startedByAdmin`), admin message, and user in-app notification.
-- **Files:** `lib/src/pages/messages_page.dart`, `lib/src/pages/users_page.dart`, `lib/src/widgets/admin_compose_user_message.dart`.
-- **Deploy:** Rebuild/upload admin `build/web/` for live panel. Mobile rules + FCM function shipped from `neetprep_flutter`.
+- **Current status:** Counselors can message any registered user without waiting for the user to start a thread.
+- **Completed:**
+  - [x] Messages page **New message** (user search + topic + body).
+  - [x] Users table mail icon → same compose dialog (user preselected).
+  - [x] Batch write: `threads` (`startedByAdmin: true`), first admin message, `users/{uid}/notifications` (+ `threadId`).
+  - [x] Git: commit `e1cee97` on `main` / `origin/main`.
+- **Files changed:** `lib/src/pages/messages_page.dart`, `lib/src/pages/users_page.dart`, `lib/src/widgets/admin_compose_user_message.dart`, `PROGRESS.md`.
+- **Paired mobile:** `neetprep_flutter` — rules + FCM CF deployed; free-quota ignore of admin threads.
+- **Pending cleanup:**
+  - [ ] Rebuild + upload admin `build/web/` (`tool/build_admin_web.ps1`) so live `neetappadmin.satlas.org` shows the UI.
+  - [ ] Smoke: New message → user sees chat + in-app notification + push.
 
 ---
 
